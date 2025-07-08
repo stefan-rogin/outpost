@@ -1,3 +1,21 @@
+.page_layout {
+  display: flex;
+  /* gap: 12px; */
+}
+
+.catalog_column {
+  width: 128px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.items_column {
+  flex: 1;
+  border-left: 1px solid #333;
+  font-size: 12px;
+  padding-left: 24px;
+}
+
 .category_nav_container {
   width: 120px;
   height: 36px;

@@ -26,35 +26,42 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div className={styles.category_nav_container}>
-        <div className={styles.category_title}>
-          {catalog[categoryIndex].title}
+    <div className={styles.page_layout}>
+      <div className={styles.catalog_column}>
+        <div className={styles.category_nav_container}>
+          <div className={styles.category_title}>
+            {catalog[categoryIndex].title}
+          </div>
+          <Image
+            src="/left-arrow.svg"
+            alt="Previous option"
+            width={24}
+            height={24}
+            className={styles.arrow_prev}
+            onClick={handlePageChange("prev")}
+          />
+          <Image
+            src="/left-arrow.svg"
+            alt="Next option"
+            width={24}
+            height={24}
+            className={styles.arrow_next}
+            onClick={handlePageChange("next")}
+          />
         </div>
-        <Image
-          src="/left-arrow.svg"
-          alt="Previous option"
-          width={24}
-          height={24}
-          className={styles.arrow_prev}
-          onClick={handlePageChange("prev")}
-        />
-        <Image
-          src="/left-arrow.svg"
-          alt="Next option"
-          width={24}
-          height={24}
-          className={styles.arrow_next}
-          onClick={handlePageChange("next")}
+        <CatalogPage
+          category={catalog[categoryIndex]}
+          onSelect={handleSelect}
         />
       </div>
-
-      <CatalogPage category={catalog[categoryIndex]} onSelect={handleSelect} />
-      <ul>
-        {items.map((resource, index) => (
-          <li key={`${resource.id}-${index}`}>{resource.name}</li>
-        ))}
-      </ul>
-    </>
+      <div className={styles.items_column}>
+        <h3>Selected</h3>
+        <ul>
+          {items.map((resource, index) => (
+            <li key={`${resource.id}-${index}`}>{resource.name}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
   )
 }
