@@ -16,6 +16,11 @@ interface VisualCategory {
   items: VisualGroup[]
 }
 
+type CatalogPageProps = {
+  category: CatalogCategory
+  onSelect: (resource: Resource) => void
+}
+
 const getResource = (id: ResourceId): Resource => {
   const res = resources.get(id)
   if (!res) throw new Error(`Missing resource: ${id}`)
@@ -43,7 +48,7 @@ const getNavOption = (
   return group.options[futureIndex]
 }
 
-export const CatalogPage = ({ category }: { category: CatalogCategory }) => {
+export const CatalogPage = ({ category, onSelect }: CatalogPageProps) => {
   const initialVisualCategory: VisualCategory = {
     ...category,
     items: category.items.map(group => mapGroupToVisual(group))
@@ -65,6 +70,7 @@ export const CatalogPage = ({ category }: { category: CatalogCategory }) => {
         })
       }
       setVisualCategory(newVisual)
+      event.stopPropagation()
     }
 
   useEffect(() => {
@@ -74,10 +80,18 @@ export const CatalogPage = ({ category }: { category: CatalogCategory }) => {
     })
   }, [category])
 
+  const handleSelect = (resource: Resource) => (): void => {
+    onSelect(resource)
+  }
+
   return (
     <div>
       {visualCategory.items.map(group => (
-        <div key={group.title} className={styles.item_container}>
+        <div
+          key={group.title}
+          className={styles.item_container}
+          onClick={handleSelect(group.selected)}
+        >
           {group.selected.name}
           {group.options.length > 1 && (
             <>

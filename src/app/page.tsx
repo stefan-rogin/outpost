@@ -5,9 +5,11 @@ import { SyntheticEvent, useState } from "react"
 import { CatalogPage } from "@/components/CatalogPage"
 import Image from "next/image"
 import styles from "@/app/page.module.css"
+import { Resource } from "@/models/resource"
 
 export default function Home() {
   const [categoryIndex, setCategoryIndex] = useState(0)
+  const [items, setItems] = useState(new Array<Resource>())
 
   const handlePageChange =
     (direction: "prev" | "next") =>
@@ -18,6 +20,11 @@ export default function Home() {
           : (categoryIndex - 1 + catalog.length) % catalog.length
       setCategoryIndex(newCategoryIndex)
     }
+
+  const handleSelect = (resource: Resource): void => {
+    setItems([...items, resource])
+  }
+
   return (
     <>
       <div className={styles.category_nav_container}>
@@ -42,7 +49,12 @@ export default function Home() {
         />
       </div>
 
-      <CatalogPage category={catalog[categoryIndex]} />
+      <CatalogPage category={catalog[categoryIndex]} onSelect={handleSelect} />
+      <ul>
+        {items.map((resource, index) => (
+          <li key={`${resource.id}-${index}`}>{resource.name}</li>
+        ))}
+      </ul>
     </>
   )
 }
