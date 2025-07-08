@@ -1,16 +1,18 @@
-.category_nav_container {
-  width: 120px;
-  height: 36px;
-  padding: 4px;
+.item_container {
   position: relative;
+  border: 1px solid #555;
+  padding: 4px;
+  width: 120px;
+  height: 120px;
+  margin: 4px;
+  overflow: hidden;
+  font-size: 10px;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
-}
-
-.category_title {
-  font-size: 12px;
-  margin: 4px;
+  /* justify-content: center;
+  text-align: center; */
 }
 
 .arrow_prev, .arrow_next {
