@@ -1,0 +1,1017 @@
+{
+  "InorgCommonAluminum": {
+    "id": "InorgCommonAluminum",
+    "name": "Aluminum"
+  },
+  "InorgCommonArgon_G": {
+    "id": "InorgCommonArgon_G",
+    "name": "Argon"
+  },
+  "InorgCommonChlorine_G": {
+    "id": "InorgCommonChlorine_G",
+    "name": "Chlorine"
+  },
+  "InorgCommonCopper": {
+    "id": "InorgCommonCopper",
+    "name": "Copper"
+  },
+  "InorgCommonHelium3_G": {
+    "id": "InorgCommonHelium3_G",
+    "name": "Helium-3"
+  },
+  "InorgCommonIron": {
+    "id": "InorgCommonIron",
+    "name": "Iron"
+  },
+  "InorgCommonLead": {
+    "id": "InorgCommonLead",
+    "name": "Lead"
+  },
+  "InorgCommonNickel": {
+    "id": "InorgCommonNickel",
+    "name": "Nickel"
+  },
+  "InorgCommonUranium": {
+    "id": "InorgCommonUranium",
+    "name": "Uranium"
+  },
+  "InorgCommonWater_L": {
+    "id": "InorgCommonWater_L",
+    "name": "Water"
+  },
+  "InorgExoticAntimony": {
+    "id": "InorgExoticAntimony",
+    "name": "Antimony"
+  },
+  "InorgExoticCaesium_L": {
+    "id": "InorgExoticCaesium_L",
+    "name": "Caesium"
+  },
+  "InorgExoticDysprosium": {
+    "id": "InorgExoticDysprosium",
+    "name": "Dysprosium"
+  },
+  "InorgExoticEuropium": {
+    "id": "InorgExoticEuropium",
+    "name": "Europium"
+  },
+  "InorgExoticIonicLiquids_L": {
+    "id": "InorgExoticIonicLiquids_L",
+    "name": "Ionic Liquids"
+  },
+  "InorgExoticNeon_G": {
+    "id": "InorgExoticNeon_G",
+    "name": "Neon"
+  },
+  "InorgExoticPalladium": {
+    "id": "InorgExoticPalladium",
+    "name": "Palladium"
+  },
+  "InorgExoticPlutonium": {
+    "id": "InorgExoticPlutonium",
+    "name": "Plutonium"
+  },
+  "InorgExoticXenon_G": {
+    "id": "InorgExoticXenon_G",
+    "name": "Xenon"
+  },
+  "InorgExoticYtterbium": {
+    "id": "InorgExoticYtterbium",
+    "name": "Ytterbium"
+  },
+  "InorgRareCarboxylicAcids_L": {
+    "id": "InorgRareCarboxylicAcids_L",
+    "name": "Carboxylic Acids"
+  },
+  "InorgRareGold": {
+    "id": "InorgRareGold",
+    "name": "Gold"
+  },
+  "InorgRareLithium": {
+    "id": "InorgRareLithium",
+    "name": "Lithium"
+  },
+  "InorgRareMercury_L": {
+    "id": "InorgRareMercury_L",
+    "name": "Mercury"
+  },
+  "InorgRareNeodymium": {
+    "id": "InorgRareNeodymium",
+    "name": "Neodymium"
+  },
+  "InorgRarePlatinum": {
+    "id": "InorgRarePlatinum",
+    "name": "Platinum"
+  },
+  "InorgRareTantalum": {
+    "id": "InorgRareTantalum",
+    "name": "Tantalum"
+  },
+  "InorgRareTetrafluorides_G": {
+    "id": "InorgRareTetrafluorides_G",
+    "name": "Tetrafluorides"
+  },
+  "InorgRareTitanium": {
+    "id": "InorgRareTitanium",
+    "name": "Titanium"
+  },
+  "InorgRareVanadium": {
+    "id": "InorgRareVanadium",
+    "name": "Vanadium"
+  },
+  "InorgUncommonAlkanes_G": {
+    "id": "InorgUncommonAlkanes_G",
+    "name": "Alkanes"
+  },
+  "InorgUncommonBenzene_G": {
+    "id": "InorgUncommonBenzene_G",
+    "name": "Benzene"
+  },
+  "InorgUncommonBeryllium": {
+    "id": "InorgUncommonBeryllium",
+    "name": "Beryllium"
+  },
+  "InorgUncommonChlorosilanes_L": {
+    "id": "InorgUncommonChlorosilanes_L",
+    "name": "Chlorosilanes"
+  },
+  "InorgUncommonCobalt": {
+    "id": "InorgUncommonCobalt",
+    "name": "Cobalt"
+  },
+  "InorgUncommonFluorine_G": {
+    "id": "InorgUncommonFluorine_G",
+    "name": "Fluorine"
+  },
+  "InorgUncommonIridium": {
+    "id": "InorgUncommonIridium",
+    "name": "Iridium"
+  },
+  "InorgUncommonSilver": {
+    "id": "InorgUncommonSilver",
+    "name": "Silver"
+  },
+  "InorgUncommonTungsten": {
+    "id": "InorgUncommonTungsten",
+    "name": "Tungsten"
+  },
+  "InorgUniqueAldumite": {
+    "id": "InorgUniqueAldumite",
+    "name": "Aldumite"
+  },
+  "InorgUniqueAqueousHematite": {
+    "id": "InorgUniqueAqueousHematite",
+    "name": "Aqueous Hematite"
+  },
+  "InorgUniqueCaelumite": {
+    "id": "InorgUniqueCaelumite",
+    "name": "Caelumite"
+  },
+  "InorgUniqueIndicite": {
+    "id": "InorgUniqueIndicite",
+    "name": "Indicite"
+  },
+  "InorgUniqueRothicite": {
+    "id": "InorgUniqueRothicite",
+    "name": "Rothicite"
+  },
+  "InorgUniqueTasine_L": {
+    "id": "InorgUniqueTasine_L",
+    "name": "Tasine"
+  },
+  "InorgUniqueVeryl_G": {
+    "id": "InorgUniqueVeryl_G",
+    "name": "Veryl"
+  },
+  "InorgUniqueVytinium": {
+    "id": "InorgUniqueVytinium",
+    "name": "Vytinium"
+  },
+  "OrgCommonFiber": {
+    "id": "OrgCommonFiber",
+    "name": "Fiber"
+  },
+  "OrgCommonMetabolicAgent": {
+    "id": "OrgCommonMetabolicAgent",
+    "name": "Metabolic Agent"
+  },
+  "OrgCommonNutrient": {
+    "id": "OrgCommonNutrient",
+    "name": "Nutrient"
+  },
+  "OrgCommonSealant": {
+    "id": "OrgCommonSealant",
+    "name": "Sealant"
+  },
+  "OrgCommonStructural": {
+    "id": "OrgCommonStructural",
+    "name": "Structural"
+  },
+  "OrgCommonToxin": {
+    "id": "OrgCommonToxin",
+    "name": "Toxin"
+  },
+  "OrgExoticBiosuppressant": {
+    "id": "OrgExoticBiosuppressant",
+    "name": "Biosuppressant"
+  },
+  "OrgExoticHypercatalyst": {
+    "id": "OrgExoticHypercatalyst",
+    "name": "Hypercatalyst"
+  },
+  "OrgExoticLubricant": {
+    "id": "OrgExoticLubricant",
+    "name": "Lubricant"
+  },
+  "OrgExoticPolymer": {
+    "id": "OrgExoticPolymer",
+    "name": "Polymer"
+  },
+  "OrgExoticSolvent": {
+    "id": "OrgExoticSolvent",
+    "name": "Solvent"
+  },
+  "OrgExoticStimulant": {
+    "id": "OrgExoticStimulant",
+    "name": "Stimulant"
+  },
+  "OrgRareAdhesive": {
+    "id": "OrgRareAdhesive",
+    "name": "Adhesive"
+  },
+  "OrgRareAminoAcids": {
+    "id": "OrgRareAminoAcids",
+    "name": "Amino Acids"
+  },
+  "OrgRareAnalgesic": {
+    "id": "OrgRareAnalgesic",
+    "name": "Analgesic"
+  },
+  "OrgRareAromatic": {
+    "id": "OrgRareAromatic",
+    "name": "Aromatic"
+  },
+  "OrgRareHallucinogen": {
+    "id": "OrgRareHallucinogen",
+    "name": "Hallucinogen"
+  },
+  "OrgRareSedative": {
+    "id": "OrgRareSedative",
+    "name": "Sedative"
+  },
+  "OrgUncommonAntimicrobial": {
+    "id": "OrgUncommonAntimicrobial",
+    "name": "Antimicrobial"
+  },
+  "OrgUncommonCosmetic": {
+    "id": "OrgUncommonCosmetic",
+    "name": "Cosmetic"
+  },
+  "OrgUncommonMembrane": {
+    "id": "OrgUncommonMembrane",
+    "name": "Membrane"
+  },
+  "OrgUncommonOrnamental": {
+    "id": "OrgUncommonOrnamental",
+    "name": "Ornamental"
+  },
+  "OrgUncommonPigment": {
+    "id": "OrgUncommonPigment",
+    "name": "Pigment"
+  },
+  "OrgUncommonSpice": {
+    "id": "OrgUncommonSpice",
+    "name": "Spice"
+  },
+  "OrgUniqueGastronomic": {
+    "id": "OrgUniqueGastronomic",
+    "name": "Gastro Delight"
+  },
+  "OrgUniqueHighTensileSpidrion": {
+    "id": "OrgUniqueHighTensileSpidrion",
+    "name": "High-Tensile Spidroin"
+  },
+  "OrgUniqueImmunostimulant": {
+    "id": "OrgUniqueImmunostimulant",
+    "name": "Immunostimulant"
+  },
+  "OrgUniqueLuxuryTextile": {
+    "id": "OrgUniqueLuxuryTextile",
+    "name": "Luxury Textile"
+  },
+  "OrgUniqueMemorySubstrate": {
+    "id": "OrgUniqueMemorySubstrate",
+    "name": "Memory Substrate"
+  },
+  "OrgUniqueNeurologic": {
+    "id": "OrgUniqueNeurologic",
+    "name": "Neurologic"
+  },
+  "Mfg_Tier_01_AdaptiveFrame": {
+    "id": "Mfg_Tier_01_AdaptiveFrame",
+    "name": "Adaptive Frame",
+    "blueprint": {
+      "InorgCommonIron": 1,
+      "InorgCommonAluminum": 1
+    }
+  },
+  "Mfg_Tier_01_AusteniticManifold": {
+    "id": "Mfg_Tier_01_AusteniticManifold",
+    "name": "Austenitic Manifold",
+    "blueprint": {
+      "Mfg_Tier01_ReactiveGauge": 1,
+      "InorgCommonIron": 2,
+      "InorgCommonNickel": 2
+    }
+  },
+  "Mfg_Tier_01_CommRelay": {
+    "id": "Mfg_Tier_01_CommRelay",
+    "name": "Comm Relay",
+    "blueprint": {
+      "Mfg_Tier01_TauGradeRheostat": 1,
+      "Mfg_Tier01_IsocenteredMagnet": 1
+    }
+  },
+  "Mfg_Tier_01_IsocenteredMagnet": {
+    "id": "Mfg_Tier_01_IsocenteredMagnet",
+    "name": "Isocentered Magnet",
+    "blueprint": {
+      "InorgCommonNickel": 1,
+      "InorgUncommonCobalt": 1
+    }
+  },
+  "Mfg_Tier_01_IsotopicCoolant": {
+    "id": "Mfg_Tier_01_IsotopicCoolant",
+    "name": "Isotopic Coolant",
+    "blueprint": {
+      "InorgRareTetrafluorides_G": 1,
+      "InorgExoticIonicLiquids_L": 1
+    }
+  },
+  "Mfg_Tier_01_MagPressureTank": {
+    "id": "Mfg_Tier_01_MagPressureTank",
+    "name": "Mag Pressure Tank",
+    "blueprint": {
+      "InorgCommonAluminum": 2,
+      "InorgCommonNickel": 1
+    }
+  },
+  "Mfg_Tier_01_Monopropellant": {
+    "id": "Mfg_Tier_01_Monopropellant",
+    "name": "Monopropellant",
+    "blueprint": {
+      "Mfg_Tier01_MagPressureTank": 1,
+      "Mfg_Tier01_ReactiveGauge": 1,
+      "InorgUncommonAlkanes_G": 2
+    }
+  },
+  "Mfg_Tier_01_Polytextile": {
+    "id": "Mfg_Tier_01_Polytextile",
+    "name": "Polytextile",
+    "blueprint": {
+      "OrgCommonFiber": 2,
+      "OrgUncommonCosmetic": 1
+    }
+  },
+  "Mfg_Tier_01_ReactiveGauge": {
+    "id": "Mfg_Tier_01_ReactiveGauge",
+    "name": "Reactive Gauge",
+    "blueprint": {
+      "InorgCommonAluminum": 2,
+      "InorgCommonCopper": 1
+    }
+  },
+  "Mfg_Tier_01_TauGradeRheostat": {
+    "id": "Mfg_Tier_01_TauGradeRheostat",
+    "name": "Tau Grade Rheostat",
+    "blueprint": {
+      "InorgCommonCopper": 1,
+      "InorgUncommonBeryllium": 1
+    }
+  },
+  "Mfg_Tier_01_ZeroWire": {
+    "id": "Mfg_Tier_01_ZeroWire",
+    "name": "Zero Wire",
+    "blueprint": {
+      "InorgUncommonSilver": 1,
+      "InorgCommonCopper": 1
+    }
+  },
+  "Mfg_Tier_02_ControlRod": {
+    "id": "Mfg_Tier_02_ControlRod",
+    "name": "Control Rod",
+    "blueprint": {
+      "Mfg_Tier01_AusteniticManifold": 1,
+      "Mfg_Tier01_IsotopicCoolant": 1,
+      "InorgExoticDysprosium": 3
+    }
+  },
+  "Mfg_Tier_02_DrillingRig": {
+    "id": "Mfg_Tier_02_DrillingRig",
+    "name": "Drilling Rig",
+    "blueprint": {
+      "Mfg_Tier01_ReactiveGauge": 1,
+      "InorgUncommonTungsten": 3,
+      "OrgExoticLubricant": 2
+    }
+  },
+  "Mfg_Tier_02_MolecularSieve": {
+    "id": "Mfg_Tier_02_MolecularSieve",
+    "name": "Molecular Sieve",
+    "blueprint": {
+      "Mfg_Tier01_MagPressureTank": 1,
+      "InorgExoticIonicLiquids_L": 2,
+      "OrgUncommonMembrane": 2
+    }
+  },
+  "Mfg_Tier_02_NuclearFuelRod": {
+    "id": "Mfg_Tier_02_NuclearFuelRod",
+    "name": "Nuclear Fuel Rod",
+    "blueprint": {
+      "Mfg_Tier02_SemimetalWafer": 1,
+      "InorgCommonUranium": 3,
+      "OrgExoticSolvent": 2
+    }
+  },
+  "Mfg_Tier_02_ParamagnonSuperconductor": {
+    "id": "Mfg_Tier_02_ParamagnonSuperconductor",
+    "name": "Paramagnon Superconductor",
+    "blueprint": {
+      "Mfg_Tier01_ZeroWire": 3,
+      "InorgRareGold": 1,
+      "InorgRareNeodymium": 1
+    }
+  },
+  "Mfg_Tier_02_PositronBattery": {
+    "id": "Mfg_Tier_02_PositronBattery",
+    "name": "Positron Battery",
+    "blueprint": {
+      "Mfg_Tier01_TauGradeRheostat": 1,
+      "InorgExoticAntimony": 2,
+      "InorgRareVanadium": 2
+    }
+  },
+  "Mfg_Tier_02_SemimetalWafer": {
+    "id": "Mfg_Tier_02_SemimetalWafer",
+    "name": "Semimetal Wafer",
+    "blueprint": {
+      "Mfg_Tier01_ZeroWire": 1,
+      "InorgExoticAntimony": 2,
+      "InorgRareGold": 2
+    }
+  },
+  "Mfg_Tier_02_SterileNanotubes": {
+    "id": "Mfg_Tier_02_SterileNanotubes",
+    "name": "Sterile Nanotubes",
+    "blueprint": {
+      "Mfg_Tier02_MolecularSieve": 1,
+      "InorgRareVanadium": 2,
+      "OrgExoticSolvent": 2
+    }
+  },
+  "Mfg_Tier_02_SupercooledMagnet": {
+    "id": "Mfg_Tier_02_SupercooledMagnet",
+    "name": "Supercooled Magnet",
+    "blueprint": {
+      "Mfg_Tier01_IsocenteredMagnet": 1,
+      "Mfg_Tier01_IsotopicCoolant": 1,
+      "InorgRareNeodymium": 3
+    }
+  },
+  "Mfg_Tier_02_ZeroGGimbal": {
+    "id": "Mfg_Tier_02_ZeroGGimbal",
+    "name": "Zero G Gimbal",
+    "blueprint": {
+      "Mfg_Tier01_IsocenteredMagnet": 1,
+      "InorgRareTantalum": 2,
+      "OrgExoticLubricant": 2
+    }
+  },
+  "Mfg_Tier_03_AldumiteDrillingRig": {
+    "id": "Mfg_Tier_03_AldumiteDrillingRig",
+    "name": "Aldumite Drilling Rig",
+    "blueprint": {
+      "Mfg_Tier03_MicrosecondRegulator": 1,
+      "Mfg_Tier02_DrillingRig": 1,
+      "InorgUniqueAldumite": 4,
+      "InorgExoticCaesium_L": 2
+    }
+  },
+  "Mfg_Tier_03_IndiciteWafer": {
+    "id": "Mfg_Tier_03_IndiciteWafer",
+    "name": "Indicite Wafer",
+    "blueprint": {
+      "Mfg_Tier02_SemimetalWafer": 1,
+      "InorgUniqueIndicite": 4,
+      "InorgExoticCaesium_L": 2,
+      "OrgExoticSolvent": 2
+    }
+  },
+  "Mfg_Tier_03_MicrosecondRegulator": {
+    "id": "Mfg_Tier_03_MicrosecondRegulator",
+    "name": "Microsecond Regulator",
+    "blueprint": {
+      "Mfg_Tier02_SupercooledMagnet": 1,
+      "Mfg_Tier01_TauGradeRheostat": 1,
+      "InorgExoticEuropium": 4,
+      "InorgRareLithium": 2
+    }
+  },
+  "Mfg_Tier_03_PowerCircuit": {
+    "id": "Mfg_Tier_03_PowerCircuit",
+    "name": "Power Circuit",
+    "blueprint": {
+      "Mfg_Tier02_PositronBattery": 1,
+      "Mfg_Tier02_ParamagnonSuperconductor": 1,
+      "InorgExoticPalladium": 4,
+      "OrgExoticPolymer": 2
+    }
+  },
+  "Mfg_Tier_03_SubstrateMolecularSieve": {
+    "id": "Mfg_Tier_03_SubstrateMolecularSieve",
+    "name": "Substrate Molecular Sieve",
+    "blueprint": {
+      "Mfg_Tier02_MolecularSieve": 1,
+      "Mfg_Tier02_SterileNanotubes": 2,
+      "OrgUniqueMemorySubstrate": 3,
+      "OrgExoticBiosuppressant": 2
+    }
+  },
+  "Mfg_Tier_03_TasineSuperconductor": {
+    "id": "Mfg_Tier_03_TasineSuperconductor",
+    "name": "Tasine Superconductor",
+    "blueprint": {
+      "Mfg_Tier02_ParamagnonSuperconductor": 1,
+      "InorgUniqueTasine_L": 4,
+      "InorgExoticPalladium": 2,
+      "OrgExoticPolymer": 2
+    }
+  },
+  "Mfg_Tier_03_VerylManifold": {
+    "id": "Mfg_Tier_03_VerylManifold",
+    "name": "Veryl Manifold",
+    "blueprint": {
+      "Mfg_Tier01_AusteniticManifold": 1,
+      "InorgUniqueVeryl_G": 4,
+      "InorgExoticYtterbium": 2,
+      "OrgExoticLubricant": 2
+    }
+  },
+  "Mfg_Tier_03_VytiniumFuelRod": {
+    "id": "Mfg_Tier_03_VytiniumFuelRod",
+    "name": "Vytinium Fuel Rod",
+    "blueprint": {
+      "Mfg_Tier03_IndiciteWafer": 1,
+      "Mfg_Tier02_NuclearFuelRod": 1,
+      "InorgUniqueVytinium": 4,
+      "InorgExoticPlutonium": 2
+    }
+  },
+  "OutpostPI_BuilderOrganicFaunaSmall": {
+    "id": "OutpostPI_BuilderOrganicFaunaSmall",
+    "name": "Fauna Builder Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "InorgCommonAluminum": 8,
+      "Mfg_Tier01_ReactiveGauge": 3,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostPI_BuilderOrganicFaunaMedium": {
+    "id": "OutpostPI_BuilderOrganicFaunaMedium",
+    "name": "Fauna Builder Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 7,
+      "InorgCommonAluminum": 12,
+      "Mfg_Tier02_MolecularSieve": 2,
+      "OrgCommonSealant": 6
+    }
+  },
+  "OutpostPI_BuilderOrganicFaunaLarge": {
+    "id": "OutpostPI_BuilderOrganicFaunaLarge",
+    "name": "Fauna Builder Large",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 9,
+      "InorgCommonAluminum": 16,
+      "Mfg_Tier03_SubstrateMolecularSieve": 2,
+      "OrgCommonSealant": 9
+    }
+  },
+  "OutpostPI_BuilderOrganicFloraSmall": {
+    "id": "OutpostPI_BuilderOrganicFloraSmall",
+    "name": "Flora Builder Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "InorgUncommonFluorine_G": 4,
+      "Mfg_Tier01_ReactiveGauge": 3,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostPI_BuilderOrganicFloraMedium": {
+    "id": "OutpostPI_BuilderOrganicFloraMedium",
+    "name": "Flora Builder Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 7,
+      "InorgUncommonFluorine_G": 8,
+      "Mfg_Tier02_MolecularSieve": 2,
+      "OrgCommonSealant": 6
+    }
+  },
+  "OutpostPI_BuilderOrganicFloraLarge": {
+    "id": "OutpostPI_BuilderOrganicFloraLarge",
+    "name": "Flora Builder Large",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 9,
+      "InorgUncommonFluorine_G": 12,
+      "Mfg_Tier03_SubstrateMolecularSieve": 2,
+      "OrgCommonSealant": 9
+    }
+  },
+  "WorkbenchArmor": {
+    "id": "WorkbenchArmor",
+    "name": "Workbench Armor",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "OrgUncommonCosmetic": 4,
+      "OrgCommonFiber": 3
+    }
+  },
+  "WorkbenchChem": {
+    "id": "WorkbenchChem",
+    "name": "Workbench Chem",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "InorgUncommonBenzene_G": 3,
+      "InorgCommonChlorine_G": 4,
+      "InorgCommonIron": 3
+    }
+  },
+  "WorkbenchFood": {
+    "id": "WorkbenchFood",
+    "name": "Workbench Food",
+    "blueprint": {
+      "InorgCommonIron": 4,
+      "InorgCommonCopper": 3,
+      "InorgUncommonAlkanes_G": 3
+    }
+  },
+  "WorkbenchIndustrial": {
+    "id": "WorkbenchIndustrial",
+    "name": "Workbench Industrial",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "InorgCommonIron": 3
+    }
+  },
+  "WorkbenchResearch": {
+    "id": "WorkbenchResearch",
+    "name": "Workbench Research",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "InorgCommonCopper": 2,
+      "InorgUncommonBeryllium": 2
+    }
+  },
+  "WorkbenchWeapon": {
+    "id": "WorkbenchWeapon",
+    "name": "Workbench Weapon",
+    "blueprint": {
+      "InorgCommonIron": 4,
+      "InorgCommonNickel": 2,
+      "OrgCommonSealant": 3,
+      "OrgRareAdhesive": 3
+    }
+  },
+  "OutpostHarvesterAtmosphereSmall": {
+    "id": "OutpostHarvesterAtmosphereSmall",
+    "name": "Atmosphere Harvester Small",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "OrgUncommonMembrane": 4,
+      "InorgUncommonBenzene_G": 3
+    }
+  },
+  "OutpostHarvesterAtmosphereMedium": {
+    "id": "OutpostHarvesterAtmosphereMedium",
+    "name": "Atmosphere Harvester Medium",
+    "blueprint": {
+      "Mfg_Tier02_SemimetalWafer": 2,
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "Mfg_Tier01_AusteniticManifold": 1,
+      "InorgRareTantalum": 4
+    }
+  },
+  "OutpostHarvesterAtmosphereLarge": {
+    "id": "OutpostHarvesterAtmosphereLarge",
+    "name": "Atmosphere Harvester Large",
+    "blueprint": {
+      "Mfg_Tier03_IndiciteWafer": 2,
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "Mfg_Tier01_AusteniticManifold": 2,
+      "InorgRareTantalum": 6
+    }
+  },
+  "OutpostHarvesterGasSmall": {
+    "id": "OutpostHarvesterGasSmall",
+    "name": "Gas Harvester Small",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "InorgCommonNickel": 4,
+      "InorgCommonCopper": 3
+    }
+  },
+  "OutpostHarvesterGasMedium": {
+    "id": "OutpostHarvesterGasMedium",
+    "name": "Gas Harvester Medium",
+    "blueprint": {
+      "Mfg_Tier02_MolecularSieve": 2,
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "Mfg_Tier01_ReactiveGauge": 2,
+      "InorgRareVanadium": 4
+    }
+  },
+  "OutpostHarvesterGasLarge": {
+    "id": "OutpostHarvesterGasLarge",
+    "name": "Gas Harvester Large",
+    "blueprint": {
+      "Mfg_Tier03_SubstrateMolecularSieve": 2,
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "Mfg_Tier01_ReactiveGauge": 3,
+      "InorgRareVanadium": 6
+    }
+  },
+  "OutpostHarvesterLiquidSmall": {
+    "id": "OutpostHarvesterLiquidSmall",
+    "name": "Liquid Harvester Small",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "InorgCommonNickel": 4,
+      "InorgCommonIron": 3
+    }
+  },
+  "OutpostHarvesterLiquidMedium": {
+    "id": "OutpostHarvesterLiquidMedium",
+    "name": "Liquid Harvester Medium",
+    "blueprint": {
+      "Mfg_Tier02_MolecularSieve": 2,
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "Mfg_Tier01_AusteniticManifold": 3,
+      "InorgRareTitanium": 4
+    }
+  },
+  "OutpostHarvesterLiquidLarge": {
+    "id": "OutpostHarvesterLiquidLarge",
+    "name": "Liquid Harvester Large",
+    "blueprint": {
+      "Mfg_Tier03_SubstrateMolecularSieve": 2,
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "Mfg_Tier03_VerylManifold": 3,
+      "InorgRareTitanium": 6
+    }
+  },
+  "OutpostHarvesterSolidSmall": {
+    "id": "OutpostHarvesterSolidSmall",
+    "name": "Solid Harvester Small",
+    "blueprint": {
+      "InorgCommonIron": 5,
+      "InorgCommonAluminum": 4,
+      "InorgUncommonTungsten": 2
+    }
+  },
+  "OutpostHarvesterSolidMedium": {
+    "id": "OutpostHarvesterSolidMedium",
+    "name": "Solid Harvester Medium",
+    "blueprint": {
+      "Mfg_Tier02_DrillingRig": 1,
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "Mfg_Tier01_IsotopicCoolant": 2,
+      "InorgUncommonTungsten": 4
+    }
+  },
+  "OutpostHarvesterSolidLarge": {
+    "id": "OutpostHarvesterSolidLarge",
+    "name": "Solid Harvester Large",
+    "blueprint": {
+      "Mfg_Tier03_AldumiteDrillingRig": 1,
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "Mfg_Tier01_IsotopicCoolant": 4,
+      "InorgUncommonTungsten": 6
+    }
+  },
+  "SQ_ClearBountyTerminal": {
+    "id": "SQ_ClearBountyTerminal",
+    "name": "Clear Bounty Terminal",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "Mfg_Tier01_ZeroWire": 2,
+      "InorgUncommonBeryllium": 2
+    }
+  },
+  "OutpostPI_CargoLinkLandingPad": {
+    "id": "OutpostPI_CargoLinkLandingPad",
+    "name": "Cargo Link Landing Pad",
+    "blueprint": {
+      "InorgCommonIron": 20,
+      "InorgCommonAluminum": 12,
+      "InorgUncommonBeryllium": 2,
+      "Mfg_Tier01_ZeroWire": 2
+    }
+  },
+  "OutpostPI_CrewStation": {
+    "id": "OutpostPI_CrewStation",
+    "name": "Crew Station",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "InorgCommonIron": 2,
+      "InorgCommonNickel": 3
+    }
+  },
+  "OutpostPI_LandingPadShipbuilder": {
+    "id": "OutpostPI_LandingPadShipbuilder",
+    "name": "Landing Pad With Shipbuilder",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 18,
+      "InorgCommonIron": 30,
+      "InorgUncommonBeryllium": 2,
+      "Mfg_Tier01_ZeroWire": 2
+    }
+  },
+  "OutpostPI_LandingPadMedium": {
+    "id": "OutpostPI_LandingPadMedium",
+    "name": "Landing Pad Medium",
+    "blueprint": {
+      "InorgCommonIron": 15,
+      "InorgCommonAluminum": 8
+    }
+  },
+  "OutpostPI_LandingPadSmall": {
+    "id": "OutpostPI_LandingPadSmall",
+    "name": "Landing Pad Small",
+    "blueprint": {
+      "InorgCommonIron": 20,
+      "InorgCommonAluminum": 8
+    }
+  },
+  "OutpostScanBoosterSmall": {
+    "id": "OutpostScanBoosterSmall",
+    "name": "Scan Booster Small",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "InorgCommonCopper": 3,
+      "InorgUncommonBeryllium": 2
+    }
+  },
+  "OutpostScanBoosterMedium": {
+    "id": "OutpostScanBoosterMedium",
+    "name": "Scan Booster Medium",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "Mfg_Tier01_ZeroWire": 3,
+      "Mfg_Tier01_CommRelay": 1,
+      "Mfg_Tier01_IsocenteredMagnet": 1
+    }
+  },
+  "OutpostScanBoosterLarge": {
+    "id": "OutpostScanBoosterLarge",
+    "name": "Scan Booster Large",
+    "blueprint": {
+      "InorgCommonAluminum": 6,
+      "Mfg_Tier02_ParamagnonSuperconductor": 1,
+      "Mfg_Tier01_CommRelay": 2,
+      "Mfg_Tier02_SupercooledMagnet": 1
+    }
+  },
+  "OutpostPI_Power_PowerReactorSmall": {
+    "id": "OutpostPI_Power_PowerReactorSmall",
+    "name": "Power Reactor Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 6,
+      "InorgCommonLead": 10,
+      "Mfg_Tier02_NuclearFuelRod": 8,
+      "Mfg_Tier02_SupercooledMagnet": 5,
+      "Mfg_Tier02_ControlRod": 3,
+      "Mfg_Tier01_TauGradeRheostat": 3,
+      "Mfg_Tier02_ParamagnonSuperconductor": 4
+    }
+  },
+  "OutpostPI_Power_PowerReactorMedium": {
+    "id": "OutpostPI_Power_PowerReactorMedium",
+    "name": "Power Reactor Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 10,
+      "InorgCommonLead": 20,
+      "Mfg_Tier03_VytiniumFuelRod": 8,
+      "Mfg_Tier03_RothiciteMagnet": 5,
+      "Mfg_Tier02_ControlRod": 5,
+      "Mfg_Tier03_PowerCircuit": 3,
+      "Mfg_Tier03_TasineSuperconductor": 4
+    }
+  },
+  "OutpostPower_WindTurbineSmall": {
+    "id": "OutpostPower_WindTurbineSmall",
+    "name": "Wind Turbine Small",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "InorgUncommonCobalt": 2,
+      "InorgCommonNickel": 3
+    }
+  },
+  "OutpostPower_WindTurbineMedium": {
+    "id": "OutpostPower_WindTurbineMedium",
+    "name": "Wind Turbine Medium",
+    "blueprint": {
+      "InorgCommonAluminum": 5,
+      "Mfg_Tier01_IsocenteredMagnet": 2
+    }
+  },
+  "OutpostStorageGasSmall": {
+    "id": "OutpostStorageGasSmall",
+    "name": "Gas Storage Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "InorgCommonCopper": 6,
+      "InorgUncommonTungsten": 5
+    }
+  },
+  "OutpostStorageGasMedium": {
+    "id": "OutpostStorageGasMedium",
+    "name": "Gas Storage Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "InorgCommonCopper": 10,
+      "InorgUncommonTungsten": 8
+    }
+  },
+  "OutpostStorageGasLarge": {
+    "id": "OutpostStorageGasLarge",
+    "name": "Gas Storage Large",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 10,
+      "InorgCommonCopper": 20,
+      "InorgUncommonTungsten": 16
+    }
+  },
+  "OutpostStorageLiquidSmall": {
+    "id": "OutpostStorageLiquidSmall",
+    "name": "Liquid Storage Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "InorgCommonAluminum": 6,
+      "InorgCommonNickel": 5
+    }
+  },
+  "OutpostStorageLiquidMedium": {
+    "id": "OutpostStorageLiquidMedium",
+    "name": "Liquid Storage Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "InorgCommonAluminum": 10,
+      "InorgCommonNickel": 8
+    }
+  },
+  "OutpostStorageLiquidLarge": {
+    "id": "OutpostStorageLiquidLarge",
+    "name": "Liquid Storage Large",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 10,
+      "InorgCommonAluminum": 20,
+      "InorgCommonNickel": 16
+    }
+  },
+  "OutpostStorageSolidSmall": {
+    "id": "OutpostStorageSolidSmall",
+    "name": "Solid Storage Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "InorgCommonIron": 6,
+      "InorgCommonAluminum": 5
+    }
+  },
+  "OutpostStorageSolidMedium": {
+    "id": "OutpostStorageSolidMedium",
+    "name": "Solid Storage Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "InorgCommonIron": 10,
+      "InorgCommonAluminum": 8
+    }
+  },
+  "OutpostStorageSolidLarge": {
+    "id": "OutpostStorageSolidLarge",
+    "name": "Solid Storage Large",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 10,
+      "InorgCommonIron": 20,
+      "InorgCommonAluminum": 16
+    }
+  },
+  "OutpostTransferContainer": {
+    "id": "OutpostTransferContainer",
+    "name": "Outpost Transfer Container",
+    "blueprint": {
+      "InorgCommonIron": 8,
+      "InorgUncommonTungsten": 5,
+      "OrgExoticLubricant": 4
+    }
+  }
+}
