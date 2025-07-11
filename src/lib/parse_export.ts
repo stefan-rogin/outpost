@@ -55,10 +55,9 @@ const coLines: string[] = filterLines(
   await getAllLines(CONSTRUCTIBLES_FILE),
   "co"
 )
-console.debug(`Construcible resources lines: ${coLines.length}`)
+console.debug(`Constructible resources lines: ${coLines.length}`)
 
-const coResources: Resource[] = coLines.slice(0, 500).map(line => {
-  // FIXME: Remove temp slice
+const coResources: Resource[] = coLines.map(line => {
   const cols: string[] = line.split("\t")
   const id: ResourceId = cols[14]
   const name: string = cols[14]
