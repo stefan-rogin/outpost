@@ -1,13 +1,34 @@
 import { Resource, ResourceId } from "@/models/resource"
 import styles from "@/components/BoM.module.css"
-import { resources } from "@/lib/resources"
+import { tryGetResource } from "@/lib/resources"
+// import { useEffect, useState } from "react"
 
-export const BoM = ({ items }: { items: Resource[] }) => {
-  const bom: Map<ResourceId, number> = items.reduce(
-    (acc: Map<ResourceId, number>, item: Resource) => {
-      Object.entries(item.blueprint!).map(([resId, qty]) => {
-        acc.set(resId, (acc.get(resId) || 0) + qty)
-      }) // Only constructibles in this list
+interface ShadowResource extends Resource {
+  deconstructed: boolean
+}
+
+// function mapItemsToShadow(items: Resource[], shadow?:ShadowResource[]) {
+//   // All resources of the same Id are either deconstructed or not
+
+//   return items.map(item => {
+//     const itemShadow = shadow?.find(shadowItem => shadowItem.id === item)
+//   })
+// }
+
+export const BoM = ({ items }: { items: Map<ResourceId, number> }) => {
+  // const [shadow, setShadow] = useState<Map<ShadowResource, number>>(items)
+  // useEffect(() => {
+  //   setShadow(items)
+  // }, [items])
+
+  const bom: Map<ResourceId, number> = [...items].reduce(
+    (acc: Map<ResourceId, number>, [id, qty]) => {
+      const resource = tryGetResource(id)
+      if (!resource?.blueprint) return acc
+
+      Object.entries(resource.blueprint).map(([bpId, bpQty]) => {
+        acc.set(bpId, (acc.get(bpId) || 0) + qty * bpQty)
+      })
       return acc
     },
     new Map<ResourceId, number>()
@@ -15,12 +36,12 @@ export const BoM = ({ items }: { items: Resource[] }) => {
 
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Bill of materials</h3>
+      <h3 className={styles.title}>Materials</h3>
       <div className={styles.bom}>
-        {Array.from(bom).map(([resId, qty]) => {
+        {[...bom].map(([id, qty]) => {
           return (
-            <div className={styles.bom_item} key={resId}>
-              {qty} x {resources[resId]?.name || resId}
+            <div className={styles.bom_item} key={id}>
+              {qty} x {tryGetResource(id)?.name ?? id}
             </div>
           )
         })}

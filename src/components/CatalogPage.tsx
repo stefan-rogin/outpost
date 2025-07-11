@@ -1,14 +1,16 @@
 import { CatalogCategory, CatalogGroup } from "@/models/catalog"
+import { Arrow } from "@/components/Arrow"
 import styles from "@/components/CatalogPage.module.css"
 import { useState, SyntheticEvent, useEffect } from "react"
-import { Resource, ResourceId } from "@/models/resource"
-import { resources } from "@/lib/resources"
+import { ResourceId } from "@/models/resource"
+import { tryGetResource } from "@/lib/resources"
+import { NavDirection, QtyChange } from "@/models/types"
 import Image from "next/image"
 
 interface VisualGroup {
   title: string
-  selected: Resource
-  options: Resource[]
+  selected: ResourceId
+  options: ResourceId[]
 }
 
 interface VisualCategory {
@@ -16,29 +18,18 @@ interface VisualCategory {
   items: VisualGroup[]
 }
 
-type CatalogPageProps = {
-  category: CatalogCategory
-  onSelect: (resource: Resource, action: "add" | "remove") => () => void
-}
-
-const getResource = (id: ResourceId): Resource => {
-  const res = resources[id]
-  if (!res) throw new Error(`Missing resource: ${id}`)
-  return res
-}
-
 const mapGroupToVisual = (group: CatalogGroup): VisualGroup => {
   return {
     ...group,
-    selected: getResource(group.options[0]),
-    options: group.options.map(option => getResource(option))
+    selected: group.options[0]
   }
 }
 
+// TODO: Extract array wrapper from here and page
 const getNavOption = (
   group: VisualGroup,
-  direction: "prev" | "next"
-): Resource => {
+  direction: NavDirection
+): ResourceId => {
   const currentIndex = group.options.indexOf(group.selected) || 0
   const futureIndex =
     direction === "next"
@@ -48,26 +39,30 @@ const getNavOption = (
   return group.options[futureIndex]
 }
 
-export const CatalogPage = ({ category, onSelect }: CatalogPageProps) => {
+// TODO: Extract Arrow component
+export const CatalogPage = ({
+  category,
+  onSelect
+}: {
+  category: CatalogCategory
+  onSelect: (id: ResourceId, action: QtyChange) => () => void
+}) => {
   const initialVisualCategory: VisualCategory = {
     ...category,
     items: category.items.map(group => mapGroupToVisual(group))
   }
   const [visualCategory, setVisualCategory] = useState(initialVisualCategory)
 
-  const handleNewOption =
-    (newSelection: Resource) =>
+  const handleNewOptionFn =
+    (newSelection: ResourceId) =>
     (event: SyntheticEvent): void => {
       const newVisual: VisualCategory = {
         ...visualCategory,
-        items: visualCategory.items.map(group => {
-          return {
-            ...group,
-            selected: group.options.includes(newSelection)
-              ? newSelection
-              : group.selected
-          }
-        })
+        items: visualCategory.items.map(group =>
+          group.options.includes(newSelection)
+            ? { ...group, selected: newSelection }
+            : group
+        )
       }
       setVisualCategory(newVisual)
       event.stopPropagation()
@@ -82,34 +77,39 @@ export const CatalogPage = ({ category, onSelect }: CatalogPageProps) => {
 
   return (
     <div className={styles.items_column}>
-      {visualCategory.items.map(group => (
-        <div key={group.title} className={styles.item_with_label_container}>
-          <div key={group.title} className={styles.item_container}>
-            <Image
-              src={`/icons/${group.selected.id}.jpg`}
-              alt={group.selected.name}
-              width={100}
-              height={100}
-              loading={"eager"}
-              onClick={onSelect(group.selected, "add")}
-            />
+      {visualCategory.items.map(group => {
+        const resource = tryGetResource(group.selected)
+        if (!resource) return null
 
-            {group.options.length > 1 && (
-              <>
-                <div
-                  className={`arrow ${styles.arrow_prev}`}
-                  onClick={handleNewOption(getNavOption(group, "prev"))}
-                ></div>
-                <div
-                  className={`arrow ${styles.arrow_next}`}
-                  onClick={handleNewOption(getNavOption(group, "next"))}
-                ></div>
-              </>
-            )}
+        return (
+          <div key={group.title} className={styles.item_with_label_container}>
+            <div className={styles.item_container}>
+              <Image
+                src={`/icons/${group.selected}.jpg`}
+                alt={resource.name}
+                width={100}
+                height={100}
+                loading={"eager"}
+                onClick={onSelect(group.selected, "add")}
+              />
+
+              {group.options.length > 1 && (
+                <>
+                  <Arrow
+                    className={styles.arrow_prev}
+                    onClick={handleNewOptionFn(getNavOption(group, "prev"))}
+                  />
+                  <Arrow
+                    className={styles.arrow_next}
+                    onClick={handleNewOptionFn(getNavOption(group, "next"))}
+                  />
+                </>
+              )}
+            </div>
+            <div className={styles.item_label}>{resource.name}</div>
           </div>
-          <div className={styles.item_label}>{group.selected.name}</div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }

@@ -5,14 +5,17 @@ import { useState } from "react"
 import { CatalogPage } from "@/components/CatalogPage"
 import Image from "next/image"
 import styles from "@/app/page.module.css"
-import { Resource } from "@/models/resource"
+import { ResourceId } from "@/models/resource"
 import { Project } from "@/components/Project"
+import { useMappedState } from "@/hooks/useMappedState"
+import { Arrow } from "@/components/Arrow"
+import { NavDirection, QtyChange } from "@/models/types"
 
 export default function Home() {
   const [categoryIndex, setCategoryIndex] = useState(0)
-  const [items, setItems] = useState(new Array<Resource>())
+  const { map, set, remove, get } = useMappedState<ResourceId, number>()
 
-  const handlePageChange = (direction: "prev" | "next") => (): void => {
+  const handlePageChangeFn = (direction: NavDirection) => (): void => {
     const newCategoryIndex =
       direction === "next"
         ? (categoryIndex + 1) % catalog.length
@@ -20,19 +23,14 @@ export default function Home() {
     setCategoryIndex(newCategoryIndex)
   }
 
-  const handleQtyChange =
-    (resource: Resource, action: "add" | "remove") => (): void => {
-      if (action === "add") {
-        setItems([...items, resource])
-        return
-      }
-      const index = items.indexOf(resource)
-      if (index !== -1) {
-        setItems(items.toSpliced(index, 1))
-      } else {
-        console.warn(`Attempted to remove a non-existent resource.`)
-      }
+  const handleQtyChangeFn = (id: ResourceId, action: QtyChange) => (): void => {
+    if (action === "add") {
+      set(id, (get(id) || 0) + 1)
+      return
     }
+    const currentQty = get(id) || 0
+    currentQty <= 1 ? remove(id) : set(id, currentQty - 1)
+  }
 
   return (
     <div className={styles.page_layout}>
@@ -62,22 +60,22 @@ export default function Home() {
             <div className={styles.category_title}>
               {catalog[categoryIndex].title}
             </div>
-            <div
-              className={`arrow ${styles.arrow_prev}`}
-              onClick={handlePageChange("prev")}
-            ></div>
-            <div
-              className={`arrow ${styles.arrow_next}`}
-              onClick={handlePageChange("next")}
-            ></div>
+            <Arrow
+              className={styles.arrow_prev}
+              onClick={handlePageChangeFn("prev")}
+            />
+            <Arrow
+              className={styles.arrow_next}
+              onClick={handlePageChangeFn("next")}
+            />
           </div>
           <CatalogPage
             category={catalog[categoryIndex]}
-            onSelect={handleQtyChange}
+            onSelect={handleQtyChangeFn}
           />
         </div>
         <div className={styles.bom_column}>
-          <Project items={items} onQtyChange={handleQtyChange} />
+          <Project items={map} onQtyChange={handleQtyChangeFn} />
         </div>
       </main>
       <footer className={styles.footer}>
