@@ -307,16 +307,16 @@
     "id": "OrgUniqueNeurologic",
     "name": "Neurologic"
   },
-  "Mfg_Tier_01_AdaptiveFrame": {
-    "id": "Mfg_Tier_01_AdaptiveFrame",
+  "Mfg_Tier01_AdaptiveFrame": {
+    "id": "Mfg_Tier01_AdaptiveFrame",
     "name": "Adaptive Frame",
     "blueprint": {
       "InorgCommonIron": 1,
       "InorgCommonAluminum": 1
     }
   },
-  "Mfg_Tier_01_AusteniticManifold": {
-    "id": "Mfg_Tier_01_AusteniticManifold",
+  "Mfg_Tier01_AusteniticManifold": {
+    "id": "Mfg_Tier01_AusteniticManifold",
     "name": "Austenitic Manifold",
     "blueprint": {
       "Mfg_Tier01_ReactiveGauge": 1,
@@ -324,40 +324,40 @@
       "InorgCommonNickel": 2
     }
   },
-  "Mfg_Tier_01_CommRelay": {
-    "id": "Mfg_Tier_01_CommRelay",
+  "Mfg_Tier01_CommRelay": {
+    "id": "Mfg_Tier01_CommRelay",
     "name": "Comm Relay",
     "blueprint": {
       "Mfg_Tier01_TauGradeRheostat": 1,
       "Mfg_Tier01_IsocenteredMagnet": 1
     }
   },
-  "Mfg_Tier_01_IsocenteredMagnet": {
-    "id": "Mfg_Tier_01_IsocenteredMagnet",
+  "Mfg_Tier01_IsocenteredMagnet": {
+    "id": "Mfg_Tier01_IsocenteredMagnet",
     "name": "Isocentered Magnet",
     "blueprint": {
       "InorgCommonNickel": 1,
       "InorgUncommonCobalt": 1
     }
   },
-  "Mfg_Tier_01_IsotopicCoolant": {
-    "id": "Mfg_Tier_01_IsotopicCoolant",
+  "Mfg_Tier01_IsotopicCoolant": {
+    "id": "Mfg_Tier01_IsotopicCoolant",
     "name": "Isotopic Coolant",
     "blueprint": {
       "InorgRareTetrafluorides_G": 1,
       "InorgExoticIonicLiquids_L": 1
     }
   },
-  "Mfg_Tier_01_MagPressureTank": {
-    "id": "Mfg_Tier_01_MagPressureTank",
+  "Mfg_Tier01_MagPressureTank": {
+    "id": "Mfg_Tier01_MagPressureTank",
     "name": "Mag Pressure Tank",
     "blueprint": {
       "InorgCommonAluminum": 2,
       "InorgCommonNickel": 1
     }
   },
-  "Mfg_Tier_01_Monopropellant": {
-    "id": "Mfg_Tier_01_Monopropellant",
+  "Mfg_Tier01_Monopropellant": {
+    "id": "Mfg_Tier01_Monopropellant",
     "name": "Monopropellant",
     "blueprint": {
       "Mfg_Tier01_MagPressureTank": 1,
@@ -365,40 +365,40 @@
       "InorgUncommonAlkanes_G": 2
     }
   },
-  "Mfg_Tier_01_Polytextile": {
-    "id": "Mfg_Tier_01_Polytextile",
+  "Mfg_Tier01_Polytextile": {
+    "id": "Mfg_Tier01_Polytextile",
     "name": "Polytextile",
     "blueprint": {
       "OrgCommonFiber": 2,
       "OrgUncommonCosmetic": 1
     }
   },
-  "Mfg_Tier_01_ReactiveGauge": {
-    "id": "Mfg_Tier_01_ReactiveGauge",
+  "Mfg_Tier01_ReactiveGauge": {
+    "id": "Mfg_Tier01_ReactiveGauge",
     "name": "Reactive Gauge",
     "blueprint": {
       "InorgCommonAluminum": 2,
       "InorgCommonCopper": 1
     }
   },
-  "Mfg_Tier_01_TauGradeRheostat": {
-    "id": "Mfg_Tier_01_TauGradeRheostat",
+  "Mfg_Tier01_TauGradeRheostat": {
+    "id": "Mfg_Tier01_TauGradeRheostat",
     "name": "Tau Grade Rheostat",
     "blueprint": {
       "InorgCommonCopper": 1,
       "InorgUncommonBeryllium": 1
     }
   },
-  "Mfg_Tier_01_ZeroWire": {
-    "id": "Mfg_Tier_01_ZeroWire",
+  "Mfg_Tier01_ZeroWire": {
+    "id": "Mfg_Tier01_ZeroWire",
     "name": "Zero Wire",
     "blueprint": {
       "InorgUncommonSilver": 1,
       "InorgCommonCopper": 1
     }
   },
-  "Mfg_Tier_02_ControlRod": {
-    "id": "Mfg_Tier_02_ControlRod",
+  "Mfg_Tier02_ControlRod": {
+    "id": "Mfg_Tier02_ControlRod",
     "name": "Control Rod",
     "blueprint": {
       "Mfg_Tier01_AusteniticManifold": 1,
@@ -406,8 +406,8 @@
       "InorgExoticDysprosium": 3
     }
   },
-  "Mfg_Tier_02_DrillingRig": {
-    "id": "Mfg_Tier_02_DrillingRig",
+  "Mfg_Tier02_DrillingRig": {
+    "id": "Mfg_Tier02_DrillingRig",
     "name": "Drilling Rig",
     "blueprint": {
       "Mfg_Tier01_ReactiveGauge": 1,
@@ -415,8 +415,8 @@
       "OrgExoticLubricant": 2
     }
   },
-  "Mfg_Tier_02_MolecularSieve": {
-    "id": "Mfg_Tier_02_MolecularSieve",
+  "Mfg_Tier02_MolecularSieve": {
+    "id": "Mfg_Tier02_MolecularSieve",
     "name": "Molecular Sieve",
     "blueprint": {
       "Mfg_Tier01_MagPressureTank": 1,
@@ -424,8 +424,8 @@
       "OrgUncommonMembrane": 2
     }
   },
-  "Mfg_Tier_02_NuclearFuelRod": {
-    "id": "Mfg_Tier_02_NuclearFuelRod",
+  "Mfg_Tier02_NuclearFuelRod": {
+    "id": "Mfg_Tier02_NuclearFuelRod",
     "name": "Nuclear Fuel Rod",
     "blueprint": {
       "Mfg_Tier02_SemimetalWafer": 1,
@@ -433,8 +433,8 @@
       "OrgExoticSolvent": 2
     }
   },
-  "Mfg_Tier_02_ParamagnonSuperconductor": {
-    "id": "Mfg_Tier_02_ParamagnonSuperconductor",
+  "Mfg_Tier02_ParamagnonSuperconductor": {
+    "id": "Mfg_Tier02_ParamagnonSuperconductor",
     "name": "Paramagnon Superconductor",
     "blueprint": {
       "Mfg_Tier01_ZeroWire": 3,
@@ -442,8 +442,8 @@
       "InorgRareNeodymium": 1
     }
   },
-  "Mfg_Tier_02_PositronBattery": {
-    "id": "Mfg_Tier_02_PositronBattery",
+  "Mfg_Tier02_PositronBattery": {
+    "id": "Mfg_Tier02_PositronBattery",
     "name": "Positron Battery",
     "blueprint": {
       "Mfg_Tier01_TauGradeRheostat": 1,
@@ -451,8 +451,8 @@
       "InorgRareVanadium": 2
     }
   },
-  "Mfg_Tier_02_SemimetalWafer": {
-    "id": "Mfg_Tier_02_SemimetalWafer",
+  "Mfg_Tier02_SemimetalWafer": {
+    "id": "Mfg_Tier02_SemimetalWafer",
     "name": "Semimetal Wafer",
     "blueprint": {
       "Mfg_Tier01_ZeroWire": 1,
@@ -460,8 +460,8 @@
       "InorgRareGold": 2
     }
   },
-  "Mfg_Tier_02_SterileNanotubes": {
-    "id": "Mfg_Tier_02_SterileNanotubes",
+  "Mfg_Tier02_SterileNanotubes": {
+    "id": "Mfg_Tier02_SterileNanotubes",
     "name": "Sterile Nanotubes",
     "blueprint": {
       "Mfg_Tier02_MolecularSieve": 1,
@@ -469,8 +469,8 @@
       "OrgExoticSolvent": 2
     }
   },
-  "Mfg_Tier_02_SupercooledMagnet": {
-    "id": "Mfg_Tier_02_SupercooledMagnet",
+  "Mfg_Tier02_SupercooledMagnet": {
+    "id": "Mfg_Tier02_SupercooledMagnet",
     "name": "Supercooled Magnet",
     "blueprint": {
       "Mfg_Tier01_IsocenteredMagnet": 1,
@@ -478,8 +478,8 @@
       "InorgRareNeodymium": 3
     }
   },
-  "Mfg_Tier_02_ZeroGGimbal": {
-    "id": "Mfg_Tier_02_ZeroGGimbal",
+  "Mfg_Tier02_ZeroGGimbal": {
+    "id": "Mfg_Tier02_ZeroGGimbal",
     "name": "Zero G Gimbal",
     "blueprint": {
       "Mfg_Tier01_IsocenteredMagnet": 1,
@@ -487,8 +487,8 @@
       "OrgExoticLubricant": 2
     }
   },
-  "Mfg_Tier_03_AldumiteDrillingRig": {
-    "id": "Mfg_Tier_03_AldumiteDrillingRig",
+  "Mfg_Tier03_AldumiteDrillingRig": {
+    "id": "Mfg_Tier03_AldumiteDrillingRig",
     "name": "Aldumite Drilling Rig",
     "blueprint": {
       "Mfg_Tier03_MicrosecondRegulator": 1,
@@ -497,8 +497,8 @@
       "InorgExoticCaesium_L": 2
     }
   },
-  "Mfg_Tier_03_IndiciteWafer": {
-    "id": "Mfg_Tier_03_IndiciteWafer",
+  "Mfg_Tier03_IndiciteWafer": {
+    "id": "Mfg_Tier03_IndiciteWafer",
     "name": "Indicite Wafer",
     "blueprint": {
       "Mfg_Tier02_SemimetalWafer": 1,
@@ -507,8 +507,8 @@
       "OrgExoticSolvent": 2
     }
   },
-  "Mfg_Tier_03_MicrosecondRegulator": {
-    "id": "Mfg_Tier_03_MicrosecondRegulator",
+  "Mfg_Tier03_MicrosecondRegulator": {
+    "id": "Mfg_Tier03_MicrosecondRegulator",
     "name": "Microsecond Regulator",
     "blueprint": {
       "Mfg_Tier02_SupercooledMagnet": 1,
@@ -517,8 +517,8 @@
       "InorgRareLithium": 2
     }
   },
-  "Mfg_Tier_03_PowerCircuit": {
-    "id": "Mfg_Tier_03_PowerCircuit",
+  "Mfg_Tier03_PowerCircuit": {
+    "id": "Mfg_Tier03_PowerCircuit",
     "name": "Power Circuit",
     "blueprint": {
       "Mfg_Tier02_PositronBattery": 1,
@@ -527,8 +527,8 @@
       "OrgExoticPolymer": 2
     }
   },
-  "Mfg_Tier_03_SubstrateMolecularSieve": {
-    "id": "Mfg_Tier_03_SubstrateMolecularSieve",
+  "Mfg_Tier03_SubstrateMolecularSieve": {
+    "id": "Mfg_Tier03_SubstrateMolecularSieve",
     "name": "Substrate Molecular Sieve",
     "blueprint": {
       "Mfg_Tier02_MolecularSieve": 1,
@@ -537,8 +537,8 @@
       "OrgExoticBiosuppressant": 2
     }
   },
-  "Mfg_Tier_03_TasineSuperconductor": {
-    "id": "Mfg_Tier_03_TasineSuperconductor",
+  "Mfg_Tier03_TasineSuperconductor": {
+    "id": "Mfg_Tier03_TasineSuperconductor",
     "name": "Tasine Superconductor",
     "blueprint": {
       "Mfg_Tier02_ParamagnonSuperconductor": 1,
@@ -547,8 +547,8 @@
       "OrgExoticPolymer": 2
     }
   },
-  "Mfg_Tier_03_VerylManifold": {
-    "id": "Mfg_Tier_03_VerylManifold",
+  "Mfg_Tier03_VerylManifold": {
+    "id": "Mfg_Tier03_VerylManifold",
     "name": "Veryl Manifold",
     "blueprint": {
       "Mfg_Tier01_AusteniticManifold": 1,
@@ -557,8 +557,8 @@
       "OrgExoticLubricant": 2
     }
   },
-  "Mfg_Tier_03_VytiniumFuelRod": {
-    "id": "Mfg_Tier_03_VytiniumFuelRod",
+  "Mfg_Tier03_VytiniumFuelRod": {
+    "id": "Mfg_Tier03_VytiniumFuelRod",
     "name": "Vytinium Fuel Rod",
     "blueprint": {
       "Mfg_Tier03_IndiciteWafer": 1,

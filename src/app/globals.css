@@ -41,6 +41,7 @@ a {
   justify-content: center;
   position: relative;
   border-radius: 50%;
+  user-select: none;
 }
 
 .arrow::before {

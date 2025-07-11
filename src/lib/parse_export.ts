@@ -96,7 +96,7 @@ const sanitizedCoResources: Resource[] = coResources
         /Harvester(Atmosphere|Gas|Liquid|Solid)_(01|02|03)(_[a-zA-Z0-9]+)$/,
         "Harvester$1_$2"
       ],
-      [/([a-z])(01|02|03)/, "$1_$2"],
+      [/([a-z])(01|02|03)$/, "$1_$2"],
       [/_01$/, "Small"],
       [/_02$/, "Medium"],
       [/_03$/, "Large"]
