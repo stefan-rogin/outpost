@@ -1,6 +1,6 @@
 import { Resource, ResourceId } from "@/models/resource"
+import data from "@/resources/resources.json"
 
-const blueprint = (inputs: [ResourceId, number][]): Map<ResourceId, number> =>
-  new Map(inputs.map(([id, qty]) => [id, qty]))
-
-export const resources = new Map<ResourceId, Resource>([])
+export const resources: Record<ResourceId, Resource> = Object.fromEntries(
+  Object.entries(data)
+)

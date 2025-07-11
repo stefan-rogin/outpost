@@ -27,41 +27,57 @@ export default function Home() {
 
   return (
     <div className={styles.page_layout}>
-      <div className={styles.catalog_column}>
-        <div className={styles.category_nav_container}>
-          <div className={styles.category_title}>
-            {catalog[categoryIndex].title}
-          </div>
+      <header className={styles.header}>
+        <div className={styles.header_title}>
           <Image
-            src="/left-arrow.svg"
-            alt="Previous option"
-            width={24}
-            height={24}
-            className={styles.arrow_prev}
-            onClick={handlePageChange("prev")}
+            priority={true}
+            src="/starfield.svg"
+            alt="Starfield Logo"
+            width={120}
+            height={120}
           />
-          <Image
-            src="/left-arrow.svg"
-            alt="Next option"
-            width={24}
-            height={24}
-            className={styles.arrow_next}
-            onClick={handlePageChange("next")}
+          <h2>OUTPOST</h2>
+          <h3>&middot; PLANNER</h3>
+        </div>
+
+        <div className={styles.header_border}>
+          <div className={styles.border_bar_1}>&nbsp;</div>
+          <div className={styles.border_bar_2}>&nbsp;</div>
+          <div className={styles.border_bar_3}>&nbsp;</div>
+          <div className={styles.border_bar_4}>&nbsp;</div>
+        </div>
+      </header>
+      <main className={styles.body}>
+        <div className={styles.catalog_column}>
+          <div className={styles.category_nav_container}>
+            <div className={styles.category_title}>
+              {catalog[categoryIndex].title}
+            </div>
+            <div
+              className={`arrow ${styles.arrow_prev}`}
+              onClick={handlePageChange("prev")}
+            ></div>
+            <div
+              className={`arrow ${styles.arrow_next}`}
+              onClick={handlePageChange("next")}
+            ></div>
+          </div>
+          <CatalogPage
+            category={catalog[categoryIndex]}
+            onSelect={handleSelect}
           />
         </div>
-        <CatalogPage
-          category={catalog[categoryIndex]}
-          onSelect={handleSelect}
-        />
-      </div>
-      <div className={styles.items_column}>
-        <h3>Selected</h3>
-        <ul>
-          {items.map((resource, index) => (
-            <li key={`${resource.id}-${index}`}>{resource.name}</li>
-          ))}
-        </ul>
-      </div>
+        <div className={styles.bom_column}>
+          <ul>
+            {items.map((resource, index) => (
+              <li key={`${resource.id}-${index}`}>{resource.name}</li>
+            ))}
+          </ul>
+        </div>
+      </main>
+      <footer className={styles.footer}>
+        <small>Starfield Outpost</small>
+      </footer>
     </div>
   )
 }

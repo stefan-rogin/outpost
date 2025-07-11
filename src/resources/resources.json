@@ -629,7 +629,7 @@
   },
   "WorkbenchArmor": {
     "id": "WorkbenchArmor",
-    "name": "Workbench Armor",
+    "name": "Armor Workbench",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "OrgUncommonCosmetic": 4,
@@ -638,7 +638,7 @@
   },
   "WorkbenchChem": {
     "id": "WorkbenchChem",
-    "name": "Workbench Chem",
+    "name": "Chem Workbench",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgUncommonBenzene_G": 3,
@@ -648,7 +648,7 @@
   },
   "WorkbenchFood": {
     "id": "WorkbenchFood",
-    "name": "Workbench Food",
+    "name": "Food Workbench",
     "blueprint": {
       "InorgCommonIron": 4,
       "InorgCommonCopper": 3,
@@ -657,7 +657,7 @@
   },
   "WorkbenchIndustrial": {
     "id": "WorkbenchIndustrial",
-    "name": "Workbench Industrial",
+    "name": "Industrial Workbench",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgCommonIron": 3
@@ -665,7 +665,7 @@
   },
   "WorkbenchResearch": {
     "id": "WorkbenchResearch",
-    "name": "Workbench Research",
+    "name": "Research Workbench",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgCommonCopper": 2,
@@ -674,7 +674,7 @@
   },
   "WorkbenchWeapon": {
     "id": "WorkbenchWeapon",
-    "name": "Workbench Weapon",
+    "name": "Weapon Workbench",
     "blueprint": {
       "InorgCommonIron": 4,
       "InorgCommonNickel": 2,
@@ -684,7 +684,7 @@
   },
   "OutpostHarvesterAtmosphereSmall": {
     "id": "OutpostHarvesterAtmosphereSmall",
-    "name": "Atmosphere Harvester Small",
+    "name": "Atmosphere Extractor Small",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "OrgUncommonMembrane": 4,
@@ -693,7 +693,7 @@
   },
   "OutpostHarvesterAtmosphereMedium": {
     "id": "OutpostHarvesterAtmosphereMedium",
-    "name": "Atmosphere Harvester Medium",
+    "name": "Atmosphere Extractor Medium",
     "blueprint": {
       "Mfg_Tier02_SemimetalWafer": 2,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -703,7 +703,7 @@
   },
   "OutpostHarvesterAtmosphereLarge": {
     "id": "OutpostHarvesterAtmosphereLarge",
-    "name": "Atmosphere Harvester Large",
+    "name": "Atmosphere Extractor Large",
     "blueprint": {
       "Mfg_Tier03_IndiciteWafer": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -713,7 +713,7 @@
   },
   "OutpostHarvesterGasSmall": {
     "id": "OutpostHarvesterGasSmall",
-    "name": "Gas Harvester Small",
+    "name": "Gas Extractor Small",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "InorgCommonNickel": 4,
@@ -722,7 +722,7 @@
   },
   "OutpostHarvesterGasMedium": {
     "id": "OutpostHarvesterGasMedium",
-    "name": "Gas Harvester Medium",
+    "name": "Gas Extractor Medium",
     "blueprint": {
       "Mfg_Tier02_MolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -732,7 +732,7 @@
   },
   "OutpostHarvesterGasLarge": {
     "id": "OutpostHarvesterGasLarge",
-    "name": "Gas Harvester Large",
+    "name": "Gas Extractor Large",
     "blueprint": {
       "Mfg_Tier03_SubstrateMolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -742,7 +742,7 @@
   },
   "OutpostHarvesterLiquidSmall": {
     "id": "OutpostHarvesterLiquidSmall",
-    "name": "Liquid Harvester Small",
+    "name": "Liquid Extractor Small",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "InorgCommonNickel": 4,
@@ -751,7 +751,7 @@
   },
   "OutpostHarvesterLiquidMedium": {
     "id": "OutpostHarvesterLiquidMedium",
-    "name": "Liquid Harvester Medium",
+    "name": "Liquid Extractor Medium",
     "blueprint": {
       "Mfg_Tier02_MolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -761,7 +761,7 @@
   },
   "OutpostHarvesterLiquidLarge": {
     "id": "OutpostHarvesterLiquidLarge",
-    "name": "Liquid Harvester Large",
+    "name": "Liquid Extractor Large",
     "blueprint": {
       "Mfg_Tier03_SubstrateMolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -771,7 +771,7 @@
   },
   "OutpostHarvesterSolidSmall": {
     "id": "OutpostHarvesterSolidSmall",
-    "name": "Solid Harvester Small",
+    "name": "Solid Extractor Small",
     "blueprint": {
       "InorgCommonIron": 5,
       "InorgCommonAluminum": 4,
@@ -780,7 +780,7 @@
   },
   "OutpostHarvesterSolidMedium": {
     "id": "OutpostHarvesterSolidMedium",
-    "name": "Solid Harvester Medium",
+    "name": "Solid Extractor Medium",
     "blueprint": {
       "Mfg_Tier02_DrillingRig": 1,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -790,7 +790,7 @@
   },
   "OutpostHarvesterSolidLarge": {
     "id": "OutpostHarvesterSolidLarge",
-    "name": "Solid Harvester Large",
+    "name": "Solid Extractor Large",
     "blueprint": {
       "Mfg_Tier03_AldumiteDrillingRig": 1,
       "Mfg_Tier01_AdaptiveFrame": 5,

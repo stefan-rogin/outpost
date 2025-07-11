@@ -5,21 +5,70 @@ export const catalog: CatalogCategory[] = [
     title: "Extractors",
     items: [
       {
-        title: "Solid extractors",
-        options: ["solid_extractor_normal", "solid_extractor_commercial"]
+        title: "Solid Extractors",
+        options: [
+          "OutpostHarvesterSolidSmall",
+          "OutpostHarvesterSolidMedium",
+          "OutpostHarvesterSolidLarge"
+        ]
       },
       {
-        title: "Liquid extractors",
-        options: ["liquid_extractor_normal", "liquid_extractor_commercial"]
+        title: "Liquid Extractors",
+        options: [
+          "OutpostHarvesterLiquidSmall",
+          "OutpostHarvesterLiquidMedium",
+          "OutpostHarvesterLiquidLarge"
+        ]
       },
       {
-        title: "Platform",
-        options: ["platform"]
+        title: "Gas Extractors",
+        options: [
+          "OutpostHarvesterGasSmall",
+          "OutpostHarvesterGasMedium",
+          "OutpostHarvesterGasLarge"
+        ]
+      },
+      {
+        title: "Atmosphere Extractors",
+        options: [
+          "OutpostHarvesterAtmosphereSmall",
+          "OutpostHarvesterAtmosphereMedium",
+          "OutpostHarvesterAtmosphereLarge"
+        ]
       }
     ]
   },
   {
-    title: "Outpost modules",
-    items: [{ title: "Airlock", options: ["airlock"] }]
+    title: "Storage",
+    items: [
+      {
+        title: "Solid storage",
+        options: [
+          "OutpostStorageSolidSmall",
+          "OutpostStorageSolidMedium",
+          "OutpostStorageSolidLarge"
+        ]
+      },
+      {
+        title: "Liquid Storage",
+        options: [
+          "OutpostStorageLiquidSmall",
+          "OutpostStorageLiquidMedium",
+          "OutpostStorageLiquidLarge"
+        ]
+      },
+      {
+        title: "Gas Storage",
+        options: [
+          "OutpostStorageGasSmall",
+          "OutpostStorageGasMedium",
+          "OutpostStorageGasLarge"
+        ]
+      },
+      {
+        title: "Transfer Container",
+        options: ["OutpostTransferContainer"]
+      }
+    ]
   }
 ]

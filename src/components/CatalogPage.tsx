@@ -1,6 +1,6 @@
 import { CatalogCategory, CatalogGroup } from "@/models/catalog"
 import styles from "@/components/CatalogPage.module.css"
-import { useState, useMemo, SyntheticEvent, useEffect } from "react"
+import { useState, SyntheticEvent, useEffect } from "react"
 import { Resource, ResourceId } from "@/models/resource"
 import { resources } from "@/lib/resources"
 import Image from "next/image"
@@ -22,7 +22,7 @@ type CatalogPageProps = {
 }
 
 const getResource = (id: ResourceId): Resource => {
-  const res = resources.get(id)
+  const res = resources[id]
   if (!res) throw new Error(`Missing resource: ${id}`)
   return res
 }
@@ -85,34 +85,33 @@ export const CatalogPage = ({ category, onSelect }: CatalogPageProps) => {
   }
 
   return (
-    <div>
+    <div className={styles.items_column}>
       {visualCategory.items.map(group => (
-        <div
-          key={group.title}
-          className={styles.item_container}
-          onClick={handleSelect(group.selected)}
-        >
-          {group.selected.name}
-          {group.options.length > 1 && (
-            <>
-              <Image
-                src="/left-arrow.svg"
-                alt="Previous option"
-                width={24}
-                height={24}
-                className={styles.arrow_prev}
-                onClick={handleNewOption(getNavOption(group, "prev"))}
-              />
-              <Image
-                src="/left-arrow.svg"
-                alt="Next option"
-                width={24}
-                height={24}
-                className={styles.arrow_next}
-                onClick={handleNewOption(getNavOption(group, "next"))}
-              />
-            </>
-          )}
+        <div key={group.title} className={styles.item_with_label_container}>
+          <div key={group.title} className={styles.item_container}>
+            <Image
+              src={`/icons/${group.selected.id}.jpg`}
+              alt={group.selected.name}
+              width={100}
+              height={100}
+              loading={"eager"}
+              onClick={handleSelect(group.selected)}
+            />
+
+            {group.options.length > 1 && (
+              <>
+                <div
+                  className={`arrow ${styles.arrow_prev}`}
+                  onClick={handleNewOption(getNavOption(group, "prev"))}
+                ></div>
+                <div
+                  className={`arrow ${styles.arrow_next}`}
+                  onClick={handleNewOption(getNavOption(group, "next"))}
+                ></div>
+              </>
+            )}
+          </div>
+          <div className={styles.item_label}>{group.selected.name}</div>
         </div>
       ))}
     </div>

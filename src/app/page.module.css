@@ -1,45 +1,119 @@
 .page_layout {
   display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin: 10px auto;
+  padding: 12px;
   /* gap: 12px; */
+}
+.header {
+  padding: 12px 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+.header_title {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  position: relative;
+}
+.header_title img {
+  margin-left: 46px;
+}
+.header_title h2 {
+  position: absolute;
+  left: 200px;
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: 8;
+  font-size: 24px;
+  font-weight: 200;
+}
+
+.header_title h3 {
+  position: absolute;
+  left: 380px;
+  top: 50%;
+  transform: translateY(-50%);
+  letter-spacing: 4;
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.body {
+  display: flex;
+  gap: 24px;
+  padding: 12px 0;
+  background-color: #080808;
+  min-height: 960px;
+}
+
+.footer {
+  padding: 8px 0;
+  border-top: 1px solid #333;
+  text-align: center;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.border_bar_1, .border_bar_2, .border_bar_3, .border_bar_4 {
+  width: 100%;
+  height: 4px;
+  font-size: 0;
+}
+
+.border_bar_1 {
+  background-color: #c02034;
+}
+.border_bar_2 {
+  background-color: #d8612f;
+}
+.border_bar_3 {
+  background-color: #d3aa5b;
+}
+.border_bar_4 {
+  background-color: #334c7a;
 }
 
 .catalog_column {
-  width: 128px;
+  width: 180px;
   flex-shrink: 0;
   user-select: none;
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  margin-left: 12px;
 }
 
-.items_column {
+.bom_column {
   flex: 1;
-  border-left: 1px solid #333;
   font-size: 12px;
-  padding-left: 24px;
 }
 
 .category_nav_container {
-  width: 120px;
-  height: 36px;
+  width: 180px;
+  height: 44px;
   padding: 4px;
   position: relative;
+  /* border: 1px solid #333; */
+  background-color: #242424;
 
   display: flex;
   align-items: center;
 }
 
 .category_title {
-  font-size: 12px;
+  font-size: 15px;
   margin: 4px;
+  width: 100%;
+  text-align: center;
+  
 }
-
 .arrow_prev, .arrow_next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 24px;
-  height: 24px;
-  z-index: 1;
-  opacity: 0.8;
-  cursor: pointer;
 }
 
 .arrow_prev {
@@ -47,11 +121,4 @@
 }
 .arrow_next {
   right: 4px;
-  transform: translateY(-50%) rotate(0.5turn);
-}
-
-.arrow_prev:hover,
-.arrow_next:hover {
-  opacity: 1;
-  scale: 1.1;
 }
