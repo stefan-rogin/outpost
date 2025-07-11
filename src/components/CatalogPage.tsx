@@ -18,7 +18,7 @@ interface VisualCategory {
 
 type CatalogPageProps = {
   category: CatalogCategory
-  onSelect: (resource: Resource) => void
+  onSelect: (resource: Resource, action: "add" | "remove") => () => void
 }
 
 const getResource = (id: ResourceId): Resource => {
@@ -80,10 +80,6 @@ export const CatalogPage = ({ category, onSelect }: CatalogPageProps) => {
     })
   }, [category])
 
-  const handleSelect = (resource: Resource) => (): void => {
-    onSelect(resource)
-  }
-
   return (
     <div className={styles.items_column}>
       {visualCategory.items.map(group => (
@@ -95,7 +91,7 @@ export const CatalogPage = ({ category, onSelect }: CatalogPageProps) => {
               width={100}
               height={100}
               loading={"eager"}
-              onClick={handleSelect(group.selected)}
+              onClick={onSelect(group.selected, "add")}
             />
 
             {group.options.length > 1 && (

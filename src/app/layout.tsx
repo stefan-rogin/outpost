@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Forge Path",
-  description: "Resource planner"
+  title: "Outpost",
+  description: "Planner"
 }
 
 export default function RootLayout({

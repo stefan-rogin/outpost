@@ -1,29 +1,38 @@
 "use client"
 
 import { catalog } from "@/lib/catalog"
-import { SyntheticEvent, useState } from "react"
+import { useState } from "react"
 import { CatalogPage } from "@/components/CatalogPage"
 import Image from "next/image"
 import styles from "@/app/page.module.css"
 import { Resource } from "@/models/resource"
+import { Project } from "@/components/Project"
 
 export default function Home() {
   const [categoryIndex, setCategoryIndex] = useState(0)
   const [items, setItems] = useState(new Array<Resource>())
 
-  const handlePageChange =
-    (direction: "prev" | "next") =>
-    (event: SyntheticEvent): void => {
-      const newCategoryIndex =
-        direction === "next"
-          ? (categoryIndex + 1) % catalog.length
-          : (categoryIndex - 1 + catalog.length) % catalog.length
-      setCategoryIndex(newCategoryIndex)
-    }
-
-  const handleSelect = (resource: Resource): void => {
-    setItems([...items, resource])
+  const handlePageChange = (direction: "prev" | "next") => (): void => {
+    const newCategoryIndex =
+      direction === "next"
+        ? (categoryIndex + 1) % catalog.length
+        : (categoryIndex - 1 + catalog.length) % catalog.length
+    setCategoryIndex(newCategoryIndex)
   }
+
+  const handleQtyChange =
+    (resource: Resource, action: "add" | "remove") => (): void => {
+      if (action === "add") {
+        setItems([...items, resource])
+        return
+      }
+      const index = items.indexOf(resource)
+      if (index !== -1) {
+        setItems(items.toSpliced(index, 1))
+      } else {
+        console.warn(`Attempted to remove a non-existent resource.`)
+      }
+    }
 
   return (
     <div className={styles.page_layout}>
@@ -64,15 +73,11 @@ export default function Home() {
           </div>
           <CatalogPage
             category={catalog[categoryIndex]}
-            onSelect={handleSelect}
+            onSelect={handleQtyChange}
           />
         </div>
         <div className={styles.bom_column}>
-          <ul>
-            {items.map((resource, index) => (
-              <li key={`${resource.id}-${index}`}>{resource.name}</li>
-            ))}
-          </ul>
+          <Project items={items} onQtyChange={handleQtyChange} />
         </div>
       </main>
       <footer className={styles.footer}>
