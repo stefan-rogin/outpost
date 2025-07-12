@@ -1,4 +1,6 @@
 // $ npx tsx ./parse_export.ts
+// or
+// $ node --loader ts-node/esm ./parse_export.ts
 
 import fs from "node:fs/promises"
 import { Resource, ResourceId } from "@/models/resource"

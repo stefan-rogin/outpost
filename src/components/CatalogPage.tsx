@@ -6,40 +6,8 @@ import { ResourceId } from "@/models/resource"
 import { tryGetResource } from "@/lib/resources"
 import { NavDirection, QtyChange } from "@/models/types"
 import Image from "next/image"
+import { getNavIndex } from "@/lib/navigation"
 
-interface VisualGroup {
-  title: string
-  selected: ResourceId
-  options: ResourceId[]
-}
-
-interface VisualCategory {
-  title: string
-  items: VisualGroup[]
-}
-
-const mapGroupToVisual = (group: CatalogGroup): VisualGroup => {
-  return {
-    ...group,
-    selected: group.options[0]
-  }
-}
-
-// TODO: Extract array wrapper from here and page
-const getNavOption = (
-  group: VisualGroup,
-  direction: NavDirection
-): ResourceId => {
-  const currentIndex = group.options.indexOf(group.selected) || 0
-  const futureIndex =
-    direction === "next"
-      ? (currentIndex + 1) % group.options.length
-      : (currentIndex - 1 + group.options.length) % group.options.length
-
-  return group.options[futureIndex]
-}
-
-// TODO: Extract Arrow component
 export const CatalogPage = ({
   category,
   onSelect
@@ -47,32 +15,19 @@ export const CatalogPage = ({
   category: CatalogCategory
   onSelect: (id: ResourceId, action: QtyChange) => () => void
 }) => {
-  const initialVisualCategory: VisualCategory = {
-    ...category,
-    items: category.items.map(group => mapGroupToVisual(group))
-  }
-  const [visualCategory, setVisualCategory] = useState(initialVisualCategory)
+  const [visualCategory, setVisualCategory] = useState<VisualCategory>(
+    mapCategoryToVisual(category)
+  )
 
   const handleNewOptionFn =
     (newSelection: ResourceId) =>
     (event: SyntheticEvent): void => {
-      const newVisual: VisualCategory = {
-        ...visualCategory,
-        items: visualCategory.items.map(group =>
-          group.options.includes(newSelection)
-            ? { ...group, selected: newSelection }
-            : group
-        )
-      }
-      setVisualCategory(newVisual)
+      setVisualCategory(getVisualForSelection(visualCategory, newSelection))
       event.stopPropagation()
     }
 
   useEffect(() => {
-    setVisualCategory({
-      ...category,
-      items: category.items.map(group => mapGroupToVisual(group))
-    })
+    setVisualCategory(mapCategoryToVisual(category))
   }, [category])
 
   return (
@@ -98,10 +53,12 @@ export const CatalogPage = ({
                   <Arrow
                     className={styles.arrow_prev}
                     onClick={handleNewOptionFn(getNavOption(group, "prev"))}
+                    aria-label="Previous option"
                   />
                   <Arrow
                     className={styles.arrow_next}
                     onClick={handleNewOptionFn(getNavOption(group, "next"))}
+                    aria-label="Next option"
                   />
                 </>
               )}
@@ -112,4 +69,49 @@ export const CatalogPage = ({
       })}
     </div>
   )
+}
+
+export interface VisualGroup {
+  title: string
+  selected: ResourceId
+  options: ResourceId[]
+}
+
+export interface VisualCategory {
+  title: string
+  items: VisualGroup[]
+}
+
+export function getVisualForSelection(
+  category: VisualCategory,
+  selection: ResourceId
+): VisualCategory {
+  return {
+    ...category,
+    items: category.items.map(group =>
+      group.options.includes(selection)
+        ? { ...group, selected: selection }
+        : group
+    )
+  }
+}
+
+export function mapCategoryToVisual(category: CatalogCategory): VisualCategory {
+  return {
+    ...category,
+    items: category.items.map(group => {
+      return {
+        ...group,
+        selected: group.options[0]
+      }
+    })
+  }
+}
+
+export function getNavOption(
+  group: VisualGroup,
+  direction: NavDirection
+): ResourceId {
+  const currentIndex = group.options.indexOf(group.selected) || 0
+  return group.options[getNavIndex(group.options, direction, currentIndex)]
 }

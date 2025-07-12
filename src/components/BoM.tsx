@@ -1,38 +1,9 @@
-import { Resource, ResourceId } from "@/models/resource"
+import { isConstructible, ResourceId } from "@/models/resource"
 import styles from "@/components/BoM.module.css"
 import { tryGetResource } from "@/lib/resources"
-// import { useEffect, useState } from "react"
-
-interface ShadowResource extends Resource {
-  deconstructed: boolean
-}
-
-// function mapItemsToShadow(items: Resource[], shadow?:ShadowResource[]) {
-//   // All resources of the same Id are either deconstructed or not
-
-//   return items.map(item => {
-//     const itemShadow = shadow?.find(shadowItem => shadowItem.id === item)
-//   })
-// }
 
 export const BoM = ({ items }: { items: Map<ResourceId, number> }) => {
-  // const [shadow, setShadow] = useState<Map<ShadowResource, number>>(items)
-  // useEffect(() => {
-  //   setShadow(items)
-  // }, [items])
-
-  const bom: Map<ResourceId, number> = [...items].reduce(
-    (acc: Map<ResourceId, number>, [id, qty]) => {
-      const resource = tryGetResource(id)
-      if (!resource?.blueprint) return acc
-
-      Object.entries(resource.blueprint).map(([bpId, bpQty]) => {
-        acc.set(bpId, (acc.get(bpId) || 0) + qty * bpQty)
-      })
-      return acc
-    },
-    new Map<ResourceId, number>()
-  )
+  const bom: Map<ResourceId, number> = aggregateBlueprints(items)
 
   return (
     <div className={styles.container}>
@@ -47,5 +18,21 @@ export const BoM = ({ items }: { items: Map<ResourceId, number> }) => {
         })}
       </div>
     </div>
+  )
+}
+
+export function aggregateBlueprints(
+  constructibles: Map<ResourceId, number>
+): Map<ResourceId, number> {
+  return [...constructibles].reduce(
+    (acc: Map<ResourceId, number>, [id, qty]) => {
+      const resource = tryGetResource(id)
+      if (!resource || !isConstructible(resource)) return acc
+      Object.entries(resource.blueprint).map(([bpId, bpQty]) => {
+        acc.set(bpId, (acc.get(bpId) || 0) + qty * bpQty)
+      })
+      return acc
+    },
+    new Map<ResourceId, number>()
   )
 }

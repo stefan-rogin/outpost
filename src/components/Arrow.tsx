@@ -3,7 +3,8 @@ import { SyntheticEvent } from "react"
 
 export const Arrow = ({
   onClick,
-  className = ""
+  className = "",
+  ...props
 }: {
   onClick: (event: SyntheticEvent<Element, Event>) => void
   className?: string
@@ -12,5 +13,6 @@ export const Arrow = ({
     role="button"
     className={`${styles.arrow} ${className}`}
     onClick={onClick}
+    {...props}
   ></div>
 )

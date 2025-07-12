@@ -7,30 +7,19 @@ import Image from "next/image"
 import styles from "@/app/page.module.css"
 import { ResourceId } from "@/models/resource"
 import { Project } from "@/components/Project"
-import { useMappedState } from "@/hooks/useMappedState"
 import { Arrow } from "@/components/Arrow"
 import { NavDirection, QtyChange } from "@/models/types"
+import { getNavIndex } from "@/lib/navigation"
 
-export default function Home() {
+export const Home = () => {
   const [categoryIndex, setCategoryIndex] = useState(0)
-  const { map, set, remove, get } = useMappedState<ResourceId, number>()
+  const [items, setItems] = useState<Map<ResourceId, number>>(new Map())
 
-  const handlePageChangeFn = (direction: NavDirection) => (): void => {
-    const newCategoryIndex =
-      direction === "next"
-        ? (categoryIndex + 1) % catalog.length
-        : (categoryIndex - 1 + catalog.length) % catalog.length
-    setCategoryIndex(newCategoryIndex)
-  }
+  const handlePageChangeFn = (direction: NavDirection) => (): void =>
+    setCategoryIndex(getNavIndex(catalog, direction, categoryIndex))
 
-  const handleQtyChangeFn = (id: ResourceId, action: QtyChange) => (): void => {
-    if (action === "add") {
-      set(id, (get(id) || 0) + 1)
-      return
-    }
-    const currentQty = get(id) || 0
-    currentQty <= 1 ? remove(id) : set(id, currentQty - 1)
-  }
+  const handleQtyChangeFn = (id: ResourceId, action: QtyChange) => (): void =>
+    setItems(changeQty(id, action, items))
 
   return (
     <div className={styles.page_layout}>
@@ -63,10 +52,12 @@ export default function Home() {
             <Arrow
               className={styles.arrow_prev}
               onClick={handlePageChangeFn("prev")}
+              aria-label="Previous page"
             />
             <Arrow
               className={styles.arrow_next}
               onClick={handlePageChangeFn("next")}
+              aria-label="Next page"
             />
           </div>
           <CatalogPage
@@ -75,7 +66,7 @@ export default function Home() {
           />
         </div>
         <div className={styles.bom_column}>
-          <Project items={map} onQtyChange={handleQtyChangeFn} />
+          <Project items={items} onQtyChange={handleQtyChangeFn} />
         </div>
       </main>
       <footer className={styles.footer}>
@@ -84,3 +75,20 @@ export default function Home() {
     </div>
   )
 }
+
+export function changeQty(
+  id: ResourceId,
+  action: QtyChange,
+  map: Map<ResourceId, number>
+): Map<ResourceId, number> {
+  const newMap = new Map(map)
+  const currentQty = newMap.get(id) || 0
+  if (action === "add") {
+    newMap.set(id, currentQty + 1)
+  } else {
+    currentQty <= 1 ? newMap.delete(id) : newMap.set(id, currentQty - 1)
+  }
+  return newMap
+}
+
+export default Home
