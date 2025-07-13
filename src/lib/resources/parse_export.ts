@@ -3,16 +3,22 @@
 // $ node --loader ts-node/esm ./parse_export.ts
 
 import fs from "node:fs/promises"
-import { Resource, ResourceId } from "@/models/resource"
+import {
+  Resource,
+  Constructible,
+  BaseResource,
+  ResourceId,
+  Blueprint
+} from "@/models/resource"
 
 type PatternFilter = {
   include: RegExp[]
   exclude: RegExp[]
 }
 
-const CONSTRUCTIBLES_FILE = "../resources/co_all.txt"
-const RESOURCES_FILE = "../resources/res_all.txt"
-const OUTPUT_FILE = "../resources/resources.json"
+const CONSTRUCTIBLES_FILE = "./co_all.txt"
+const RESOURCES_FILE = "./res_all.txt"
+const OUTPUT_FILE = "./resources.json"
 
 const PATTERNS = new Map<string, PatternFilter>([
   [
@@ -45,7 +51,7 @@ const PATTERNS = new Map<string, PatternFilter>([
 const resLines: string[] = filterLines(await getAllLines(RESOURCES_FILE), "res")
 console.debug(`Base resources lines: ${resLines.length}`)
 
-const baseResources: Resource[] = resLines.map(line => {
+const baseResources: BaseResource[] = resLines.map(line => {
   const cols: string[] = line.split("\t").map(col => col.trim())
   const id: ResourceId = cols[1].replace(/^Res/, "")
   const name: string = cols[8]
@@ -59,7 +65,7 @@ const coLines: string[] = filterLines(
 )
 console.debug(`Constructible resources lines: ${coLines.length}`)
 
-const coResources: Resource[] = coLines.map(line => {
+const constructibles: Constructible[] = coLines.map(line => {
   const cols: string[] = line.split("\t")
   const id: ResourceId = cols[14]
   const name: string = cols[14]
@@ -69,7 +75,7 @@ const coResources: Resource[] = coLines.map(line => {
       const [resId, qty] = res.split("::")
       return [resId.trim().replace(/^Res/, "") as ResourceId, Number(qty)]
     })
-  const blueprint: Record<ResourceId, number> = Object.fromEntries(inputs)
+  const blueprint: Blueprint = Object.fromEntries(inputs)
   return {
     id,
     name,
@@ -77,9 +83,9 @@ const coResources: Resource[] = coLines.map(line => {
   }
 })
 
-const sanitizedCoResources: Resource[] = coResources
+const sanitizedConstructibles: Constructible[] = constructibles
   .filter(res => !/List$/.test(res.id))
-  .reduce((result: Resource[], resource: Resource) => {
+  .reduce((result: Constructible[], resource: Constructible) => {
     const idPatterns: [RegExp, string][] = [
       [/02_Med/, "02"],
       [/03_Large/, "03"],
@@ -103,7 +109,7 @@ const sanitizedCoResources: Resource[] = coResources
       [/_02$/, "Medium"],
       [/_03$/, "Large"]
     ]
-    const correctedId = idPatterns.reduce(
+    const correctedId: ResourceId = idPatterns.reduce(
       (result: ResourceId, pattern: [RegExp, string]) =>
         result.replace(pattern[0], pattern[1]),
       resource.id
@@ -124,25 +130,25 @@ const sanitizedCoResources: Resource[] = coResources
       [/([A-Z])/g, " $1"],
       [/^ /, ""]
     ]
-    const correctedName = namePatterns.reduce(
+    const correctedName: string = namePatterns.reduce(
       (result: ResourceId, pattern: [RegExp, string]) =>
         result.replace(pattern[0], pattern[1]),
       correctedId
     )
-    const newResource: Resource = {
+    const newConstructible: Constructible = {
       id: correctedId,
       name: correctedName,
       blueprint: resource.blueprint
     }
-    if (result.includes(newResource)) {
+    if (result.includes(newConstructible)) {
       return [...result]
     }
-    return [...result, newResource]
-  }, new Array<Resource>())
+    return [...result, newConstructible]
+  }, new Array<Constructible>())
 
 // Write output
 const resources: Record<ResourceId, Resource> = Object.fromEntries(
-  [...baseResources, ...sanitizedCoResources].map(res => [res.id, res])
+  [...baseResources, ...sanitizedConstructibles].map(res => [res.id, res])
 )
 const content = JSON.stringify(resources, null, 2)
 await fs.writeFile(OUTPUT_FILE, content)

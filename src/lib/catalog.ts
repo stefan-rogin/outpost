@@ -1,74 +1,50 @@
-import { CatalogCategory } from "@/models/catalog"
+import { CatalogConfigCategory } from "@/models/catalog"
 
-export const catalog: CatalogCategory[] = [
+export const catalogConfig: CatalogConfigCategory[] = [
   {
     title: "Extractors",
     items: [
-      {
-        title: "Solid Extractors",
-        options: [
-          "OutpostHarvesterSolidSmall",
-          "OutpostHarvesterSolidMedium",
-          "OutpostHarvesterSolidLarge"
-        ]
-      },
-      {
-        title: "Liquid Extractors",
-        options: [
-          "OutpostHarvesterLiquidSmall",
-          "OutpostHarvesterLiquidMedium",
-          "OutpostHarvesterLiquidLarge"
-        ]
-      },
-      {
-        title: "Gas Extractors",
-        options: [
-          "OutpostHarvesterGasSmall",
-          "OutpostHarvesterGasMedium",
-          "OutpostHarvesterGasLarge"
-        ]
-      },
-      {
-        title: "Atmosphere Extractors",
-        options: [
-          "OutpostHarvesterAtmosphereSmall",
-          "OutpostHarvesterAtmosphereMedium",
-          "OutpostHarvesterAtmosphereLarge"
-        ]
-      }
+      [
+        "OutpostHarvesterSolidSmall",
+        "OutpostHarvesterSolidMedium",
+        "OutpostHarvesterSolidLarge"
+      ],
+      [
+        "OutpostHarvesterLiquidSmall",
+        "OutpostHarvesterLiquidMedium",
+        "OutpostHarvesterLiquidLarge"
+      ],
+      [
+        "OutpostHarvesterGasSmall",
+        "OutpostHarvesterGasMedium",
+        "OutpostHarvesterGasLarge"
+      ],
+      [
+        "OutpostHarvesterAtmosphereSmall",
+        "OutpostHarvesterAtmosphereMedium",
+        "OutpostHarvesterAtmosphereLarge"
+      ]
     ]
   },
   {
     title: "Storage",
     items: [
-      {
-        title: "Solid storage",
-        options: [
-          "OutpostStorageSolidSmall",
-          "OutpostStorageSolidMedium",
-          "OutpostStorageSolidLarge"
-        ]
-      },
-      {
-        title: "Liquid Storage",
-        options: [
-          "OutpostStorageLiquidSmall",
-          "OutpostStorageLiquidMedium",
-          "OutpostStorageLiquidLarge"
-        ]
-      },
-      {
-        title: "Gas Storage",
-        options: [
-          "OutpostStorageGasSmall",
-          "OutpostStorageGasMedium",
-          "OutpostStorageGasLarge"
-        ]
-      },
-      {
-        title: "Transfer Container",
-        options: ["OutpostTransferContainer"]
-      }
+      [
+        "OutpostStorageSolidSmall",
+        "OutpostStorageSolidMedium",
+        "OutpostStorageSolidLarge"
+      ],
+      [
+        "OutpostStorageLiquidSmall",
+        "OutpostStorageLiquidMedium",
+        "OutpostStorageLiquidLarge"
+      ],
+      [
+        "OutpostStorageGasSmall",
+        "OutpostStorageGasMedium",
+        "OutpostStorageGasLarge"
+      ],
+      ["OutpostTransferContainer"]
     ]
   }
 ]

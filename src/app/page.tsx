@@ -1,25 +1,27 @@
 "use client"
 
-import { catalog } from "@/lib/catalog"
-import { useState } from "react"
-import { CatalogPage } from "@/components/CatalogPage"
 import Image from "next/image"
 import styles from "@/app/page.module.css"
-import { ResourceId } from "@/models/resource"
+import { CatalogView } from "@/components/CatalogView"
 import { Project } from "@/components/Project"
-import { Arrow } from "@/components/Arrow"
-import { NavDirection, QtyChange } from "@/models/types"
-import { getNavIndex } from "@/lib/navigation"
+import {
+  ResourceId,
+  QtyChange,
+  Resource,
+  isConstructible
+} from "@/models/resource"
+import { Order } from "@/models/order"
+import { useState } from "react"
+import { getResource } from "@/lib/resources"
 
 export const Home = () => {
-  const [categoryIndex, setCategoryIndex] = useState(0)
-  const [items, setItems] = useState<Map<ResourceId, number>>(new Map())
+  const [order, setOrder] = useState<Order>(new Map())
 
-  const handlePageChangeFn = (direction: NavDirection) => (): void =>
-    setCategoryIndex(getNavIndex(catalog, direction, categoryIndex))
+  const handleCatalogSelect = (id: ResourceId) => (): void =>
+    setOrder(changeOrderQty(id, "add", order))
 
-  const handleQtyChangeFn = (id: ResourceId, action: QtyChange) => (): void =>
-    setItems(changeQty(id, action, items))
+  const handleQtyChange = (id: ResourceId, action: QtyChange) => (): void =>
+    setOrder(changeOrderQty(id, action, order))
 
   return (
     <div className={styles.page_layout}>
@@ -45,28 +47,10 @@ export const Home = () => {
       </header>
       <main className={styles.body}>
         <div className={styles.catalog_column}>
-          <div className={styles.category_nav_container}>
-            <div className={styles.category_title}>
-              {catalog[categoryIndex].title}
-            </div>
-            <Arrow
-              className={styles.arrow_prev}
-              onClick={handlePageChangeFn("prev")}
-              aria-label="Previous page"
-            />
-            <Arrow
-              className={styles.arrow_next}
-              onClick={handlePageChangeFn("next")}
-              aria-label="Next page"
-            />
-          </div>
-          <CatalogPage
-            category={catalog[categoryIndex]}
-            onSelect={handleQtyChangeFn}
-          />
+          <CatalogView onSelect={handleCatalogSelect} />
         </div>
         <div className={styles.bom_column}>
-          <Project items={items} onQtyChange={handleQtyChangeFn} />
+          <Project order={order} onQtyChange={handleQtyChange} />
         </div>
       </main>
       <footer className={styles.footer}>
@@ -76,19 +60,29 @@ export const Home = () => {
   )
 }
 
-export function changeQty(
+export default Home
+
+export function changeOrderQty(
   id: ResourceId,
   action: QtyChange,
-  map: Map<ResourceId, number>
-): Map<ResourceId, number> {
-  const newMap = new Map(map)
-  const currentQty = newMap.get(id) || 0
+  order: Order
+): Order {
+  const newOrder = new Map(order)
+  const item = newOrder.get(id)
   if (action === "add") {
-    newMap.set(id, currentQty + 1)
-  } else {
-    currentQty <= 1 ? newMap.delete(id) : newMap.set(id, currentQty - 1)
+    if (item) {
+      newOrder.set(id, { ...item, quantity: item.quantity + 1 })
+    } else {
+      const constructible: Resource | undefined = getResource(id)
+      if (constructible && isConstructible(constructible))
+        newOrder.set(id, { item: constructible, quantity: 1 })
+    }
+  } else if (item) {
+    if (item.quantity <= 1) {
+      newOrder.delete(id)
+    } else {
+      newOrder.set(id, { ...item, quantity: item.quantity - 1 })
+    }
   }
-  return newMap
+  return newOrder
 }
-
-export default Home

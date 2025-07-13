@@ -1,13 +1,14 @@
 export type ResourceId = string
 
+export type Blueprint = Record<ResourceId, number>
+
 export interface BaseResource {
   id: ResourceId
   name: string
-  blueprint?: Record<ResourceId, number>
 }
 
 export interface Constructible extends BaseResource {
-  blueprint: Record<ResourceId, number>
+  blueprint: Blueprint
 }
 
 export type Resource = BaseResource | Constructible
@@ -15,3 +16,5 @@ export type Resource = BaseResource | Constructible
 export function isConstructible(resource: Resource): resource is Constructible {
   return "blueprint" in resource
 }
+
+export type QtyChange = "add" | "remove"

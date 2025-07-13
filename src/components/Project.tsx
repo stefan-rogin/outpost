@@ -1,34 +1,33 @@
 import styles from "@/components/Project.module.css"
-import { ResourceId } from "@/models/resource"
-import { Construction } from "./Construction"
+import { ResourceId, QtyChange } from "@/models/resource"
+import { OrderItemView } from "./OrderItemView"
 import { BoM } from "./BoM"
-import { QtyChange } from "@/models/types"
+import { Order } from "@/models/order"
 
 export const Project = ({
-  items,
+  order,
   onQtyChange
 }: {
-  items: Map<ResourceId, number>
-  onQtyChange: (id: ResourceId, action: QtyChange) => () => void // TODO: Extract to types, both props and action
+  order: Order
+  onQtyChange: (id: ResourceId, action: QtyChange) => () => void
 }) => {
   return (
     <>
-      {[...items].length < 1 ? (
+      {[...order].length < 1 ? (
         <h3 className={styles.title}>
           Start outpost project by selecting modules to build.
         </h3>
       ) : (
         <div className={styles.container}>
           <h3 className={styles.title}>Modules</h3>
-          {[...items].map(([id, qty]: [id: ResourceId, qty: number]) => (
-            <Construction
+          {[...order].map(([id, item]) => (
+            <OrderItemView
               key={id}
-              id={id}
-              count={qty}
+              orderItem={item}
               onQtyChange={onQtyChange}
             />
           ))}
-          <BoM items={items} />
+          <BoM order={order} />
         </div>
       )}
     </>

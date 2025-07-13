@@ -1,9 +1,10 @@
-import { isConstructible, ResourceId } from "@/models/resource"
+import { ResourceId } from "@/models/resource"
+import { Order } from "@/models/order"
 import styles from "@/components/BoM.module.css"
-import { tryGetResource } from "@/lib/resources"
+import { getResource } from "@/lib/resources"
 
-export const BoM = ({ items }: { items: Map<ResourceId, number> }) => {
-  const bom: Map<ResourceId, number> = aggregateBlueprints(items)
+export const BoM = ({ order }: { order: Order }) => {
+  const bom: Map<ResourceId, number> = aggregateBlueprints(order)
 
   return (
     <div className={styles.container}>
@@ -12,7 +13,7 @@ export const BoM = ({ items }: { items: Map<ResourceId, number> }) => {
         {[...bom].map(([id, qty]) => {
           return (
             <div className={styles.bom_item} key={id}>
-              {qty} x {tryGetResource(id)?.name ?? id}
+              {qty} x {getResource(id)?.name ?? id}
             </div>
           )
         })}
@@ -21,18 +22,14 @@ export const BoM = ({ items }: { items: Map<ResourceId, number> }) => {
   )
 }
 
-export function aggregateBlueprints(
-  constructibles: Map<ResourceId, number>
-): Map<ResourceId, number> {
-  return [...constructibles].reduce(
-    (acc: Map<ResourceId, number>, [id, qty]) => {
-      const resource = tryGetResource(id)
-      if (!resource || !isConstructible(resource)) return acc
-      Object.entries(resource.blueprint).map(([bpId, bpQty]) => {
-        acc.set(bpId, (acc.get(bpId) || 0) + qty * bpQty)
-      })
-      return acc
-    },
-    new Map<ResourceId, number>()
-  )
+export function aggregateBlueprints(order: Order): Map<ResourceId, number> {
+  const result = new Map<ResourceId, number>()
+
+  for (const orderItem of order.values()) {
+    for (const [bpId, bpQty] of Object.entries(orderItem.item.blueprint)) {
+      result.set(bpId, (result.get(bpId) || 0) + orderItem.quantity * bpQty)
+    }
+  }
+
+  return result
 }

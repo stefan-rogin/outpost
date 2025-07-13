@@ -1,0 +1,29 @@
+.category_nav_container {
+  width: 180px;
+  height: 44px;
+  padding: 4px;
+  position: relative;
+  background-color: #242424;
+
+  display: flex;
+  align-items: center;
+}
+
+.category_title {
+  font-size: 15px;
+  margin: 4px;
+  width: 100%;
+  text-align: center;
+}
+
+.arrow_prev, .arrow_next {
+  position: absolute !important;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.arrow_prev {
+  left: 4px;
+}
+.arrow_next {
+  right: 4px;
+}

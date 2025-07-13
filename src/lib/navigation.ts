@@ -1,4 +1,4 @@
-import { NavDirection } from "@/models/types"
+export type NavDirection = "prev" | "next"
 
 export function getNavIndex<T>(
   collection: Iterable<T>,
