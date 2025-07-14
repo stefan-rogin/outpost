@@ -7,9 +7,42 @@
   margin: 12px 0;
 }
 .bom {
-
 }
 
 .bom_item {
-  
+  position: relative;
+  width: 100%;
+  background-color: #333;
+  margin: 8px 0;
+  line-height: 2.5em;
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.bom_constructible {
+  border: 1px solid var(--accent);
+  cursor: pointer;
+}
+
+.bom_deconstructed {
+  border: 1px solid var(--accent) !important;
+}
+.bom_deconstructed::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+
+  opacity: 0.3;
+  background-size: 10px 10px;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--accent) 0,
+    var(--accent) 1px,
+    #333 0,
+    #333 50%
+  );
 }
