@@ -2,7 +2,7 @@ import { ResourceId, Resource, isConstructible } from "@/models/resource"
 import { Order } from "@/models/order"
 import styles from "@/components/BoM.module.css"
 import { getResource } from "@/lib/resources"
-import { useState, useMemo, useEffect } from "react"
+import { useState, useMemo } from "react"
 
 export interface BomItem {
   item: Resource
@@ -24,9 +24,8 @@ export const BoM = ({ order }: { order: Order }) => {
     if (!isConstructible(bomItem.item)) return
     const id = bomItem.item.id
     const newDeconstructed = new Map<ResourceId, BomItem>(deconstructed)
-    deconstructed.has(id)
-      ? newDeconstructed.delete(id)
-      : newDeconstructed.set(id, bomItem)
+    if (deconstructed.has(id)) newDeconstructed.delete(id)
+    else newDeconstructed.set(id, bomItem)
     console.log(newDeconstructed)
     setDeconstructed(newDeconstructed)
   }

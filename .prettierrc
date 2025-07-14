@@ -8,5 +8,6 @@
   "arrowParens": "avoid",
   "endOfLine": "lf",
   "jsxSingleQuote": false,
-  "plugins": []
+  "plugins": [],
+  "overrides": [{ "files": "*.json", "options": { "printWidth": 120 } }]
 }

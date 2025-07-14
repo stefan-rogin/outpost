@@ -480,7 +480,7 @@
   },
   "Mfg_Tier02_ZeroGGimbal": {
     "id": "Mfg_Tier02_ZeroGGimbal",
-    "name": "Zero G Gimbal",
+    "name": "ZeroG Gimbal",
     "blueprint": {
       "Mfg_Tier01_IsocenteredMagnet": 1,
       "InorgRareTantalum": 2,
@@ -567,9 +567,9 @@
       "InorgExoticPlutonium": 2
     }
   },
-  "OutpostPI_BuilderOrganicFaunaSmall": {
-    "id": "OutpostPI_BuilderOrganicFaunaSmall",
-    "name": "Fauna Builder Small",
+  "OutpostPI_BuilderOrganicFauna01": {
+    "id": "OutpostPI_BuilderOrganicFauna01",
+    "name": "Animal Husbandry Facility",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 5,
       "InorgCommonAluminum": 8,
@@ -577,9 +577,9 @@
       "OrgCommonSealant": 3
     }
   },
-  "OutpostPI_BuilderOrganicFaunaMedium": {
-    "id": "OutpostPI_BuilderOrganicFaunaMedium",
-    "name": "Fauna Builder Medium",
+  "OutpostPI_BuilderOrganicFauna02": {
+    "id": "OutpostPI_BuilderOrganicFauna02",
+    "name": "Animal Husbandry Facility - Commercial",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 7,
       "InorgCommonAluminum": 12,
@@ -587,9 +587,9 @@
       "OrgCommonSealant": 6
     }
   },
-  "OutpostPI_BuilderOrganicFaunaLarge": {
-    "id": "OutpostPI_BuilderOrganicFaunaLarge",
-    "name": "Fauna Builder Large",
+  "OutpostPI_BuilderOrganicFauna03": {
+    "id": "OutpostPI_BuilderOrganicFauna03",
+    "name": "Animal Husbandry Facility - Industrial",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 9,
       "InorgCommonAluminum": 16,
@@ -597,9 +597,9 @@
       "OrgCommonSealant": 9
     }
   },
-  "OutpostPI_BuilderOrganicFloraSmall": {
-    "id": "OutpostPI_BuilderOrganicFloraSmall",
-    "name": "Flora Builder Small",
+  "OutpostPI_BuilderOrganicFlora01": {
+    "id": "OutpostPI_BuilderOrganicFlora01",
+    "name": "Greenhouse",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 5,
       "InorgUncommonFluorine_G": 4,
@@ -607,9 +607,9 @@
       "OrgCommonSealant": 3
     }
   },
-  "OutpostPI_BuilderOrganicFloraMedium": {
-    "id": "OutpostPI_BuilderOrganicFloraMedium",
-    "name": "Flora Builder Medium",
+  "OutpostPI_BuilderOrganicFlora02": {
+    "id": "OutpostPI_BuilderOrganicFlora02",
+    "name": "Greenhouse - Commercial",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 7,
       "InorgUncommonFluorine_G": 8,
@@ -617,9 +617,9 @@
       "OrgCommonSealant": 6
     }
   },
-  "OutpostPI_BuilderOrganicFloraLarge": {
-    "id": "OutpostPI_BuilderOrganicFloraLarge",
-    "name": "Flora Builder Large",
+  "OutpostPI_BuilderOrganicFlora03": {
+    "id": "OutpostPI_BuilderOrganicFlora03",
+    "name": "Greenhouse - Industrial",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 9,
       "InorgUncommonFluorine_G": 12,
@@ -629,7 +629,7 @@
   },
   "WorkbenchArmor": {
     "id": "WorkbenchArmor",
-    "name": "Armor Workbench",
+    "name": "Spacesuit Workbench",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "OrgUncommonCosmetic": 4,
@@ -638,7 +638,7 @@
   },
   "WorkbenchChem": {
     "id": "WorkbenchChem",
-    "name": "Chem Workbench",
+    "name": "Pharmaceutical Lab",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgUncommonBenzene_G": 3,
@@ -648,7 +648,7 @@
   },
   "WorkbenchFood": {
     "id": "WorkbenchFood",
-    "name": "Food Workbench",
+    "name": "Cooking Station",
     "blueprint": {
       "InorgCommonIron": 4,
       "InorgCommonCopper": 3,
@@ -665,7 +665,7 @@
   },
   "WorkbenchResearch": {
     "id": "WorkbenchResearch",
-    "name": "Research Workbench",
+    "name": "Research Lab",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgCommonCopper": 2,
@@ -682,18 +682,18 @@
       "OrgRareAdhesive": 3
     }
   },
-  "OutpostHarvesterAtmosphereSmall": {
-    "id": "OutpostHarvesterAtmosphereSmall",
-    "name": "Atmosphere Extractor Small",
+  "OutpostHarvesterAtmosphere_01": {
+    "id": "OutpostHarvesterAtmosphere_01",
+    "name": "Extractor - Vapor",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "OrgUncommonMembrane": 4,
       "InorgUncommonBenzene_G": 3
     }
   },
-  "OutpostHarvesterAtmosphereMedium": {
-    "id": "OutpostHarvesterAtmosphereMedium",
-    "name": "Atmosphere Extractor Medium",
+  "OutpostHarvesterAtmosphere_02_Med": {
+    "id": "OutpostHarvesterAtmosphere_02_Med",
+    "name": "Extractor - Vapor - Commercial",
     "blueprint": {
       "Mfg_Tier02_SemimetalWafer": 2,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -701,9 +701,9 @@
       "InorgRareTantalum": 4
     }
   },
-  "OutpostHarvesterAtmosphereLarge": {
-    "id": "OutpostHarvesterAtmosphereLarge",
-    "name": "Atmosphere Extractor Large",
+  "OutpostHarvesterAtmosphere_03_Large": {
+    "id": "OutpostHarvesterAtmosphere_03_Large",
+    "name": "Extractor - Vapor - Industrial",
     "blueprint": {
       "Mfg_Tier03_IndiciteWafer": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -711,18 +711,18 @@
       "InorgRareTantalum": 6
     }
   },
-  "OutpostHarvesterGasSmall": {
-    "id": "OutpostHarvesterGasSmall",
-    "name": "Gas Extractor Small",
+  "OutpostHarvesterGas_01": {
+    "id": "OutpostHarvesterGas_01",
+    "name": "Extractor - Gas",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "InorgCommonNickel": 4,
       "InorgCommonCopper": 3
     }
   },
-  "OutpostHarvesterGasMedium": {
-    "id": "OutpostHarvesterGasMedium",
-    "name": "Gas Extractor Medium",
+  "OutpostHarvesterGas_02_Med": {
+    "id": "OutpostHarvesterGas_02_Med",
+    "name": "Extractor - Gas - Commercial",
     "blueprint": {
       "Mfg_Tier02_MolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -730,9 +730,9 @@
       "InorgRareVanadium": 4
     }
   },
-  "OutpostHarvesterGasLarge": {
-    "id": "OutpostHarvesterGasLarge",
-    "name": "Gas Extractor Large",
+  "OutpostHarvesterGas_03_Large": {
+    "id": "OutpostHarvesterGas_03_Large",
+    "name": "Extractor - Gas - Industrial",
     "blueprint": {
       "Mfg_Tier03_SubstrateMolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -740,18 +740,18 @@
       "InorgRareVanadium": 6
     }
   },
-  "OutpostHarvesterLiquidSmall": {
-    "id": "OutpostHarvesterLiquidSmall",
-    "name": "Liquid Extractor Small",
+  "OutpostHarvesterLiquid_01": {
+    "id": "OutpostHarvesterLiquid_01",
+    "name": "Extractor - Liquid",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "InorgCommonNickel": 4,
       "InorgCommonIron": 3
     }
   },
-  "OutpostHarvesterLiquidMedium": {
-    "id": "OutpostHarvesterLiquidMedium",
-    "name": "Liquid Extractor Medium",
+  "OutpostHarvesterLiquid_02_Med": {
+    "id": "OutpostHarvesterLiquid_02_Med",
+    "name": "Extractor - Liquid - Commercial",
     "blueprint": {
       "Mfg_Tier02_MolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -759,9 +759,9 @@
       "InorgRareTitanium": 4
     }
   },
-  "OutpostHarvesterLiquidLarge": {
-    "id": "OutpostHarvesterLiquidLarge",
-    "name": "Liquid Extractor Large",
+  "OutpostHarvesterLiquid_03_Large": {
+    "id": "OutpostHarvesterLiquid_03_Large",
+    "name": "Extractor - Liqui - Industrial",
     "blueprint": {
       "Mfg_Tier03_SubstrateMolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -769,18 +769,18 @@
       "InorgRareTitanium": 6
     }
   },
-  "OutpostHarvesterSolidSmall": {
-    "id": "OutpostHarvesterSolidSmall",
-    "name": "Solid Extractor Small",
+  "OutpostHarvesterSolid_01": {
+    "id": "OutpostHarvesterSolid_01",
+    "name": "Extractor - Solid",
     "blueprint": {
       "InorgCommonIron": 5,
       "InorgCommonAluminum": 4,
       "InorgUncommonTungsten": 2
     }
   },
-  "OutpostHarvesterSolidMedium": {
-    "id": "OutpostHarvesterSolidMedium",
-    "name": "Solid Extractor Medium",
+  "OutpostHarvesterSolid_02_Med": {
+    "id": "OutpostHarvesterSolid_02_Med",
+    "name": "Extractor - Solid - Commercial",
     "blueprint": {
       "Mfg_Tier02_DrillingRig": 1,
       "Mfg_Tier01_AdaptiveFrame": 3,
@@ -788,9 +788,9 @@
       "InorgUncommonTungsten": 4
     }
   },
-  "OutpostHarvesterSolidLarge": {
-    "id": "OutpostHarvesterSolidLarge",
-    "name": "Solid Extractor Large",
+  "OutpostHarvesterSolid_03_Large": {
+    "id": "OutpostHarvesterSolid_03_Large",
+    "name": "Extractor - Solid - Industrial",
     "blueprint": {
       "Mfg_Tier03_AldumiteDrillingRig": 1,
       "Mfg_Tier01_AdaptiveFrame": 5,
@@ -800,16 +800,16 @@
   },
   "SQ_ClearBountyTerminal": {
     "id": "SQ_ClearBountyTerminal",
-    "name": "Clear Bounty Terminal",
+    "name": "Self-Service Bounty Clearance",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "Mfg_Tier01_ZeroWire": 2,
       "InorgUncommonBeryllium": 2
     }
   },
-  "OutpostPI_CargoLinkLandingPad": {
-    "id": "OutpostPI_CargoLinkLandingPad",
-    "name": "Cargo Link Landing Pad",
+  "OutpostPI_CargoLink01LandingPad": {
+    "id": "OutpostPI_CargoLink01LandingPad",
+    "name": "Cargo Link",
     "blueprint": {
       "InorgCommonIron": 20,
       "InorgCommonAluminum": 12,
@@ -817,8 +817,18 @@
       "Mfg_Tier01_ZeroWire": 2
     }
   },
-  "OutpostPI_CrewStation": {
-    "id": "OutpostPI_CrewStation",
+  "OutpostPI_CargoLink02LandingPad_Fueled": {
+    "id": "OutpostPI_CargoLink02LandingPad_Fueled",
+    "name": "Cargo Link - Inter-System",
+    "blueprint": {
+      "InorgCommonIron": 20,
+      "InorgCommonAluminum": 12,
+      "Mfg_Tier01_CommRelay": 1,
+      "Mfg_Tier01_ReactiveGauge": 3
+    }
+  },
+  "OutpostPI_CrewStation01": {
+    "id": "OutpostPI_CrewStation01",
     "name": "Crew Station",
     "blueprint": {
       "InorgCommonAluminum": 5,
@@ -826,9 +836,9 @@
       "InorgCommonNickel": 3
     }
   },
-  "OutpostPI_LandingPadShipbuilder": {
-    "id": "OutpostPI_LandingPadShipbuilder",
-    "name": "Landing Pad With Shipbuilder",
+  "OutpostPI_LandingPad01_Shipbuilder": {
+    "id": "OutpostPI_LandingPad01_Shipbuilder",
+    "name": "Landing Pad with Shipbuilder",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 18,
       "InorgCommonIron": 30,
@@ -836,34 +846,26 @@
       "Mfg_Tier01_ZeroWire": 2
     }
   },
-  "OutpostPI_LandingPadMedium": {
-    "id": "OutpostPI_LandingPadMedium",
-    "name": "Landing Pad Medium",
-    "blueprint": {
-      "InorgCommonIron": 15,
-      "InorgCommonAluminum": 8
-    }
-  },
-  "OutpostPI_LandingPadSmall": {
-    "id": "OutpostPI_LandingPadSmall",
-    "name": "Landing Pad Small",
+  "OutpostPI_LandingPad01Small": {
+    "id": "OutpostPI_LandingPad01Small",
+    "name": "Landing Pad - Small",
     "blueprint": {
       "InorgCommonIron": 20,
       "InorgCommonAluminum": 8
     }
   },
-  "OutpostScanBoosterSmall": {
-    "id": "OutpostScanBoosterSmall",
-    "name": "Scan Booster Small",
+  "OutpostScanBooster01": {
+    "id": "OutpostScanBooster01",
+    "name": "Scan Booster",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgCommonCopper": 3,
       "InorgUncommonBeryllium": 2
     }
   },
-  "OutpostScanBoosterMedium": {
-    "id": "OutpostScanBoosterMedium",
-    "name": "Scan Booster Medium",
+  "OutpostScanBooster02": {
+    "id": "OutpostScanBooster02",
+    "name": "Scan Booster - Advanced",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "Mfg_Tier01_ZeroWire": 3,
@@ -871,9 +873,9 @@
       "Mfg_Tier01_IsocenteredMagnet": 1
     }
   },
-  "OutpostScanBoosterLarge": {
-    "id": "OutpostScanBoosterLarge",
-    "name": "Scan Booster Large",
+  "OutpostScanBooster03": {
+    "id": "OutpostScanBooster03",
+    "name": "Scan Booster - Military Grade",
     "blueprint": {
       "InorgCommonAluminum": 6,
       "Mfg_Tier02_ParamagnonSuperconductor": 1,
@@ -881,9 +883,19 @@
       "Mfg_Tier02_SupercooledMagnet": 1
     }
   },
-  "OutpostPI_Power_PowerReactorSmall": {
-    "id": "OutpostPI_Power_PowerReactorSmall",
-    "name": "Power Reactor Small",
+  "OutpostPowerFueledGenerator01": {
+    "id": "OutpostPowerFueledGenerator01",
+    "name": "Fueled Generator",
+    "blueprint": {
+      "InorgUncommonTungsten": 4,
+      "Mfg_Tier01_AusteniticManifold": 1,
+      "Mfg_Tier01_IsocenteredMagnet": 1,
+      "Mfg_Tier01_TauGradeRheostat": 1
+    }
+  },
+  "OutpostPI_Power_PowerReactor01": {
+    "id": "OutpostPI_Power_PowerReactor01",
+    "name": "Reactor",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 6,
       "InorgCommonLead": 10,
@@ -894,9 +906,9 @@
       "Mfg_Tier02_ParamagnonSuperconductor": 4
     }
   },
-  "OutpostPI_Power_PowerReactorMedium": {
-    "id": "OutpostPI_Power_PowerReactorMedium",
-    "name": "Power Reactor Medium",
+  "OutpostPI_Power_PowerReactor02": {
+    "id": "OutpostPI_Power_PowerReactor02",
+    "name": "Reactor - Advanced",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 10,
       "InorgCommonLead": 20,
@@ -907,111 +919,229 @@
       "Mfg_Tier03_TasineSuperconductor": 4
     }
   },
-  "OutpostPower_WindTurbineSmall": {
-    "id": "OutpostPower_WindTurbineSmall",
-    "name": "Wind Turbine Small",
+  "OutpostPower_WindTurbineList01": {
+    "id": "OutpostPower_WindTurbineList01",
+    "name": "Wind Turbine",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "InorgUncommonCobalt": 2,
       "InorgCommonNickel": 3
     }
   },
-  "OutpostPower_WindTurbineMedium": {
-    "id": "OutpostPower_WindTurbineMedium",
-    "name": "Wind Turbine Medium",
+  "OutpostPower_WindTurbineList02": {
+    "id": "OutpostPower_WindTurbineList02",
+    "name": "Wind Turbine - Advanced",
     "blueprint": {
       "InorgCommonAluminum": 5,
       "Mfg_Tier01_IsocenteredMagnet": 2
     }
   },
-  "OutpostStorageGasSmall": {
-    "id": "OutpostStorageGasSmall",
-    "name": "Gas Storage Small",
+  "OutpostStorageGas01Sm": {
+    "id": "OutpostStorageGas01Sm",
+    "name": "Storage - Gas",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 3,
       "InorgCommonCopper": 6,
       "InorgUncommonTungsten": 5
     }
   },
-  "OutpostStorageGasMedium": {
-    "id": "OutpostStorageGasMedium",
-    "name": "Gas Storage Medium",
+  "OutpostStorageGas01Med": {
+    "id": "OutpostStorageGas01Med",
+    "name": "Storage - Gas - Medium",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 5,
       "InorgCommonCopper": 10,
       "InorgUncommonTungsten": 8
     }
   },
-  "OutpostStorageGasLarge": {
-    "id": "OutpostStorageGasLarge",
-    "name": "Gas Storage Large",
+  "OutpostStorageGas01Large": {
+    "id": "OutpostStorageGas01Large",
+    "name": "Storage - Gas - Large",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 10,
       "InorgCommonCopper": 20,
       "InorgUncommonTungsten": 16
     }
   },
-  "OutpostStorageLiquidSmall": {
-    "id": "OutpostStorageLiquidSmall",
-    "name": "Liquid Storage Small",
+  "OutpostStorageLiquid01Sm": {
+    "id": "OutpostStorageLiquid01Sm",
+    "name": "Storage - Liquid",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 3,
       "InorgCommonAluminum": 6,
       "InorgCommonNickel": 5
     }
   },
-  "OutpostStorageLiquidMedium": {
-    "id": "OutpostStorageLiquidMedium",
-    "name": "Liquid Storage Medium",
+  "OutpostStorageLiquid01Med": {
+    "id": "OutpostStorageLiquid01Med",
+    "name": "Storage - Liquid - Medium",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 5,
       "InorgCommonAluminum": 10,
       "InorgCommonNickel": 8
     }
   },
-  "OutpostStorageLiquidLarge": {
-    "id": "OutpostStorageLiquidLarge",
-    "name": "Liquid Storage Large",
+  "OutpostStorageLiquid01Large": {
+    "id": "OutpostStorageLiquid01Large",
+    "name": "Storage - Liquid - Large",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 10,
       "InorgCommonAluminum": 20,
       "InorgCommonNickel": 16
     }
   },
-  "OutpostStorageSolidSmall": {
-    "id": "OutpostStorageSolidSmall",
-    "name": "Solid Storage Small",
+  "OutpostStorageSolid01Sm": {
+    "id": "OutpostStorageSolid01Sm",
+    "name": "Storage - Solid",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 3,
       "InorgCommonIron": 6,
       "InorgCommonAluminum": 5
     }
   },
-  "OutpostStorageSolidMedium": {
-    "id": "OutpostStorageSolidMedium",
-    "name": "Solid Storage Medium",
+  "OutpostStorageSolid01Med": {
+    "id": "OutpostStorageSolid01Med",
+    "name": "Storage - Solid - Medium",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 5,
       "InorgCommonIron": 10,
       "InorgCommonAluminum": 8
     }
   },
-  "OutpostStorageSolidLarge": {
-    "id": "OutpostStorageSolidLarge",
-    "name": "Solid Storage Large",
+  "OutpostStorageSolid01Large": {
+    "id": "OutpostStorageSolid01Large",
+    "name": "Storage - Solid - Large",
     "blueprint": {
       "Mfg_Tier01_AdaptiveFrame": 10,
       "InorgCommonIron": 20,
       "InorgCommonAluminum": 16
     }
   },
-  "OutpostTransferContainer": {
-    "id": "OutpostTransferContainer",
-    "name": "Outpost Transfer Container",
+  "OutpostTransferContainer01": {
+    "id": "OutpostTransferContainer01",
+    "name": "Transfer Container",
     "blueprint": {
       "InorgCommonIron": 8,
       "InorgUncommonTungsten": 5,
       "OrgExoticLubricant": 4
+    }
+  },
+  "OutpostStructureAirlocksList01": {
+    "id": "OutpostStructureAirlocksList01",
+    "name": "Outpost Airlock",
+    "blueprint": {
+      "InorgCommonAluminum": 3,
+      "InorgCommonLead": 2,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostPI_OPK_OpiHabFourWall01Double": {
+    "id": "OutpostPI_OPK_OpiHabFourWall01Double",
+    "name": "Four Wall Hab - Double",
+    "blueprint": {
+      "InorgCommonAluminum": 10,
+      "InorgCommonLead": 6,
+      "OrgCommonSealant": 5
+    }
+  },
+  "OutpostPI_OPK_OpiHabFourWall01": {
+    "id": "OutpostPI_OPK_OpiHabFourWall01",
+    "name": "Four Wall Hab",
+    "blueprint": {
+      "InorgCommonAluminum": 6,
+      "InorgCommonLead": 4,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostPI_OPK_OpiHabLgMidHex01": {
+    "id": "OutpostPI_OPK_OpiHabLgMidHex01",
+    "name": "Large Hex Hab",
+    "blueprint": {
+      "InorgCommonAluminum": 14,
+      "InorgCommonLead": 10,
+      "OrgCommonSealant": 8
+    }
+  },
+  "OutpostPI_OPK_OpiHabSmMidHex01": {
+    "id": "OutpostPI_OPK_OpiHabSmMidHex01",
+    "name": "Small Hex Hab",
+    "blueprint": {
+      "InorgCommonAluminum": 8,
+      "InorgCommonLead": 6,
+      "OrgCommonSealant": 4
+    }
+  },
+  "OutpostStructureHydroponicsHabsList01": {
+    "id": "OutpostStructureHydroponicsHabsList01",
+    "name": "Hydroponic Hab",
+    "blueprint": {
+      "InorgCommonAluminum": 6,
+      "InorgCommonIron": 4,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostPI_OPK_OpmHabFourWall01": {
+    "id": "OutpostPI_OPK_OpmHabFourWall01",
+    "name": "Military Hab",
+    "blueprint": {
+      "InorgRareTitanium": 6,
+      "InorgCommonLead": 4,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostStructureScienceHabsList01": {
+    "id": "OutpostStructureScienceHabsList01",
+    "name": "Science Hab",
+    "blueprint": {
+      "InorgCommonAluminum": 6,
+      "InorgCommonLead": 4,
+      "OrgCommonSealant": 3
+    }
+  },
+  "OutpostStructureRoundHabsList01": {
+    "id": "OutpostStructureRoundHabsList01",
+    "name": "Hab Round",
+    "blueprint": {
+      "InorgCommonAluminum": 8,
+      "InorgCommonLead": 6,
+      "OrgCommonSealant": 4
+    }
+  },
+  "OutpostStorageWarehouse01Large": {
+    "id": "OutpostStorageWarehouse01Large",
+    "name": "Warehouse - Large",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 10,
+      "InorgCommonAluminum": 20,
+      "InorgRareTitanium": 16
+    }
+  },
+  "OutpostStorageWarehouse01Med": {
+    "id": "OutpostStorageWarehouse01Med",
+    "name": "Warehouse - Medium",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 5,
+      "InorgCommonAluminum": 10,
+      "InorgRareTitanium": 8
+    }
+  },
+  "OutpostStorageWarehouse01Sm": {
+    "id": "OutpostStorageWarehouse01Sm",
+    "name": "Warehouse - Small",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 3,
+      "InorgCommonAluminum": 6,
+      "InorgRareTitanium": 5
+    }
+  },
+  "OutpostPI_Structure_Watchtower01": {
+    "id": "OutpostPI_Structure_Watchtower01",
+    "name": "Watchtower",
+    "blueprint": {
+      "Mfg_Tier01_AdaptiveFrame": 12,
+      "InorgCommonAluminum": 10,
+      "InorgCommonIron": 16,
+      "InorgCommonArgon_G": 6
     }
   }
 }

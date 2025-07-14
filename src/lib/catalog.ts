@@ -5,24 +5,24 @@ export const catalogConfig: CatalogConfigCategory[] = [
     title: "Extractors",
     items: [
       [
-        "OutpostHarvesterSolidSmall",
-        "OutpostHarvesterSolidMedium",
-        "OutpostHarvesterSolidLarge"
+        "OutpostHarvesterSolid_01",
+        "OutpostHarvesterSolid_02_Med",
+        "OutpostHarvesterSolid_03_Large"
       ],
       [
-        "OutpostHarvesterLiquidSmall",
-        "OutpostHarvesterLiquidMedium",
-        "OutpostHarvesterLiquidLarge"
+        "OutpostHarvesterLiquid_01",
+        "OutpostHarvesterLiquid_02_Med",
+        "OutpostHarvesterLiquid_03_Large"
       ],
       [
-        "OutpostHarvesterGasSmall",
-        "OutpostHarvesterGasMedium",
-        "OutpostHarvesterGasLarge"
+        "OutpostHarvesterGas_01",
+        "OutpostHarvesterGas_02_Med",
+        "OutpostHarvesterGas_03_Large"
       ],
       [
-        "OutpostHarvesterAtmosphereSmall",
-        "OutpostHarvesterAtmosphereMedium",
-        "OutpostHarvesterAtmosphereLarge"
+        "OutpostHarvesterAtmosphere_01",
+        "OutpostHarvesterAtmosphere_02_Med",
+        "OutpostHarvesterAtmosphere_03_Large"
       ]
     ]
   },
@@ -30,21 +30,21 @@ export const catalogConfig: CatalogConfigCategory[] = [
     title: "Storage",
     items: [
       [
-        "OutpostStorageSolidSmall",
-        "OutpostStorageSolidMedium",
-        "OutpostStorageSolidLarge"
+        "OutpostStorageSolid01Sm",
+        "OutpostStorageSolid01Med",
+        "OutpostStorageSolid01Large"
       ],
       [
-        "OutpostStorageLiquidSmall",
-        "OutpostStorageLiquidMedium",
-        "OutpostStorageLiquidLarge"
+        "OutpostStorageLiquid01Sm",
+        "OutpostStorageLiquid01Med",
+        "OutpostStorageLiquid01Large"
       ],
       [
-        "OutpostStorageGasSmall",
-        "OutpostStorageGasMedium",
-        "OutpostStorageGasLarge"
+        "OutpostStorageGas01Sm",
+        "OutpostStorageGas01Med",
+        "OutpostStorageGas01Large"
       ],
-      ["OutpostTransferContainer"]
+      ["OutpostTransferContainer01"]
     ]
   }
 ]

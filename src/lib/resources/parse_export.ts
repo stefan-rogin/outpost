@@ -10,6 +10,7 @@ import {
   ResourceId,
   Blueprint
 } from "@/models/resource"
+import name_map from "@/lib/resources/name_map.json"
 
 type PatternFilter = {
   include: RegExp[]
@@ -19,6 +20,7 @@ type PatternFilter = {
 const CONSTRUCTIBLES_FILE = "./co_all.txt"
 const RESOURCES_FILE = "./res_all.txt"
 const OUTPUT_FILE = "./resources.json"
+const ICONS_PATH = "../../../public/icons"
 
 const PATTERNS = new Map<string, PatternFilter>([
   [
@@ -33,19 +35,24 @@ const PATTERNS = new Map<string, PatternFilter>([
     {
       include: [
         /^\([0-9A-Z]{8}\)\tco_mfg_/,
-        /^\([0-9A-Z]{8}\)\tco_Outpost_(Builder|Crafting|Harvester|Misc|Power|Storage)/
+        /^\([0-9A-Z]{8}\)\tco_Outpost_(Builder|Crafting|Harvester|Misc|Power|Storage|Structure)/
       ],
       exclude: [
         /test/i,
         /NOCLUTTER/i,
-        /CargoLink02LandingPad_Fueled/,
         /LandingPad_StationRocket01/,
-        /OutpostPI_Terminal01/,
-        /OutpostPowerFueledGenerator01/
+        /OutpostStructureFourWallHabsList01/,
+        /OutpostPI_OPK_OpiHabFourWall01_Crafting/,
+        /OutpostStructureHexHabsList01/,
+        /OutpostStructurePlatformsList01/,
+        /Outpost_Misc_PI_LandingPad01New/,
+        /OutpostPI_Terminal01/
       ]
     }
   ]
 ])
+
+const nameMap: Map<string, string> = new Map(name_map as [string, string][])
 
 // Get base resources
 const resLines: string[] = filterLines(await getAllLines(RESOURCES_FILE), "res")
@@ -83,72 +90,36 @@ const constructibles: Constructible[] = coLines.map(line => {
   }
 })
 
-const sanitizedConstructibles: Constructible[] = constructibles
-  .filter(res => !/List$/.test(res.id))
-  .reduce((result: Constructible[], resource: Constructible) => {
-    const idPatterns: [RegExp, string][] = [
-      [/02_Med/, "02"],
-      [/03_Large/, "03"],
-      [/01Sm$/, "_01"],
-      [/01Med$/, "_02"],
-      [/01Large$/, "_03"],
-      [/WindTurbineList/, "WindTurbine"],
-      [/CrewStation01/, "CrewStation"],
-      [/CargoLink01LandingPad/, "CargoLinkLandingPad"],
-      [/LandingPad01_Shipbuilder/, "LandingPadShipbuilder"],
-      [/LandingPad01$/, "LandingPad02"],
-      [/LandingPad01Small/, "LandingPad01"],
-      [/TransferContainer01/, "TransferContainer"],
-      [/_([a-z0-9]+)_(01|02|03)$/i, "_$2_$1"],
-      [
-        /Harvester(Atmosphere|Gas|Liquid|Solid)_(01|02|03)(_[a-zA-Z0-9]+)$/,
-        "Harvester$1_$2"
-      ],
-      [/([a-z])(01|02|03)$/, "$1_$2"],
-      [/_01$/, "Small"],
-      [/_02$/, "Medium"],
-      [/_03$/, "Large"]
-    ]
-    const correctedId: ResourceId = idPatterns.reduce(
-      (result: ResourceId, pattern: [RegExp, string]) =>
-        result.replace(pattern[0], pattern[1]),
-      resource.id
+const sanitizedConstructibles: Map<ResourceId, Constructible> = constructibles
+  .filter(res => !/List$/.test(res.id)) // FIXME: Removes Mission Board, Power Array etc.
+  .reduce((result, resource) => {
+    const correctedId = resource.id.replace(
+      /Harvester(Atmosphere|Gas|Liquid|Solid)(?:_[a-z0-9]+)_(01|02|03)/i,
+      "Harvester$1_$2"
     )
-
-    const namePatterns: [RegExp, string][] = [
-      [/^Mfg_.+_([a-z]+)$/gi, "$1"],
-      [/BuilderOrganic(Fauna|Flora)/, "$1Builder"],
-      [/OutpostPI_Power/, "OutpostPI"],
-      [/OutpostPI_/, ""],
-      [/OutpostPower_/, ""],
-      [/Workbench([a-z]+)/i, "$1Workbench"],
-      [/OutpostHarvester(Atmosphere|Gas|Liquid|Solid)/, "$1Extractor"],
-      [/OutpostScan/, "Scan"],
-      [/OutpostStorage(Gas|Liquid|Solid)/, "$1Storage"],
-      [/LandingPadShipbuilder/, "LandingPadWithShipbuilder"],
-      [/^SQ_/, ""],
-      [/([A-Z])/g, " $1"],
-      [/^ /, ""]
-    ]
-    const correctedName: string = namePatterns.reduce(
-      (result: ResourceId, pattern: [RegExp, string]) =>
-        result.replace(pattern[0], pattern[1]),
-      correctedId
-    )
+    const name = nameMap.get(correctedId) ?? correctedId
+    if (!nameMap.has(correctedId)) console.log(`Name missing: ${correctedId}`)
     const newConstructible: Constructible = {
       id: correctedId,
-      name: correctedName,
+      name: name,
       blueprint: resource.blueprint
     }
-    if (result.includes(newConstructible)) {
-      return [...result]
-    }
-    return [...result, newConstructible]
-  }, new Array<Constructible>())
+    result.set(correctedId, newConstructible)
+    return result
+  }, new Map())
+
+sanitizedConstructibles.forEach(con => {
+  fs.access(`${ICONS_PATH}/${con.id}.jpg`).catch(() => {
+    if (!/^Mfg_/.test(con.id)) console.log(`Missing icon: ${con.id}`)
+  })
+})
 
 // Write output
 const resources: Record<ResourceId, Resource> = Object.fromEntries(
-  [...baseResources, ...sanitizedConstructibles].map(res => [res.id, res])
+  [...baseResources, ...sanitizedConstructibles.values()].map(res => [
+    res.id,
+    res
+  ])
 )
 const content = JSON.stringify(resources, null, 2)
 await fs.writeFile(OUTPUT_FILE, content)
