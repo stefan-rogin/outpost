@@ -5,14 +5,9 @@ export const catalogConfig: CatalogConfigCategory[] = [
     title: "Extractors",
     items: [
       [
-        "OutpostHarvesterSolid_01",
-        "OutpostHarvesterSolid_02_Med",
-        "OutpostHarvesterSolid_03_Large"
-      ],
-      [
-        "OutpostHarvesterLiquid_01",
-        "OutpostHarvesterLiquid_02_Med",
-        "OutpostHarvesterLiquid_03_Large"
+        "OutpostHarvesterAtmosphere_01",
+        "OutpostHarvesterAtmosphere_02_Med",
+        "OutpostHarvesterAtmosphere_03_Large"
       ],
       [
         "OutpostHarvesterGas_01",
@@ -20,15 +15,31 @@ export const catalogConfig: CatalogConfigCategory[] = [
         "OutpostHarvesterGas_03_Large"
       ],
       [
-        "OutpostHarvesterAtmosphere_01",
-        "OutpostHarvesterAtmosphere_02_Med",
-        "OutpostHarvesterAtmosphere_03_Large"
+        "OutpostHarvesterLiquid_01",
+        "OutpostHarvesterLiquid_02_Med",
+        "OutpostHarvesterLiquid_03_Large"
+      ],
+      [
+        "OutpostHarvesterSolid_01",
+        "OutpostHarvesterSolid_02_Med",
+        "OutpostHarvesterSolid_03_Large"
       ]
+    ]
+  },
+  {
+    title: "Power",
+    items: [
+      ["OutpostPower_WindTurbineList01"],
+      ["OutpostPower_WindTurbineList02"],
+      ["OutpostPowerFueledGenerator01"],
+      ["OutpostPI_Power_PowerReactor01"],
+      ["OutpostPI_Power_PowerReactor02"]
     ]
   },
   {
     title: "Storage",
     items: [
+      ["OutpostTransferContainer01"],
       [
         "OutpostStorageSolid01Sm",
         "OutpostStorageSolid01Med",
@@ -44,7 +55,66 @@ export const catalogConfig: CatalogConfigCategory[] = [
         "OutpostStorageGas01Med",
         "OutpostStorageGas01Large"
       ],
-      ["OutpostTransferContainer01"]
+      [
+        "OutpostStorageWarehouse01Sm",
+        "OutpostStorageWarehouse01Med",
+        "OutpostStorageWarehouse01Large"
+      ]
+    ]
+  },
+  {
+    title: "Builders",
+    items: [
+      [
+        "OutpostPI_BuilderOrganicFauna01",
+        "OutpostPI_BuilderOrganicFauna02",
+        "OutpostPI_BuilderOrganicFauna03"
+      ],
+      [
+        "OutpostPI_BuilderOrganicFlora01",
+        "OutpostPI_BuilderOrganicFlora02",
+        "OutpostPI_BuilderOrganicFlora03"
+      ]
+    ]
+  },
+  {
+    title: "Crafting",
+    items: [
+      ["WorkbenchIndustrial"],
+      ["WorkbenchFood"],
+      ["WorkbenchChem"],
+      ["WorkbenchWeapon"],
+      ["WorkbenchArmor"],
+      ["WorkbenchResearch"]
+    ]
+  },
+  {
+    title: "Structures",
+    items: [
+      ["OutpostStructureAirlocksList01"],
+      [
+        "OutpostPI_OPK_OpiHabFourWall01",
+        "OutpostPI_OPK_OpiHabFourWall01Double"
+      ],
+      ["OutpostStructureHydroponicsHabsList01"],
+      ["OutpostStructureScienceHabsList01"],
+      ["OutpostPI_OPK_OpmHabFourWall01"],
+      ["OutpostStructureRoundHabsList01"],
+      ["OutpostPI_OPK_OpiHabSmMidHex01", "OutpostPI_OPK_OpiHabLgMidHex01"],
+      ["OutpostPI_Structure_Watchtower01"]
+    ]
+  },
+  {
+    title: "Miscellaneous",
+    items: [
+      ["OutpostScanBooster01", "OutpostScanBooster02", "OutpostScanBooster03"],
+      [
+        "OutpostPI_CargoLink01LandingPad",
+        "OutpostPI_CargoLink02LandingPad_Fueled"
+      ],
+      ["OutpostPI_CrewStation01"],
+      ["OutpostPI_LandingPad01_Shipbuilder", "OutpostPI_LandingPad01Small"],
+      ["SQ_ClearBountyTerminal"]
     ]
   }
 ]
