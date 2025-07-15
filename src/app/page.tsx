@@ -10,12 +10,31 @@ import {
   Resource,
   isConstructible
 } from "@/models/resource"
-import { Order } from "@/models/order"
-import { useState } from "react"
+import { Order, OrderItem } from "@/models/order"
+import { useState, useEffect } from "react"
 import { getResource } from "@/lib/resources"
+import { useLocalStorage } from "@/hooks/useLocalStorage"
 
 export const Home = () => {
-  const [order, setOrder] = useState<Order>(new Map())
+  const [storedOrder, setStoredOrder] = useLocalStorage("order")
+  const [order, setOrder] = useState<Order>(new Map<ResourceId, OrderItem>())
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    try {
+      const parsedOrder = JSON.parse(storedOrder || "[]")
+      setOrder(new Map(parsedOrder))
+    } catch (err) {
+      setOrder(new Map<ResourceId, OrderItem>())
+    }
+    setHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (hydrated) {
+      setStoredOrder(JSON.stringify(Array.from(order.entries())))
+    }
+  }, [order, hydrated, setStoredOrder])
 
   const handleCatalogSelect = (id: ResourceId) => (): void =>
     setOrder(changeOrderQty(id, "add", order))
