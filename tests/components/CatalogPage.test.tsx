@@ -13,21 +13,25 @@ describe("CatalogPage tests", () => {
       ...testGroups[0],
       inView: storageSolidSmall
     }
-    expect(getNavOption(sidedLeft, "next")).toBe("OutpostStorageSolidMedium")
-    expect(getNavOption(sidedLeft, "prev")).toBe("OutpostStorageSolidLarge")
+    expect(getNavOption(sidedLeft, "next")).toBe("OutpostStorageSolid01Med")
+    expect(getNavOption(sidedLeft, "prev")).toBe("OutpostStorageSolid01Large")
 
     const sidedRight = {
       ...testGroups[0],
       inView: storageSolidLarge
     }
-    expect(getNavOption(sidedRight, "next")).toBe("OutpostStorageSolidSmall")
-    expect(getNavOption(sidedRight, "prev")).toBe("OutpostStorageSolidMedium")
+    expect(getNavOption(sidedRight, "next")).toBe("OutpostStorageSolid01Sm")
+    expect(getNavOption(sidedRight, "prev")).toBe("OutpostStorageSolid01Med")
 
     const singleOption = {
       ...testGroups[1],
       inView: transferContainer
     }
-    expect(getNavOption(singleOption, "next")).toBe("OutpostTransferContainer")
-    expect(getNavOption(singleOption, "prev")).toBe("OutpostTransferContainer")
+    expect(getNavOption(singleOption, "next")).toBe(
+      "OutpostTransferContainer01"
+    )
+    expect(getNavOption(singleOption, "prev")).toBe(
+      "OutpostTransferContainer01"
+    )
   })
 })

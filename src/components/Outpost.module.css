@@ -1,0 +1,15 @@
+.catalog_column {
+  width: 180px;
+  flex-shrink: 0;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  background-color: #111;
+  margin-left: 12px;
+}
+
+.bom_column {
+  flex: 1;
+  font-size: 12px;
+  width: 100%;
+}

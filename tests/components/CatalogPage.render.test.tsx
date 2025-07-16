@@ -13,13 +13,13 @@ describe("CatalogPage render tests", () => {
         onGroupNav={mockNavHandler}
       />
     )
-    expect(screen.getByText("Solid Storage Small")).toBeInTheDocument()
-    expect(screen.getByText("Outpost Transfer Container")).toBeInTheDocument()
+    expect(screen.getByText("Storage - Solid")).toBeInTheDocument()
+    expect(screen.getByText("Transfer Container")).toBeInTheDocument()
     expect(
-      screen.getByRole("img", { name: "Solid Storage Small" })
+      screen.getByRole("img", { name: "Storage - Solid" })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole("img", { name: "Outpost Transfer Container" })
+      screen.getByRole("img", { name: "Transfer Container" })
     ).toBeInTheDocument()
   })
 })

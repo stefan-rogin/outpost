@@ -6,13 +6,13 @@ describe("CatalogView render tests", () => {
   test("renders content", () => {
     const mockSelectHandler = () => (): void => {}
     render(<CatalogView onSelect={mockSelectHandler} />)
-    expect(screen.getByText("Solid Extractor Small")).toBeInTheDocument()
-    expect(screen.getByText("Liquid Extractor Small")).toBeInTheDocument()
+    expect(screen.getByText("Extractor - Vapor")).toBeInTheDocument()
+    expect(screen.getByText("Extractor - Gas")).toBeInTheDocument()
     expect(
-      screen.getByRole("img", { name: "Solid Extractor Small" })
+      screen.getByRole("img", { name: "Extractor - Vapor" })
     ).toBeInTheDocument()
     expect(
-      screen.getByRole("img", { name: "Liquid Extractor Small" })
+      screen.getByRole("img", { name: "Extractor - Gas" })
     ).toBeInTheDocument()
   })
 })

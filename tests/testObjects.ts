@@ -11,11 +11,11 @@ export const testConfig: CatalogConfigCategory[] = [
     title: "Storage",
     items: [
       [
-        "OutpostStorageSolidSmall",
-        "OutpostStorageSolidMedium",
-        "OutpostStorageSolidLarge"
+        "OutpostStorageSolid01Sm",
+        "OutpostStorageSolid01Med",
+        "OutpostStorageSolid01Large"
       ],
-      ["OutpostTransferContainer"]
+      ["OutpostTransferContainer01"]
     ]
   }
 ]
@@ -28,8 +28,8 @@ export const [
   transferContainer
 ] = [
   {
-    id: "OutpostStorageSolidSmall",
-    name: "Solid Storage Small",
+    id: "OutpostStorageSolid01Sm",
+    name: "Storage - Solid",
     blueprint: {
       Mfg_Tier01_AdaptiveFrame: 3,
       InorgCommonIron: 6,
@@ -37,8 +37,8 @@ export const [
     }
   },
   {
-    id: "OutpostStorageSolidMedium",
-    name: "Solid Storage Medium",
+    id: "OutpostStorageSolid01Med",
+    name: "Storage - Solid - Medium",
     blueprint: {
       Mfg_Tier01_AdaptiveFrame: 5,
       InorgCommonIron: 10,
@@ -46,8 +46,8 @@ export const [
     }
   },
   {
-    id: "OutpostStorageSolidLarge",
-    name: "Solid Storage Large",
+    id: "OutpostStorageSolid01Large",
+    name: "Storage - Solid - Large",
     blueprint: {
       Mfg_Tier01_AdaptiveFrame: 10,
       InorgCommonIron: 20,
@@ -55,8 +55,8 @@ export const [
     }
   },
   {
-    id: "OutpostStorageLiquidLarge",
-    name: "Liquid Storage Large",
+    id: "OutpostStorageLiquid01Large",
+    name: "Storage - Liquid - Large",
     blueprint: {
       Mfg_Tier01_AdaptiveFrame: 10,
       InorgCommonAluminum: 20,
@@ -64,8 +64,8 @@ export const [
     }
   },
   {
-    id: "OutpostTransferContainer",
-    name: "Outpost Transfer Container",
+    id: "OutpostTransferContainer01",
+    name: "Transfer Container",
     blueprint: {
       InorgCommonIron: 8,
       InorgUncommonTungsten: 5,
@@ -111,11 +111,11 @@ export const testResources: Record<ResourceId, Resource> = {
       InorgCommonAluminum: 1
     }
   },
-  OutpostStorageLiquidLarge: storageLiquidLarge,
-  OutpostStorageSolidLarge: storageSolidLarge
+  OutpostStorageLiquid01Large: storageLiquidLarge,
+  OutpostStorageSolid01Large: storageSolidLarge
 }
 
 export const testOrder: Order = new Map<ResourceId, OrderItem>([
-  ["OutpostStorageLiquidLarge", { item: storageLiquidLarge, quantity: 2 }],
-  ["OutpostStorageSolidLarge", { item: storageSolidLarge, quantity: 3 }]
+  ["OutpostStorageLiquid01Large", { item: storageLiquidLarge, quantity: 2 }],
+  ["OutpostStorageSolid01Large", { item: storageSolidLarge, quantity: 3 }]
 ])
