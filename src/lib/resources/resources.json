@@ -569,7 +569,7 @@
   },
   "OutpostBuilder_Assembled01List": {
     "id": "OutpostBuilder_Assembled01List",
-    "name": "OutpostBuilder_Assembled01List",
+    "name": "Simple Fabricator",
     "blueprint": {
       "InorgCommonAluminum": 8,
       "Mfg_Tier01_ZeroWire": 3,
@@ -579,7 +579,7 @@
   },
   "OutpostBuilder_Assembled02List": {
     "id": "OutpostBuilder_Assembled02List",
-    "name": "OutpostBuilder_Assembled02List",
+    "name": "Compound Fabricator",
     "blueprint": {
       "InorgUncommonTungsten": 8,
       "Mfg_Tier01_ZeroWire": 5,
@@ -589,7 +589,7 @@
   },
   "OutpostBuilder_Assembled03List": {
     "id": "OutpostBuilder_Assembled03List",
-    "name": "OutpostBuilder_Assembled03List",
+    "name": "Multiplex Fabricator",
     "blueprint": {
       "InorgRareTitanium": 8,
       "Mfg_Tier02_PositronBattery": 3,
@@ -839,7 +839,7 @@
   },
   "OutpostMiscMissionBoardList": {
     "id": "OutpostMiscMissionBoardList",
-    "name": "OutpostMiscMissionBoardList",
+    "name": "Mission Board",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "Mfg_Tier01_ZeroWire": 2,
@@ -960,7 +960,7 @@
   },
   "OutpostPower_SolarArrayList": {
     "id": "OutpostPower_SolarArrayList",
-    "name": "OutpostPower_SolarArrayList",
+    "name": "Solar Array",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "InorgCommonCopper": 3,
@@ -969,7 +969,7 @@
   },
   "OutpostPower_SolarDomeList": {
     "id": "OutpostPower_SolarDomeList",
-    "name": "OutpostPower_SolarDomeList",
+    "name": "Solar Dome",
     "blueprint": {
       "InorgCommonAluminum": 4,
       "Mfg_Tier01_TauGradeRheostat": 2
@@ -1129,7 +1129,7 @@
   },
   "OutpostStructures_HallwaysList": {
     "id": "OutpostStructures_HallwaysList",
-    "name": "OutpostStructures_HallwaysList",
+    "name": "Hallway",
     "blueprint": {
       "InorgCommonAluminum": 2,
       "InorgCommonLead": 1,

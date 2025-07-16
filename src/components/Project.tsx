@@ -2,6 +2,7 @@ import styles from "@/components/Project.module.css"
 import { ResourceId, QtyChange } from "@/models/resource"
 import { OrderItemView } from "./OrderItemView"
 import { BoM } from "./BoM"
+import { Power } from "./Power"
 import { Order } from "@/models/order"
 
 export const Project = ({
@@ -20,6 +21,7 @@ export const Project = ({
       ) : (
         <div className={styles.container}>
           <h3 className={styles.title}>Modules</h3>
+          <Power order={order} />
           {[...order].map(([id, item]) => (
             <OrderItemView
               key={id}
