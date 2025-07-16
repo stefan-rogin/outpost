@@ -3,6 +3,7 @@ import { Order } from "@/models/order"
 import styles from "@/components/BoM.module.css"
 import { getResource } from "@/lib/resources"
 import { useState, useMemo } from "react"
+import Image from "next/image"
 
 export interface BomItem {
   item: Resource
@@ -11,12 +12,15 @@ export interface BomItem {
 
 export type Bill = Map<ResourceId, BomItem>
 
+// FIXME: BoM is getting big
 export const BoM = ({ order }: { order: Order }) => {
   const [deconstructed, setDeconstructed] = useState<Bill>(new Map())
   const bom = useMemo(
     () => aggregateBlueprints(order, deconstructed),
     [order, deconstructed]
   )
+
+  const [copied, setCopied] = useState<boolean>(false)
 
   const isDeconstructed = (id: ResourceId) => deconstructed.has(id)
 
@@ -30,9 +34,34 @@ export const BoM = ({ order }: { order: Order }) => {
     setDeconstructed(newDeconstructed)
   }
 
+  const handleCopyClipboard = () => {
+    const ANIMATION_TIMEOUT = 2000
+    const text = getCsvFromBill(bom)
+    setCopied(true)
+    setTimeout(() => setCopied(false), ANIMATION_TIMEOUT)
+
+    if (typeof window !== "undefined") {
+      navigator.clipboard.writeText(text).catch(() => {
+        console.error("Failed to copy text to clipboard.")
+      })
+    }
+  }
+
   return (
     <div className={styles.container}>
-      <h3 className={styles.title}>Materials</h3>
+      <div className={styles.header}>
+        <h3 className={styles.title}>Materials</h3>
+        {/* <button className={styles.clear}>Copy</button> */}
+        <Image
+          priority={true}
+          src={copied ? "/checkmark.svg" : "/clipboard-text.svg"}
+          alt={copied ? "Copied." : "Copy to clipboard"}
+          width={24}
+          height={24}
+          className={styles.power_icon}
+          onClick={handleCopyClipboard}
+        />
+      </div>
       <div className={styles.bom}>
         {[...deconstructed.values(), ...bom.values()]
           .sort(compareFn)
@@ -62,6 +91,16 @@ export function compareFn(a: BomItem, b: BomItem) {
   if (isConstructible(a.item) && !isConstructible(b.item)) return -1
   else if (!isConstructible(b.item) && !isConstructible(a.item)) return 1
   else return 0
+}
+
+export function getCsvFromBill(bill: Bill): string {
+  return bill
+    .values()
+    .reduce(
+      (acc: string, billItem: BomItem): string =>
+        acc + `${billItem.quantity},${billItem.item.name}\n`,
+      ""
+    )
 }
 
 export function aggregateBlueprints(order: Order, deconstructed: Bill): Bill {
@@ -98,6 +137,9 @@ export function getBomForInput(
   isOrderItem = false
 ): Bill {
   const result = new Map(prev)
+  if (id === "Mfg_Tier03_RothiciteMagnet") {
+    console.log(getResource(id))
+  }
   const resource = getResource(id)
 
   if (resource == undefined) return result

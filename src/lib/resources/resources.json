@@ -527,6 +527,16 @@
       "OrgExoticPolymer": 2
     }
   },
+  "Mfg_Tier03_RothiciteMagnet": {
+    "id": "Mfg_Tier03_RothiciteMagnet",
+    "name": "Rothicite Magnet",
+    "blueprint": {
+      "Mfg_Tier02_SupercooledMagnet": 1,
+      "Mfg_Tier02_SemimetalWafer": 1,
+      "InorgUniqueRothicite": 4,
+      "InorgRareLithium": 2
+    }
+  },
   "Mfg_Tier03_SubstrateMolecularSieve": {
     "id": "Mfg_Tier03_SubstrateMolecularSieve",
     "name": "Substrate Molecular Sieve",

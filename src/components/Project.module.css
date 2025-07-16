@@ -6,13 +6,12 @@
   display: flex;
   flex-direction: row;
   position: relative;
+  align-items: center;
 }
 
 .header button {
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
 }
 
 .title {

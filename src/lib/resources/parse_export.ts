@@ -39,7 +39,7 @@ const PATTERNS = new Map<string, PatternFilter>([
       ],
       exclude: [
         /test/i,
-        /NOCLUTTER/i,
+        /^(?!.*Mfg_Tier03_RothiciteMagnet_NOCLUTTER).*NOCLUTTER/i,
         /LandingPad_StationRocket01/,
         /OutpostStructureFourWallHabsList01/,
         /OutpostPI_OPK_OpiHabFourWall01_Crafting/,
@@ -78,7 +78,10 @@ console.debug(`Constructible resources lines: ${coLines.length}`)
 
 const constructibles: Constructible[] = coLines.map(line => {
   const cols: string[] = line.split("\t")
-  const id: ResourceId = cols[14]
+  const id: ResourceId = cols[14].replace(
+    "Mfg_Tier03_RothiciteMagnet_NOCLUTTER",
+    "Mfg_Tier03_RothiciteMagnet"
+  ) // An exception
   const name: string = cols[14]
   const inputs: [ResourceId, number][] = cols[27]
     .split(",")

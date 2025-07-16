@@ -100,5 +100,6 @@
   ["OutpostMiscMissionBoardList", "Mission Board"],
   ["OutpostPower_SolarArrayList", "Solar Array"],
   ["OutpostPower_SolarDomeList", "Solar Dome"],
-  ["OutpostStructures_HallwaysList", "Hallway"]
+  ["OutpostStructures_HallwaysList", "Hallway"],
+  ["Mfg_Tier03_RothiciteMagnet", "Rothicite Magnet"]
 ]
