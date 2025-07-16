@@ -7,31 +7,33 @@ import { Order } from "@/models/order"
 
 export const Project = ({
   order,
-  onQtyChange
+  onQtyChange,
+  onClear
 }: {
   order: Order
   onQtyChange: (id: ResourceId, action: QtyChange) => () => void
-}) => {
-  return (
-    <>
-      {[...order].length < 1 ? (
-        <h3 className={styles.title}>
-          Start outpost project by selecting modules to build.
-        </h3>
-      ) : (
-        <div className={styles.container}>
-          <h3 className={styles.title}>Modules</h3>
-          <Power order={order} />
-          {[...order].map(([id, item]) => (
-            <OrderItemView
-              key={id}
-              orderItem={item}
-              onQtyChange={onQtyChange}
-            />
-          ))}
-          <BoM order={order} />
+  onClear: () => () => void
+}) => (
+  <>
+    {[...order].length < 1 ? (
+      <h3 className={styles.title}>
+        Start outpost project by selecting modules to build.
+      </h3>
+    ) : (
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h3 className={styles.title}>Project</h3>
+          <button onClick={onClear()} className={styles.clear}>
+            Clear
+          </button>
         </div>
-      )}
-    </>
-  )
-}
+
+        <Power order={order} />
+        {[...order].map(([id, item]) => (
+          <OrderItemView key={id} orderItem={item} onQtyChange={onQtyChange} />
+        ))}
+        <BoM order={order} />
+      </div>
+    )}
+  </>
+)

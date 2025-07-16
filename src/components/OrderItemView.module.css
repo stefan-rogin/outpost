@@ -34,6 +34,7 @@
   white-space: nowrap;
   padding: 4px 8px;
   margin: 4px;
-  background-color: #333;
+  background-color: #222;
+  color: #999;
   line-height: 1.2em;
 }

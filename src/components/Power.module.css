@@ -31,6 +31,12 @@
   margin: 0 8px;
 }
 
+.power_icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
 .help:hover .help_text {
   opacity: 1;
 }

@@ -13,7 +13,7 @@
 }
 
 .arrow::before {
-  content: '';
+  content: "";
   width: 4px;
   height: 4px;
   background-color: var(--accent);
@@ -25,5 +25,5 @@
 }
 
 .arrow:hover {
-  border: 1px solid var(--accent_sec);
+  border: 1px solid var(--accent-sec);
 }

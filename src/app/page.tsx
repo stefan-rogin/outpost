@@ -42,6 +42,11 @@ export const Home = () => {
   const handleQtyChange = (id: ResourceId, action: QtyChange) => (): void =>
     setOrder(changeOrderQty(id, action, order))
 
+  const handleOnClear = () => () => {
+    console.log("Clear")
+    setOrder(new Map())
+  }
+
   return (
     <div className={styles.page_layout}>
       <header className={styles.header}>
@@ -69,7 +74,11 @@ export const Home = () => {
           <CatalogView onSelect={handleCatalogSelect} />
         </div>
         <div className={styles.bom_column}>
-          <Project order={order} onQtyChange={handleQtyChange} />
+          <Project
+            onClear={handleOnClear}
+            order={order}
+            onQtyChange={handleQtyChange}
+          />
         </div>
       </main>
       <footer className={styles.footer}>

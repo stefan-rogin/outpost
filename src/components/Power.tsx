@@ -23,8 +23,15 @@ export const Power = ({ order }: { order: Order }) => {
   return (
     <div className={styles.container}>
       <div className={styles.power_row}>
+        <Image
+          priority={true}
+          src="/lightning.svg"
+          alt="Power icon."
+          width={24}
+          height={24}
+          className={styles.power_icon}
+        />
         <div>
-          <span>Power: </span>
           <span className={`${styles.power_value} ${styles.negative}`}>
             {powerRequired}
           </span>
