@@ -94,5 +94,12 @@
   ["OutpostStorageWarehouse01Large", "Warehouse - Large"],
   ["OutpostStorageWarehouse01Med", "Warehouse - Medium"],
   ["OutpostStorageWarehouse01Sm", "Warehouse - Small"],
-  ["OutpostPI_Structure_Watchtower01", "Watchtower"]
+  ["OutpostPI_Structure_Watchtower01", "Watchtower"],
+  ["OutpostBuilder_Assembled01List", "Simple Fabricator"],
+  ["OutpostBuilder_Assembled02List", "Compound Fabricator"],
+  ["OutpostBuilder_Assembled03List", "Multiplex Fabricator"],
+  ["OutpostMiscMissionBoardList", "Mission Board"],
+  ["OutpostPower_SolarArrayList", "Solar Array"],
+  ["OutpostPower_SolarDomeList", "Solar Dome"],
+  ["OutpostStructures_HallwaysList", "Hallway"]
 ]

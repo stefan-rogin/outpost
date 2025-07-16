@@ -46,7 +46,11 @@ const PATTERNS = new Map<string, PatternFilter>([
         /OutpostStructureHexHabsList01/,
         /OutpostStructurePlatformsList01/,
         /Outpost_Misc_PI_LandingPad01New/,
-        /OutpostPI_Terminal01/
+        /OutpostPI_Terminal01/,
+        /OutpostHarvester(?:Atmosphere|Gas|Liquid|Solid)_(?:[a-z3]+)List/i,
+        /OutpostBuilderOrganic_(?:Fauna|Flora)List/,
+        /OutpostStorage_ScanBoosterList/,
+        /OutpostStorage_(?:Gas|Liquid|Solid|Warehouse)List/
       ]
     }
   ]
@@ -90,9 +94,8 @@ const constructibles: Constructible[] = coLines.map(line => {
   }
 })
 
-const sanitizedConstructibles: Map<ResourceId, Constructible> = constructibles
-  .filter(res => !/List$/.test(res.id)) // FIXME: Removes Mission Board, Power Array etc.
-  .reduce((result, resource) => {
+const sanitizedConstructibles: Map<ResourceId, Constructible> =
+  constructibles.reduce((result, resource) => {
     const correctedId = resource.id.replace(
       /Harvester(Atmosphere|Gas|Liquid|Solid)(?:_[a-z0-9]+)_(01|02|03)/i,
       "Harvester$1_$2"

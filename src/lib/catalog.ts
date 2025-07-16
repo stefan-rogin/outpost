@@ -29,6 +29,8 @@ export const catalogConfig: CatalogConfigCategory[] = [
   {
     title: "Power",
     items: [
+      ["OutpostPower_SolarArrayList"],
+      ["OutpostPower_SolarDomeList"],
       ["OutpostPower_WindTurbineList01"],
       ["OutpostPower_WindTurbineList02"],
       ["OutpostPowerFueledGenerator01"],
@@ -65,6 +67,9 @@ export const catalogConfig: CatalogConfigCategory[] = [
   {
     title: "Builders",
     items: [
+      ["OutpostBuilder_Assembled01List"],
+      ["OutpostBuilder_Assembled02List"],
+      ["OutpostBuilder_Assembled03List"],
       [
         "OutpostPI_BuilderOrganicFauna01",
         "OutpostPI_BuilderOrganicFauna02",
@@ -101,6 +106,7 @@ export const catalogConfig: CatalogConfigCategory[] = [
       ["OutpostPI_OPK_OpmHabFourWall01"],
       ["OutpostStructureRoundHabsList01"],
       ["OutpostPI_OPK_OpiHabSmMidHex01", "OutpostPI_OPK_OpiHabLgMidHex01"],
+      ["OutpostStructures_HallwaysList"],
       ["OutpostPI_Structure_Watchtower01"]
     ]
   },
@@ -114,6 +120,7 @@ export const catalogConfig: CatalogConfigCategory[] = [
       ],
       ["OutpostPI_CrewStation01"],
       ["OutpostPI_LandingPad01_Shipbuilder", "OutpostPI_LandingPad01Small"],
+      ["OutpostMiscMissionBoardList"],
       ["SQ_ClearBountyTerminal"]
     ]
   }

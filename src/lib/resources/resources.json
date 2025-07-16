@@ -567,6 +567,36 @@
       "InorgExoticPlutonium": 2
     }
   },
+  "OutpostBuilder_Assembled01List": {
+    "id": "OutpostBuilder_Assembled01List",
+    "name": "OutpostBuilder_Assembled01List",
+    "blueprint": {
+      "InorgCommonAluminum": 8,
+      "Mfg_Tier01_ZeroWire": 3,
+      "InorgUncommonTungsten": 4,
+      "OrgCommonSealant": 2
+    }
+  },
+  "OutpostBuilder_Assembled02List": {
+    "id": "OutpostBuilder_Assembled02List",
+    "name": "OutpostBuilder_Assembled02List",
+    "blueprint": {
+      "InorgUncommonTungsten": 8,
+      "Mfg_Tier01_ZeroWire": 5,
+      "Mfg_Tier01_IsotopicCoolant": 2,
+      "OrgRareAdhesive": 4
+    }
+  },
+  "OutpostBuilder_Assembled03List": {
+    "id": "OutpostBuilder_Assembled03List",
+    "name": "OutpostBuilder_Assembled03List",
+    "blueprint": {
+      "InorgRareTitanium": 8,
+      "Mfg_Tier02_PositronBattery": 3,
+      "OrgExoticPolymer": 8,
+      "OrgExoticLubricant": 6
+    }
+  },
   "OutpostPI_BuilderOrganicFauna01": {
     "id": "OutpostPI_BuilderOrganicFauna01",
     "name": "Animal Husbandry Facility",
@@ -807,6 +837,15 @@
       "InorgUncommonBeryllium": 2
     }
   },
+  "OutpostMiscMissionBoardList": {
+    "id": "OutpostMiscMissionBoardList",
+    "name": "OutpostMiscMissionBoardList",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "Mfg_Tier01_ZeroWire": 2,
+      "InorgUncommonBeryllium": 2
+    }
+  },
   "OutpostPI_CargoLink01LandingPad": {
     "id": "OutpostPI_CargoLink01LandingPad",
     "name": "Cargo Link",
@@ -917,6 +956,23 @@
       "Mfg_Tier02_ControlRod": 5,
       "Mfg_Tier03_PowerCircuit": 3,
       "Mfg_Tier03_TasineSuperconductor": 4
+    }
+  },
+  "OutpostPower_SolarArrayList": {
+    "id": "OutpostPower_SolarArrayList",
+    "name": "OutpostPower_SolarArrayList",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "InorgCommonCopper": 3,
+      "InorgUncommonBeryllium": 2
+    }
+  },
+  "OutpostPower_SolarDomeList": {
+    "id": "OutpostPower_SolarDomeList",
+    "name": "OutpostPower_SolarDomeList",
+    "blueprint": {
+      "InorgCommonAluminum": 4,
+      "Mfg_Tier01_TauGradeRheostat": 2
     }
   },
   "OutpostPower_WindTurbineList01": {
@@ -1069,6 +1125,15 @@
       "InorgCommonAluminum": 8,
       "InorgCommonLead": 6,
       "OrgCommonSealant": 4
+    }
+  },
+  "OutpostStructures_HallwaysList": {
+    "id": "OutpostStructures_HallwaysList",
+    "name": "OutpostStructures_HallwaysList",
+    "blueprint": {
+      "InorgCommonAluminum": 2,
+      "InorgCommonLead": 1,
+      "OrgCommonSealant": 2
     }
   },
   "OutpostStructureHydroponicsHabsList01": {
