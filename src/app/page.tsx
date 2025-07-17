@@ -35,7 +35,7 @@ const Home = () => (
         its in-game items are the property of Bethesda Softworks and its
         respective owners. This tool is a fan-created resource and is not
         affiliated with, endorsed by, or associated with Bethesda. Data and
-        renderings of modules were obtained using Starfield's Creators Kit.
+        renderings of modules were obtained using Starfield Creators Kit.
       </small>
     </footer>
   </div>

@@ -21,7 +21,7 @@ export const Project = ({
         <h3 className={styles.title}>Starfield Outpost Planner</h3>
         <p>
           Start building your outpost by selecting modules from the panel on the
-          left. Your project is automatically saved in your browser's local
+          left. Your project is automatically saved in your browser&apos;s local
           storage and typically persists across visits on the same device.
         </p>
         <ul>

@@ -4,7 +4,7 @@ declare global {
   interface Window {
     PayPal?: {
       Donation?: {
-        Button?: (options: any) => { render: (selector: string) => void }
+        Button?: (options: unknown) => { render: (selector: string) => void }
       }
     }
   }
