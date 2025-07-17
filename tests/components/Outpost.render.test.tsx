@@ -6,9 +6,7 @@ describe("page render tests", () => {
     render(<Outpost />)
     expect(screen.getByText("Extractor - Solid")).toBeInTheDocument()
     expect(screen.getByText("Extractor - Liquid")).toBeInTheDocument()
-    expect(
-      screen.getByText("Start outpost project by selecting modules to build.")
-    ).toBeInTheDocument()
+    expect(screen.getByText("Starfield Outpost Planner")).toBeInTheDocument()
 
     fireEvent.click(screen.getByLabelText("Previous page"))
     await waitFor(() => {
@@ -24,11 +22,7 @@ describe("page render tests", () => {
 
     fireEvent.click(screen.getByAltText("Scan Booster - Advanced"))
     await waitFor(() => {
-      expect(
-        screen.queryByText(
-          "Start outpost project by selecting modules to build."
-        )
-      ).toBeNull()
+      expect(screen.queryByText("Starfield Outpost Planner")).toBeNull()
       expect(screen.queryByText("Materials")).toBeInTheDocument()
     })
   })

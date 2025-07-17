@@ -30,7 +30,13 @@ const Home = () => (
       <Outpost />
     </main>
     <footer className={styles.footer}>
-      <small>Starfield Outpost</small>
+      <small>
+        All images, names, and intellectual property related to Starfield and
+        its in-game items are the property of Bethesda Softworks and its
+        respective owners. This tool is a fan-created resource and is not
+        affiliated with, endorsed by, or associated with Bethesda. Data and
+        renderings of modules were obtained using Starfield's Creators Kit.
+      </small>
     </footer>
   </div>
 )
