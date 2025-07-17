@@ -49,3 +49,10 @@ button {
   padding: 12px;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: auto;
+  }
+}
