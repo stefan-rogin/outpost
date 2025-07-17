@@ -1,4 +1,10 @@
-import { ResourceId, Resource, isConstructible } from "@/models/resource"
+import {
+  ResourceId,
+  Resource,
+  isConstructible,
+  Constructible,
+  BaseResource
+} from "@/models/resource"
 import { Order } from "@/models/order"
 import styles from "@/components/BoM.module.css"
 import { getResource } from "@/lib/resources"
@@ -11,6 +17,8 @@ export interface BomItem {
 }
 
 export type Bill = Map<ResourceId, BomItem>
+export type Scarcity = "Common" | "Uncommon" | "Rare" | "Exotic" | "Unique"
+export type Tier = "Tier01" | "Tier02" | "Tier03"
 
 // FIXME: BoM is getting big
 export const BoM = ({ order }: { order: Order }) => {
@@ -51,7 +59,6 @@ export const BoM = ({ order }: { order: Order }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>Materials</h3>
-        {/* <button className={styles.clear}>Copy</button> */}
         <Image
           priority={true}
           src={copied ? "/checkmark.svg" : "/clipboard-text.svg"}
@@ -66,18 +73,31 @@ export const BoM = ({ order }: { order: Order }) => {
         {[...deconstructed.values(), ...bom.values()]
           .sort(compareFn)
           .map(bomItem => {
-            const className = `${styles.bom_item} ${
+            const itemClassName = `${styles.bom_item} ${
               isConstructible(bomItem.item) ? styles.bom_constructible : ""
             } ${
               isDeconstructed(bomItem.item.id) ? styles.bom_deconstructed : ""
             }`
+            const iconPath: string | undefined = getIconPath(bomItem.item)
             return (
               <div
-                className={className}
+                className={itemClassName}
                 key={bomItem.item.id}
                 onClick={toggleDeconstructed(bomItem)}
               >
-                {bomItem.quantity} x {bomItem.item.name ?? bomItem.item.id}
+                <span className={styles.quantity}>{bomItem.quantity}</span>
+                <div className={styles.icon_container}>
+                  {iconPath && (
+                    <Image
+                      src={iconPath}
+                      alt="Scarcity"
+                      width={16}
+                      height={16}
+                    />
+                  )}
+                </div>
+
+                {bomItem.item.name ?? bomItem.item.id}
               </div>
             )
           })}
@@ -91,6 +111,50 @@ export function compareFn(a: BomItem, b: BomItem) {
   if (isConstructible(a.item) && !isConstructible(b.item)) return -1
   else if (!isConstructible(b.item) && !isConstructible(a.item)) return 1
   else return 0
+}
+
+// TODO: Move out
+export function getTier(constructible: Constructible): Tier | undefined {
+  const tierMatch = constructible.id.match(/^(?:Mfg_)(Tier01|Tier02|Tier03)/)
+  if (!tierMatch) return undefined
+  return tierMatch[1] as Tier
+}
+
+// TODO: Move out
+export function getScarcity(baseResource: BaseResource): Scarcity | undefined {
+  const scarcityMatch = baseResource.id.match(
+    /^(?:Inorg|Org)(Common|Uncommon|Rare|Exotic|Unique)/
+  )
+  if (!scarcityMatch) return undefined
+  return scarcityMatch[1] as Scarcity
+}
+
+export function getIconPath(resource: Resource): string | undefined {
+  if (isConstructible(resource)) {
+    switch (getTier(resource)) {
+      case "Tier01":
+        return "/tier-1.svg"
+      case "Tier02":
+        return "/tier-2.svg"
+      case "Tier03":
+        return "/tier-3.svg"
+      default:
+        return undefined
+    }
+  } else {
+    switch (getScarcity(resource)) {
+      case "Uncommon":
+        return "/scarcity-uncommon.svg"
+      case "Rare":
+        return "/scarcity-rare.svg"
+      case "Exotic":
+        return "/scarcity-exotic.svg"
+      case "Unique":
+        return "/scarcity-unique.svg"
+      default:
+        return undefined
+    }
+  }
 }
 
 export function getCsvFromBill(bill: Bill): string {

@@ -4,6 +4,7 @@ import { OrderItemView } from "./OrderItemView"
 import { BoM } from "./BoM"
 import { Power } from "./Power"
 import { Order } from "@/models/order"
+import Image from "next/image"
 
 export const Project = ({
   order,
@@ -73,9 +74,15 @@ export const Project = ({
       <div className={styles.container}>
         <div className={styles.header}>
           <h3 className={styles.title}>Project</h3>
-          <button onClick={onClear()} className={styles.clear}>
-            Clear
-          </button>
+          <Image
+            priority={true}
+            src="delete.svg"
+            alt="Delete project"
+            width={24}
+            height={24}
+            className={styles.power_icon}
+            onClick={onClear()}
+          />
         </div>
 
         <Power order={order} />

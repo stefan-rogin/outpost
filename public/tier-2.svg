@@ -1,0 +1,11 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="none"/>
+
+  <!-- Bottom-left star -->
+  <polygon points="55,50 65,70 85,80 65,90 55,110 45,90 25,80 45,70"
+           fill="none" stroke="#9779FB" stroke-width="5"/>
+
+  <!-- Bottom-right star -->
+  <polygon points="145,50 155,70 175,80 155,90 145,110 135,90 115,80 135,70"
+           fill="none" stroke="#9779FB" stroke-width="5"/>
+</svg>

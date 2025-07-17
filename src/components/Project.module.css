@@ -9,14 +9,15 @@
   align-items: center;
 }
 
-.header button {
+.header img {
   position: absolute;
   right: 0;
+  cursor: pointer;
 }
 
 .title {
   font-size: 18px;
-  margin: 24px 0;
+  margin: 12px 0;
 }
 
 .intro,

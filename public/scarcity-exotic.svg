@@ -1,0 +1,20 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="none"/>
+
+  <!-- Dimensions -->
+  <!-- Side length of triangle: approx. 100 units -->
+  <!-- Coordinates based on equilateral triangle geometry -->
+
+  <!-- Top diamond (top vertex) -->
+  <rect x="75" y="40" width="50" height="50" fill="#eac05a" stroke="#444"
+        transform="rotate(45 100 65)"/>
+
+  <!-- Bottom-left diamond (left vertex) -->
+  <rect x="25" y="115" width="50" height="50" fill="#eac05a" stroke="#444"
+        transform="rotate(45 50 140)"/>
+
+  <!-- Bottom-right diamond (right vertex) -->
+  <rect x="125" y="115" width="50" height="50" fill="#eac05a" stroke="#444"
+        transform="rotate(45 150 140)"/>
+</svg>

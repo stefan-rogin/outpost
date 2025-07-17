@@ -10,11 +10,13 @@
 .bom_item {
   position: relative;
   width: 100%;
-  background-color: #333;
+  background-color: #222;
   margin: 4px 0;
   line-height: 2.2em;
   font-size: 12px;
   padding: 0 8px;
+  display: flex;
+  align-items: center;
 }
 
 .bom_constructible {
@@ -56,4 +58,17 @@
   position: absolute;
   right: 0;
   cursor: pointer;
+}
+
+.bom_item .quantity {
+  display: inline-block;
+  min-width: 36px;
+  text-align: right;
+}
+
+.icon_container {
+  height: 18px;
+  width: 16px;
+  margin: 0 12px;
+  z-index: 4;
 }

@@ -1,0 +1,15 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="none"/>
+
+  <!-- Top star -->
+  <polygon points="100,30 110,50 130,60 110,70 100,90 90,70 70,60 90,50"
+           fill="none" stroke="#EEC162" stroke-width="5"/>
+
+  <!-- Bottom-left star -->
+  <polygon points="55,75 65,95 85,105 65,115 55,135 45,115 25,105 45,95"
+           fill="none" stroke="#EEC162" stroke-width="5"/>
+
+  <!-- Bottom-right star -->
+  <polygon points="145,75 155,95 175,105 155,115 145,135 135,115 115,105 135,95"
+           fill="none" stroke="#EEC162" stroke-width="5"/>
+</svg>

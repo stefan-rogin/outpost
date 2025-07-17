@@ -1,0 +1,12 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Transparent background -->
+  <rect width="100%" height="100%" fill="none"/>
+
+  <!-- Top-left diamond -->
+  <rect x="30" y="30" width="50" height="50" fill="#9a7bff" stroke="#444444" transform="rotate(45 55 55)"/>
+
+  <!-- Top-right diamond -->
+  <rect x="120" y="30" width="50" height="50" fill="#9a7bff" stroke="#444444" transform="rotate(45 145 55)"/>
+
+</svg>
+
