@@ -1,5 +1,15 @@
 "use client"
 
+declare global {
+  interface Window {
+    PayPal?: {
+      Donation?: {
+        Button?: (options: any) => { render: (selector: string) => void }
+      }
+    }
+  }
+}
+
 import styles from "./Outpost.module.css"
 import { CatalogView } from "@/components/CatalogView"
 import { Project } from "@/components/Project"
@@ -35,6 +45,26 @@ export const Outpost = () => {
     }
   }, [order, hydrated, setStoredOrder])
 
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
+    script.charset = "UTF-8"
+    script.onload = () => {
+      if (window.PayPal?.Donation?.Button) {
+        window.PayPal.Donation.Button({
+          env: "production",
+          hosted_button_id: "CXMVLBQ2WCZDC",
+          image: {
+            src: "https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif",
+            alt: "Donate with PayPal button",
+            title: "PayPal - The safer, easier way to pay online!"
+          }
+        }).render("#donate-button")
+      }
+    }
+    document.body.appendChild(script)
+  }, [])
+
   const handleCatalogSelect = (id: ResourceId) => (): void =>
     setOrder(changeOrderQty(id, "add", order))
 
@@ -49,6 +79,10 @@ export const Outpost = () => {
   return (
     <>
       <div className={styles.catalog_column}>
+        <div id="donate-button-container">
+          <div id="donate-button"></div>
+        </div>
+
         <CatalogView onSelect={handleCatalogSelect} />
       </div>
       <div className={styles.bom_column}>
