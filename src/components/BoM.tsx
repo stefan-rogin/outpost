@@ -5,7 +5,7 @@ import {
   Constructible,
   BaseResource
 } from "@/models/resource"
-import { Order } from "@/models/order"
+import { Order, OrderItem } from "@/models/order"
 import styles from "@/components/BoM.module.css"
 import { getResource } from "@/lib/resources"
 import { useState, useMemo } from "react"
@@ -44,7 +44,7 @@ export const BoM = ({ order }: { order: Order }) => {
 
   const handleCopyClipboard = () => {
     const ANIMATION_TIMEOUT = 2000
-    const text = getCsvFromBill(bom)
+    const text = getCsvFromProject(bom, order)
     setCopied(true)
     setTimeout(() => setCopied(false), ANIMATION_TIMEOUT)
 
@@ -157,14 +157,22 @@ export function getIconPath(resource: Resource): string | undefined {
   }
 }
 
-export function getCsvFromBill(bill: Bill): string {
-  return bill
+export function getCsvFromProject(bill: Bill, order: Order): string {
+  const bomExport: string = bill
     .values()
     .reduce(
       (acc: string, billItem: BomItem): string =>
         acc + `${billItem.quantity},${billItem.item.name}\n`,
       ""
     )
+  const orderExport = order
+    .values()
+    .reduce(
+      (acc: string, orderItem: OrderItem) =>
+        acc + `${orderItem.quantity}, ${orderItem.item.name}\n`,
+      ""
+    )
+  return `${orderExport}\n${bomExport}`
 }
 
 export function aggregateBlueprints(order: Order, deconstructed: Bill): Bill {

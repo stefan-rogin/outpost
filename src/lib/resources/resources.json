@@ -801,7 +801,7 @@
   },
   "OutpostHarvesterLiquid_03_Large": {
     "id": "OutpostHarvesterLiquid_03_Large",
-    "name": "Extractor - Liqui - Industrial",
+    "name": "Extractor - Liquid - Industrial",
     "blueprint": {
       "Mfg_Tier03_SubstrateMolecularSieve": 2,
       "Mfg_Tier01_AdaptiveFrame": 5,
