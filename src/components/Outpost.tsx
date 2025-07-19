@@ -12,7 +12,7 @@ declare global {
 
 import styles from "./Outpost.module.css"
 import { CatalogView } from "@/components/CatalogView"
-import { Project } from "@/components/Project"
+import { ProjectView } from "@/components/ProjectView"
 import {
   ResourceId,
   QtyChange,
@@ -86,7 +86,7 @@ export const Outpost = () => {
         <CatalogView onSelect={handleCatalogSelect} />
       </div>
       <div className={styles.bom_column}>
-        <Project
+        <ProjectView
           onClear={handleOnClear}
           order={order}
           onQtyChange={handleQtyChange}

@@ -6,7 +6,7 @@ import { Power } from "./Power"
 import { Order } from "@/models/order"
 import Image from "next/image"
 
-export const Project = ({
+export const ProjectView = ({
   order,
   onQtyChange,
   onClear

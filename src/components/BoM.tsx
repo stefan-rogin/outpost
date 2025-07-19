@@ -10,15 +10,7 @@ import styles from "@/components/BoM.module.css"
 import { getResource } from "@/lib/resources"
 import { useState, useMemo } from "react"
 import Image from "next/image"
-
-export interface BomItem {
-  item: Resource
-  quantity: number
-}
-
-export type Bill = Map<ResourceId, BomItem>
-export type Scarcity = "Common" | "Uncommon" | "Rare" | "Exotic" | "Unique"
-export type Tier = "Tier01" | "Tier02" | "Tier03"
+import { BomItem, Bill, Tier, Scarcity } from "@/models/bom"
 
 // FIXME: BoM is getting big
 export const BoM = ({ order }: { order: Order }) => {
@@ -209,9 +201,6 @@ export function getBomForInput(
   isOrderItem = false
 ): Bill {
   const result = new Map(prev)
-  if (id === "Mfg_Tier03_RothiciteMagnet") {
-    console.log(getResource(id))
-  }
   const resource = getResource(id)
 
   if (resource == undefined) return result
