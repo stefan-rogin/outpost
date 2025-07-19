@@ -7,7 +7,7 @@ export interface OrderItem {
 
 export type Order = Map<ResourceId, OrderItem>
 
-function isOrderItem(obj: any): obj is OrderItem {
+export function isOrderItem(obj: any): obj is OrderItem {
   return (
     typeof obj === "object" &&
     obj !== null &&
@@ -15,3 +15,5 @@ function isOrderItem(obj: any): obj is OrderItem {
     isConstructible(obj.item)
   )
 }
+
+export type QtyChange = "add" | "remove"

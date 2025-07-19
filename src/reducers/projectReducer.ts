@@ -1,24 +1,50 @@
 import { BomItem } from "@/models/bom"
-import { OrderItem } from "@/models/order"
+import { QtyChange } from "@/models/order"
 import { Project } from "@/models/project"
-import { QtyChange } from "@/models/resource"
+import { ResourceId } from "@/models/resource"
+import { changeOrderQty } from "@/logic/order"
 
 export enum ProjectActionType {
+  INIT = "INIT",
   CHANGE_ITEM_QTY = "CHANGE_ITEM_QTY",
   RENAME = "RENAME",
-  LOAD_INIT = "LOAD_INIT",
-  LOAD_OK = "LOAD_OK",
-  LOAD_ERR = "LOAD_ERR",
   TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT"
 }
 
 export type ProjectAction =
-  | { type: ProjectActionType.LOAD_INIT }
-  | { type: ProjectActionType.LOAD_OK; payload: Project }
-  | { type: ProjectActionType.LOAD_ERR }
-  | { type: ProjectActionType.LOAD_ERR; payload: string }
+  | { type: ProjectActionType.INIT; payload: Project }
+  | { type: ProjectActionType.RENAME; payload: string }
   | {
       type: ProjectActionType.CHANGE_ITEM_QTY
-      payload: { item: OrderItem; qtyChange: QtyChange }
+      payload: { id: ResourceId; qtyChange: QtyChange }
     }
   | { type: ProjectActionType.TOGGLE_DECONSTRUCT; payload: { item: BomItem } }
+
+export const projectReducer = (
+  project: Project,
+  action: ProjectAction
+): Project => {
+  switch (action.type) {
+    case ProjectActionType.INIT:
+      // TODO: Implement rename
+      return action.payload
+    case ProjectActionType.RENAME:
+      // TODO: Implement rename
+      return project
+    case ProjectActionType.CHANGE_ITEM_QTY:
+      const [id, qtyChange, order] = [
+        action.payload.id,
+        action.payload.qtyChange,
+        project.order
+      ]
+      return {
+        ...project,
+        order: changeOrderQty(id, qtyChange, order)
+      }
+    case ProjectActionType.TOGGLE_DECONSTRUCT:
+      // TODO: Implement deconstruct
+      return project
+    default:
+      throw new Error("State change not implemented.")
+  }
+}

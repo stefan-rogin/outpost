@@ -1,0 +1,50 @@
+outpost/
+├── src/
+│   ├── app/             
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   │
+│   ├── components/               
+│   │   ├── BoM.tsx
+│   │   ├── CatalogPage.tsx
+│   │   ├── CatalogView.tsx
+│   │   ├── OrderItemView.tsx
+│   │   ├── Outpost.tsx
+│   │   ├── Power.tsx
+│   │   └── ProjectView.tsx
+│   │
+│   ├── hooks/                   
+│   │   └── useProject.ts
+│   │
+│   ├── lib/                      
+│   │   ├── resources/             
+│   │   │   ├── parse_export.ts
+│   │   │   └── resources.json
+│   │   ├── catalog.ts             
+│   │   ├── navigation.ts            
+│   │   ├── resources.ts            
+│   │   └── resources.ts       
+│   │
+│   ├── logic/                   
+│   │   └── order.ts
+│   │
+│   ├── models/                 
+│   │   ├── bom.ts
+│   │   ├── catalog.ts
+│   │   ├── order.ts
+│   │   ├── project.ts
+│   │   └── resource.ts
+│   │
+│   └── reducers/               
+│       └── projectReducer.ts
+│
+├── tests/                   
+│   └── components/
+│       └── ....test.tsx
+│
+├── context/                 
+│   └── AuthContext.tsx
+│
+├── ...          
+├── tsconfig.json           
+└── package.json

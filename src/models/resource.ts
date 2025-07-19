@@ -16,5 +16,3 @@ export type Resource = BaseResource | Constructible
 export function isConstructible(resource: Resource): resource is Constructible {
   return "blueprint" in resource
 }
-
-export type QtyChange = "add" | "remove"

@@ -1,5 +1,14 @@
 "use client"
 
+import styles from "./Outpost.module.css"
+import { CatalogView } from "@/components/CatalogView"
+import { ProjectView } from "@/components/ProjectView"
+import { ResourceId } from "@/models/resource"
+import { QtyChange } from "@/models/order"
+import { useEffect, useState } from "react"
+import { useProject } from "@/hooks/useProject"
+import { ProjectActionType } from "@/reducers/projectReducer"
+
 declare global {
   interface Window {
     PayPal?: {
@@ -10,41 +19,10 @@ declare global {
   }
 }
 
-import styles from "./Outpost.module.css"
-import { CatalogView } from "@/components/CatalogView"
-import { ProjectView } from "@/components/ProjectView"
-import {
-  ResourceId,
-  QtyChange,
-  Resource,
-  isConstructible
-} from "@/models/resource"
-import { Order, OrderItem } from "@/models/order"
-import { useState, useEffect } from "react"
-import { getResource } from "@/lib/resources"
-import { useLocalStorage } from "@/hooks/useLocalStorage"
-
 export const Outpost = () => {
-  const [storedOrder, setStoredOrder] = useLocalStorage("order")
-  const [order, setOrder] = useState<Order>(new Map<ResourceId, OrderItem>())
-  const [hydrated, setHydrated] = useState(false)
+  const { project, dispatch } = useProject()
 
-  useEffect(() => {
-    try {
-      const parsedOrder = JSON.parse(storedOrder || "[]")
-      setOrder(new Map(parsedOrder))
-    } catch {
-      setOrder(new Map<ResourceId, OrderItem>())
-    }
-    setHydrated(true)
-  }, [storedOrder])
-
-  useEffect(() => {
-    if (hydrated) {
-      setStoredOrder(JSON.stringify(Array.from(order.entries())))
-    }
-  }, [order, hydrated, setStoredOrder])
-
+  // Paypal button
   useEffect(() => {
     const script = document.createElement("script")
     script.src = "https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
@@ -66,14 +44,21 @@ export const Outpost = () => {
   }, [])
 
   const handleCatalogSelect = (id: ResourceId) => (): void =>
-    setOrder(changeOrderQty(id, "add", order))
+    dispatch({
+      type: ProjectActionType.CHANGE_ITEM_QTY,
+      payload: { id, qtyChange: "add" }
+    })
 
-  const handleQtyChange = (id: ResourceId, action: QtyChange) => (): void =>
-    setOrder(changeOrderQty(id, action, order))
+  const handleQtyChange = (id: ResourceId, qtyChange: QtyChange) => (): void =>
+    dispatch({
+      type: ProjectActionType.CHANGE_ITEM_QTY,
+      payload: { id, qtyChange }
+    })
 
   const handleOnClear = () => () => {
     console.log("Clear")
-    setOrder(new Map())
+    // TODO: New reducer action
+    // setOrder(new Map())
   }
 
   return (
@@ -88,35 +73,10 @@ export const Outpost = () => {
       <div className={styles.bom_column}>
         <ProjectView
           onClear={handleOnClear}
-          order={order}
+          order={project.order}
           onQtyChange={handleQtyChange}
         />
       </div>
     </>
   )
-}
-
-export function changeOrderQty(
-  id: ResourceId,
-  action: QtyChange,
-  order: Order
-): Order {
-  const newOrder = new Map(order)
-  const item = newOrder.get(id)
-  if (action === "add") {
-    if (item) {
-      newOrder.set(id, { ...item, quantity: item.quantity + 1 })
-    } else {
-      const constructible: Resource | undefined = getResource(id)
-      if (constructible && isConstructible(constructible))
-        newOrder.set(id, { item: constructible, quantity: 1 })
-    }
-  } else if (item) {
-    if (item.quantity <= 1) {
-      newOrder.delete(id)
-    } else {
-      newOrder.set(id, { ...item, quantity: item.quantity - 1 })
-    }
-  }
-  return newOrder
 }
