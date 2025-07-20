@@ -1,10 +1,10 @@
 import { ResourceId, Resource } from "@/models/resource"
-import * as Resources from "@/lib/resources"
+import * as Resources from "@/service/resource"
 import { BoM } from "@/components/BoM"
 import { render, screen } from "@testing-library/react"
 import { testResources, testOrder } from "../testObjects"
 
-jest.mock("@/lib/resources", () => ({
+jest.mock("@/service/resource", () => ({
   getResource: jest.fn()
 }))
 const getResource = Resources.getResource as jest.MockedFunction<

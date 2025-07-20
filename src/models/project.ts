@@ -1,11 +1,11 @@
 import { Order } from "@/models/order"
-import { Bill } from "@/models/bom"
+import { ResourceId } from "./resource"
 
 export interface Project {
   id: UUID
   name: string
   order: Order
-  deconstructed: Bill
+  deconstructed: ResourceId[]
   lastChanged: Date
 }
 

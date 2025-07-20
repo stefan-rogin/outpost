@@ -1,9 +1,9 @@
 import styles from "@/components/Project.module.css"
-import { ResourceId, QtyChange } from "@/models/resource"
+import { ResourceId } from "@/models/resource"
 import { OrderItemView } from "./OrderItemView"
 import { BoM } from "./BoM"
 import { Power } from "./Power"
-import { Order } from "@/models/order"
+import { Order, QtyChange } from "@/models/order"
 import Image from "next/image"
 
 export const ProjectView = ({

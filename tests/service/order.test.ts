@@ -1,9 +1,9 @@
-import { changeOrderQty } from "@/components/Outpost"
+import { changeOrderQty } from "@/service/order"
 import { testResources } from "../testObjects"
 import { Resource, ResourceId } from "@/models/resource"
-import * as Resources from "@/lib/resources"
+import * as Resources from "@/service/resource"
 
-jest.mock("@/lib/resources", () => ({
+jest.mock("@/service/resource", () => ({
   getResource: jest.fn()
 }))
 const getResource = Resources.getResource as jest.MockedFunction<
@@ -11,7 +11,7 @@ const getResource = Resources.getResource as jest.MockedFunction<
 >
 getResource.mockImplementation(id => testResources[id])
 
-describe("page tests", () => {
+describe("service/order tests", () => {
   test("changeOrderQty handles add/remove actions, removing unused keys", () => {
     const order = new Map()
     const step1 = changeOrderQty("OutpostStorageSolid01Large", "add", order)

@@ -1,22 +1,11 @@
-import { catalogConfig } from "@/lib/catalog"
+import { catalogConfig, mapCatalogFromConfig } from "@/service/catalog"
 import { useState, useMemo } from "react"
 import styles from "@/components/CatalogView.module.css"
-import { getNavIndex, NavDirection } from "@/lib/navigation"
+import { getNavIndex, NavDirection } from "@/service/navigation"
 import { CatalogPage } from "@/components/CatalogPage"
-import {
-  Constructible,
-  isConstructible,
-  Resource,
-  ResourceId
-} from "@/models/resource"
+import { Constructible, ResourceId } from "@/models/resource"
 import { Arrow } from "@/components/Arrow"
-import {
-  Catalog,
-  CatalogCategory,
-  CatalogConfigCategory,
-  CatalogGroup
-} from "@/models/catalog"
-import { getResource } from "@/lib/resources"
+import { Catalog, CatalogGroup } from "@/models/catalog"
 
 export const CatalogView = ({
   onSelect
@@ -65,31 +54,4 @@ export const CatalogView = ({
       />
     </div>
   )
-}
-
-export function mapCatalogFromConfig(
-  catalogConfig: CatalogConfigCategory[]
-): Catalog {
-  return catalogConfig.map(mapCategoryFromConfig)
-}
-
-export function mapCategoryFromConfig(
-  categoryConfig: CatalogConfigCategory
-): CatalogCategory {
-  return {
-    ...categoryConfig,
-    items: categoryConfig.items.map(mapGroupFromConfig)
-  }
-}
-
-export function mapGroupFromConfig(groupConfig: ResourceId[]): CatalogGroup {
-  const options: Constructible[] = groupConfig
-    .map((id: ResourceId): Resource | undefined => getResource(id))
-    .filter(
-      (res: Resource | undefined) => res !== undefined && isConstructible(res)
-    )
-  return {
-    inView: options[0], // TODO: Handle possible empty options
-    options
-  }
 }

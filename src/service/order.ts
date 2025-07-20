@@ -1,5 +1,5 @@
 import { ResourceId, Resource, isConstructible } from "@/models/resource"
-import { getResource } from "@/lib/resources"
+import { getResource } from "@/service/resource"
 import { Order, QtyChange } from "@/models/order"
 
 export function changeOrderQty(

@@ -2,7 +2,7 @@ import { BomItem } from "@/models/bom"
 import { QtyChange } from "@/models/order"
 import { Project } from "@/models/project"
 import { ResourceId } from "@/models/resource"
-import { changeOrderQty } from "@/logic/order"
+import { changeOrderQty } from "@/service/order"
 
 export enum ProjectActionType {
   INIT = "INIT",
@@ -26,7 +26,6 @@ export const projectReducer = (
 ): Project => {
   switch (action.type) {
     case ProjectActionType.INIT:
-      // TODO: Implement rename
       return action.payload
     case ProjectActionType.RENAME:
       // TODO: Implement rename
@@ -39,7 +38,8 @@ export const projectReducer = (
       ]
       return {
         ...project,
-        order: changeOrderQty(id, qtyChange, order)
+        order: changeOrderQty(id, qtyChange, order),
+        lastChanged: new Date()
       }
     case ProjectActionType.TOGGLE_DECONSTRUCT:
       // TODO: Implement deconstruct

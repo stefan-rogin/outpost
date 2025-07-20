@@ -1,16 +1,15 @@
-import {
-  ResourceId,
-  Resource,
-  isConstructible,
-  Constructible,
-  BaseResource
-} from "@/models/resource"
-import { Order, OrderItem } from "@/models/order"
+import { ResourceId, Resource, isConstructible } from "@/models/resource"
+import { Order } from "@/models/order"
 import styles from "@/components/BoM.module.css"
-import { getResource } from "@/lib/resources"
 import { useState, useMemo } from "react"
 import Image from "next/image"
-import { BomItem, Bill, Tier, Scarcity } from "@/models/bom"
+import { BomItem, Bill } from "@/models/bom"
+import {
+  getTier,
+  getScarcity,
+  aggregateBlueprints,
+  getCsvFromProject
+} from "../service/bom"
 
 // FIXME: BoM is getting big
 export const BoM = ({ order }: { order: Order }) => {
@@ -105,22 +104,6 @@ export function compareFn(a: BomItem, b: BomItem) {
   else return 0
 }
 
-// TODO: Move out
-export function getTier(constructible: Constructible): Tier | undefined {
-  const tierMatch = constructible.id.match(/^(?:Mfg_)(Tier01|Tier02|Tier03)/)
-  if (!tierMatch) return undefined
-  return tierMatch[1] as Tier
-}
-
-// TODO: Move out
-export function getScarcity(baseResource: BaseResource): Scarcity | undefined {
-  const scarcityMatch = baseResource.id.match(
-    /^(?:Inorg|Org)(Common|Uncommon|Rare|Exotic|Unique)/
-  )
-  if (!scarcityMatch) return undefined
-  return scarcityMatch[1] as Scarcity
-}
-
 export function getIconPath(resource: Resource): string | undefined {
   if (isConstructible(resource)) {
     switch (getTier(resource)) {
@@ -135,6 +118,8 @@ export function getIconPath(resource: Resource): string | undefined {
     }
   } else {
     switch (getScarcity(resource)) {
+      case "Common":
+        return ""
       case "Uncommon":
         return "/scarcity-uncommon.svg"
       case "Rare":
@@ -147,88 +132,4 @@ export function getIconPath(resource: Resource): string | undefined {
         return undefined
     }
   }
-}
-
-export function getCsvFromProject(bill: Bill, order: Order): string {
-  const bomExport: string = bill
-    .values()
-    .reduce(
-      (acc: string, billItem: BomItem): string =>
-        acc + `${billItem.quantity},${billItem.item.name}\n`,
-      ""
-    )
-  const orderExport = order
-    .values()
-    .reduce(
-      (acc: string, orderItem: OrderItem) =>
-        acc + `${orderItem.quantity}, ${orderItem.item.name}\n`,
-      ""
-    )
-  return `${orderExport}\n${bomExport}`
-}
-
-export function aggregateBlueprints(order: Order, deconstructed: Bill): Bill {
-  const result = new Map<ResourceId, BomItem>()
-  for (const orderItem of order.values()) {
-    const itemBom = getBomForInput(
-      new Map(),
-      orderItem.item.id,
-      orderItem.quantity,
-      deconstructed,
-      true
-    )
-    for (const bomResource of itemBom.values()) {
-      mergeResource(result, bomResource)
-    }
-  }
-  return result
-}
-
-export function mergeResource(prev: Bill, newResource: BomItem) {
-  const id = newResource.item.id
-  const existing = prev.get(id)
-  prev.set(id, {
-    item: newResource.item,
-    quantity: (existing?.quantity || 0) + newResource.quantity
-  })
-}
-
-export function getBomForInput(
-  prev: Bill,
-  id: ResourceId,
-  qty: number,
-  deconstructed: Bill,
-  isOrderItem = false
-): Bill {
-  const result = new Map(prev)
-  const resource = getResource(id)
-
-  if (resource == undefined) return result
-
-  if (
-    !isConstructible(resource) ||
-    (!deconstructed.has(resource.id) && !isOrderItem)
-  ) {
-    mergeResource(result, {
-      item: resource,
-      quantity: qty
-    })
-    return result
-  }
-
-  for (const [blueprintId, blueprintQty] of Object.entries(
-    resource.blueprint
-  )) {
-    const partial = getBomForInput(
-      new Map(),
-      blueprintId,
-      blueprintQty * qty,
-      deconstructed
-    )
-    for (const resourceFromBlueprint of partial.values()) {
-      mergeResource(result, resourceFromBlueprint)
-    }
-  }
-
-  return result
 }

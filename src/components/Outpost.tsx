@@ -5,7 +5,7 @@ import { CatalogView } from "@/components/CatalogView"
 import { ProjectView } from "@/components/ProjectView"
 import { ResourceId } from "@/models/resource"
 import { QtyChange } from "@/models/order"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useProject } from "@/hooks/useProject"
 import { ProjectActionType } from "@/reducers/projectReducer"
 

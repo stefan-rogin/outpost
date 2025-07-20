@@ -7,12 +7,12 @@ export interface OrderItem {
 
 export type Order = Map<ResourceId, OrderItem>
 
-export function isOrderItem(obj: any): obj is OrderItem {
+export function isOrderItem(obj: unknown): obj is OrderItem {
   return (
     typeof obj === "object" &&
     obj !== null &&
-    typeof obj.quantity === "number" &&
-    isConstructible(obj.item)
+    typeof (obj as OrderItem).quantity === "number" &&
+    isConstructible((obj as OrderItem).item)
   )
 }
 
