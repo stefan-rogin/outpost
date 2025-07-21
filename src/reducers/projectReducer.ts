@@ -8,7 +8,8 @@ export enum ProjectActionType {
   INIT = "INIT",
   CHANGE_ITEM_QTY = "CHANGE_ITEM_QTY",
   RENAME = "RENAME",
-  TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT"
+  TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT",
+  CLEAR = "CLEAR"
 }
 
 export type ProjectAction =
@@ -22,6 +23,7 @@ export type ProjectAction =
       type: ProjectActionType.TOGGLE_DECONSTRUCT
       payload: { id: ResourceId }
     }
+  | { type: ProjectActionType.CLEAR }
 
 export const projectReducer = (
   state: ProjectState,
@@ -33,6 +35,18 @@ export const projectReducer = (
     case ProjectActionType.RENAME:
       // TODO: Implement rename
       return state
+    case ProjectActionType.CLEAR:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          order: new Map(),
+          deconstructed: [],
+          lastChanged: new Date()
+        },
+        itemBill: new Map(),
+        deconstructedBill: new Map()
+      }
     case ProjectActionType.CHANGE_ITEM_QTY:
       const icOrder = changeOrderQty(
         action.payload.id,

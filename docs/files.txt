@@ -32,13 +32,6 @@ outpost/
 │   │   ├── project.ts
 │   │   └── resource.ts
 │   │
-│   ├── models/                 
-│   │   ├── bom.ts
-│   │   ├── catalog.ts
-│   │   ├── order.ts
-│   │   ├── project.ts
-│   │   └── resource.ts
-│   │
 │   ├── reducers/               
 │   │   └── projectReducer.ts
 │   │

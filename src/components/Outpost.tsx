@@ -56,9 +56,7 @@ export const Outpost = () => {
     })
 
   const handleOnClear = () => () => {
-    console.log("Clear")
-    // TODO: New reducer action
-    // setOrder(new Map())
+    dispatch({ type: ProjectActionType.CLEAR })
   }
 
   const handleOnToggleDeconstruct = (id: ResourceId) => (): void =>
