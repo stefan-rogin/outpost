@@ -1,44 +1,65 @@
 import { ResourceId, Resource, isConstructible } from "@/models/resource"
-import { Order } from "@/models/order"
 import styles from "@/components/BoM.module.css"
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import Image from "next/image"
-import { BomItem, Bill } from "@/models/bom"
+import { Bill, BomItem } from "@/models/bom"
 import {
   getTier,
   getScarcity,
-  aggregateBlueprints,
+  getAggregatedItems,
+  getAggregatedDeconstructed,
   getCsvFromProject
 } from "../service/bom"
+import { Order } from "@/models/order"
 
-// FIXME: BoM is getting big
-export const BoM = ({ order }: { order: Order }) => {
-  const [deconstructed, setDeconstructed] = useState<Bill>(new Map())
-  const bom = useMemo(
-    () => aggregateBlueprints(order, deconstructed),
+export const BoM = ({
+  order,
+  deconstructed,
+  onDeconstructedChange
+}: {
+  order: Order
+  deconstructed: ResourceId[]
+  onDeconstructedChange: (deconstructed: ResourceId[]) => () => void
+}) => {
+  const itemBill: Bill = useMemo(
+    () => getAggregatedItems(order, deconstructed),
+    [order, deconstructed]
+  )
+  const deconstructedBill: Bill = useMemo(
+    () => getAggregatedDeconstructed(order, deconstructed),
     [order, deconstructed]
   )
 
+  useEffect(() => {
+    const newDeconstructed: ResourceId[] = Array.from(
+      deconstructedBill.values()
+    ).map((bomItem): ResourceId => bomItem.item.id)
+
+    if (
+      deconstructed.length !== newDeconstructed.length ||
+      [...deconstructed].sort().toString() !==
+        [...newDeconstructed].sort().toString()
+    ) {
+      onDeconstructedChange(newDeconstructed)()
+    }
+  }, [deconstructedBill, deconstructed, onDeconstructedChange])
+
   const [copied, setCopied] = useState<boolean>(false)
 
-  const isDeconstructed = (id: ResourceId) => deconstructed.has(id)
+  const isDeconstructed = (id: ResourceId) => deconstructed.includes(id)
 
-  const toggleDeconstructed = (bomItem: BomItem) => (): void => {
-    if (!isConstructible(bomItem.item)) return
-    const id = bomItem.item.id
-    const newDeconstructed = new Map<ResourceId, BomItem>(deconstructed)
-    if (deconstructed.has(id)) newDeconstructed.delete(id)
-    else newDeconstructed.set(id, bomItem)
-    console.log(newDeconstructed)
-    setDeconstructed(newDeconstructed)
+  const toggleDeconstructed = (id: ResourceId) => (): void => {
+    const index = deconstructed.indexOf(id)
+    const newDeconstructed =
+      index < 0 ? [...deconstructed, id] : deconstructed.toSpliced(index, 1)
+    onDeconstructedChange(newDeconstructed)()
   }
 
   const handleCopyClipboard = () => {
     const ANIMATION_TIMEOUT = 2000
-    const text = getCsvFromProject(bom, order)
+    const text = getCsvFromProject(itemBill, order)
     setCopied(true)
     setTimeout(() => setCopied(false), ANIMATION_TIMEOUT)
-
     if (typeof window !== "undefined") {
       navigator.clipboard.writeText(text).catch(() => {
         console.error("Failed to copy text to clipboard.")
@@ -61,7 +82,7 @@ export const BoM = ({ order }: { order: Order }) => {
         />
       </div>
       <div className={styles.bom}>
-        {[...deconstructed.values(), ...bom.values()]
+        {[...deconstructedBill.values(), ...itemBill.values()]
           .sort(compareFn)
           .map(bomItem => {
             const itemClassName = `${styles.bom_item} ${
@@ -74,7 +95,7 @@ export const BoM = ({ order }: { order: Order }) => {
               <div
                 className={itemClassName}
                 key={bomItem.item.id}
-                onClick={toggleDeconstructed(bomItem)}
+                onClick={toggleDeconstructed(bomItem.item.id)}
               >
                 <span className={styles.quantity}>{bomItem.quantity}</span>
                 <div className={styles.icon_container}>

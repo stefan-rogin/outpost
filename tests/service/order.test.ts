@@ -24,29 +24,20 @@ describe("service/order tests", () => {
       "quantity",
       2
     )
-    const step3 = changeOrderQty("OutpostStorageLiquid01Large", "add", step2)
+    const step3 = changeOrderQty("OutpostStorageGas01Large", "add", step2)
     expect(step3.get("OutpostStorageSolid01Large")).toHaveProperty(
       "quantity",
       2
     )
-    expect(step3.get("OutpostStorageLiquid01Large")).toHaveProperty(
-      "quantity",
-      1
-    )
+    expect(step3.get("OutpostStorageGas01Large")).toHaveProperty("quantity", 1)
     const step4 = changeOrderQty("OutpostStorageSolid01Large", "remove", step3)
     expect(step4.get("OutpostStorageSolid01Large")).toHaveProperty(
       "quantity",
       1
     )
-    expect(step4.get("OutpostStorageLiquid01Large")).toHaveProperty(
-      "quantity",
-      1
-    )
+    expect(step4.get("OutpostStorageGas01Large")).toHaveProperty("quantity", 1)
     const step5 = changeOrderQty("OutpostStorageSolid01Large", "remove", step4)
     expect(step5.has("OutpostStorageSolid01Large")).toBe(false)
-    expect(step5.get("OutpostStorageLiquid01Large")).toHaveProperty(
-      "quantity",
-      1
-    )
+    expect(step5.get("OutpostStorageGas01Large")).toHaveProperty("quantity", 1)
   })
 })

@@ -1,12 +1,20 @@
 import { ResourceId, Resource, Constructible } from "@/models/resource"
 import * as Resources from "@/service/resource"
 import {
-  aggregateBlueprints,
+  getAggregatedItems,
+  getAggregatedDeconstructed,
   getCsvFromProject,
   getScarcity,
   getTier
 } from "@/service/bom"
-import { testResources, testOrder, testBill, testCsv } from "../testObjects"
+import {
+  testResources,
+  testOrder,
+  testBillWithDeconstructItemSet,
+  testBillWithDeconstructDeconstructedSet,
+  testCsv,
+  testProject
+} from "../testObjects"
 
 jest.mock("@/service/resource", () => ({
   getResource: jest.fn()
@@ -17,8 +25,16 @@ const getResource = Resources.getResource as jest.MockedFunction<
 getResource.mockImplementation(id => testResources[id])
 
 describe("service/bom", () => {
-  test("aggregates materials for a list of constructible items", () => {
-    expect(aggregateBlueprints(testOrder, new Map())).toStrictEqual(testBill)
+  test("aggregates materials for a list of constructible items with deconstructed items", () => {
+    expect(
+      getAggregatedItems(testOrder, testProject.deconstructed)
+    ).toStrictEqual(testBillWithDeconstructItemSet)
+  })
+
+  test("aggregates deconstructed materials for a list of constructible items with deconstructed items", () => {
+    expect(
+      getAggregatedDeconstructed(testOrder, testProject.deconstructed)
+    ).toStrictEqual(testBillWithDeconstructDeconstructedSet)
   })
 
   test("gets scarcity for resources", () => {
@@ -33,6 +49,8 @@ describe("service/bom", () => {
 
   test("creates csv export for a project", () => {
     // WARN: Potential for flakiness
-    expect(getCsvFromProject(testBill, testOrder)).toBe(testCsv)
+    expect(getCsvFromProject(testBillWithDeconstructItemSet, testOrder)).toBe(
+      testCsv
+    )
   })
 })

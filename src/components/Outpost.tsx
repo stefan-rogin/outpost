@@ -61,6 +61,12 @@ export const Outpost = () => {
     // setOrder(new Map())
   }
 
+  const handleDeconstructedChange = (deconstructed: ResourceId[]) => (): void =>
+    dispatch({
+      type: ProjectActionType.CHANGE_DECONSTRUCT,
+      payload: { deconstructed }
+    })
+
   return (
     <>
       <div className={styles.catalog_column}>
@@ -73,8 +79,9 @@ export const Outpost = () => {
       <div className={styles.bom_column}>
         <ProjectView
           onClear={handleOnClear}
-          order={project.order}
+          project={project}
           onQtyChange={handleQtyChange}
+          onDeconstructedChange={handleDeconstructedChange}
         />
       </div>
     </>

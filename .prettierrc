@@ -9,5 +9,8 @@
   "endOfLine": "lf",
   "jsxSingleQuote": false,
   "plugins": [],
-  "overrides": [{ "files": "*.json", "options": { "printWidth": 120 } }]
+  "overrides": [
+    { "files": "*.json", "options": { "printWidth": 120 } },
+    { "files": "**/testObjects.ts", "options": { "printWidth": 240 } }
+  ]
 }

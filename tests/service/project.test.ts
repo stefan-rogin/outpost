@@ -42,7 +42,7 @@ describe("service/project", () => {
 
   test("falls back to a new project if serialization is invalid", () => {
     const notJSON = serializedTestProject.replace(
-      '"order":{"OutpostStorageLiquid01Large":2,"OutpostStorageSolid01Large":3}',
+      '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2}',
       '"order":'
     )
     getItemMock.mockImplementationOnce(() => notJSON)
@@ -54,7 +54,7 @@ describe("service/project", () => {
 
   test("falls back to a new project if stored is invalid", () => {
     const orderNotObject = serializedTestProject.replace(
-      '"order":{"OutpostStorageLiquid01Large":2,"OutpostStorageSolid01Large":3}',
+      '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2}',
       '"order": ""'
     )
     getItemMock.mockImplementationOnce(() => orderNotObject)
@@ -66,8 +66,8 @@ describe("service/project", () => {
 
   test("only allows constructible items in order", () => {
     const notConstructible = serializedTestProject.replace(
-      '"order":{"OutpostStorageLiquid01Large":2,"OutpostStorageSolid01Large":3}',
-      '"order":{"OutpostStorageLiquid01Large":2,"OutpostStorageSolid01Large":3, "InorgCommonNickel": 1}'
+      '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2}',
+      '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2, "InorgCommonNickel": 1}'
     )
     getItemMock.mockImplementationOnce(() => notConstructible)
     expect(getStoredProject()).toStrictEqual(testProject)

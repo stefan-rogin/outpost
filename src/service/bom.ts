@@ -8,6 +8,13 @@ import {
 } from "@/models/resource"
 import { getResource } from "@/service/resource"
 
+type AggregateOptions = {
+  resultType: "items" | "deconstructed"
+  deconstruct: "list" | "all"
+  deconstructed: ResourceId[]
+  isOrderItem: boolean
+}
+
 export function getTier(constructible: Constructible): Tier | undefined {
   const tierMatch = constructible.id.match(/^(?:Mfg_)(Tier01|Tier02|Tier03)/)
   if (!tierMatch) return undefined
@@ -40,68 +47,113 @@ export function getCsvFromProject(bill: Bill, order: Order): string {
   return `${orderExport}\n${bomExport}`
 }
 
-export function aggregateBlueprints(order: Order, deconstructed: Bill): Bill {
-  const result = new Map<ResourceId, BomItem>()
+export function getAggregatedItems(
+  order: Order,
+  deconstructed: ResourceId[]
+): Bill {
+  const opts: Partial<AggregateOptions> = {
+    resultType: "items",
+    deconstruct: "list",
+    deconstructed
+  }
+  return aggregateBlueprints(order, opts)
+}
+
+export function getAggregatedDeconstructed(
+  order: Order,
+  deconstructed: ResourceId[]
+): Bill {
+  const opts: Partial<AggregateOptions> = {
+    resultType: "deconstructed",
+    deconstruct: "list",
+    deconstructed
+  }
+  return aggregateBlueprints(order, opts)
+}
+
+function aggregateBlueprints(
+  order: Order,
+  options: Partial<AggregateOptions> = {}
+): Bill {
+  const defaultOpts: AggregateOptions = {
+    resultType: "items",
+    deconstruct: "list",
+    deconstructed: [],
+    isOrderItem: false
+  }
+  const opts: AggregateOptions = { ...defaultOpts, ...options }
+  const result: Bill = new Map()
+
   for (const orderItem of order.values()) {
-    const itemBom = getBomForInput(
-      new Map(),
+    const itemResult = getBomForInput(
       orderItem.item.id,
       orderItem.quantity,
-      deconstructed,
-      true
+      new Map(),
+      { ...opts, isOrderItem: true }
     )
-    for (const bomResource of itemBom.values()) {
+    for (const bomResource of itemResult.values()) {
       mergeResource(result, bomResource)
     }
   }
   return result
 }
 
-export function mergeResource(prev: Bill, newResource: BomItem) {
+function getBomForInput(
+  id: ResourceId,
+  qty: number,
+  acc: Bill,
+  options: AggregateOptions
+): Bill {
+  const result: Bill = new Map(acc)
+  const resource = getResource(id)
+  const opts = options
+
+  if (resource == undefined) return result
+
+  if (opts.resultType === "deconstructed") {
+    if (opts.deconstructed.includes(id)) {
+      mergeResource(result, { item: resource, quantity: qty })
+    }
+  } else {
+    // opts.resultType === "items"
+    if (
+      !isConstructible(resource) ||
+      (opts.deconstruct == "list" &&
+        !opts.deconstructed.includes(id) &&
+        !opts.isOrderItem)
+    ) {
+      mergeResource(result, {
+        item: resource,
+        quantity: qty
+      })
+      return result
+    }
+  }
+
+  if (isConstructible(resource)) {
+    for (const [blueprintId, blueprintQty] of Object.entries(
+      resource.blueprint
+    )) {
+      const nextResult = getBomForInput(
+        blueprintId,
+        blueprintQty * qty,
+        new Map(),
+        { ...opts, isOrderItem: false }
+      )
+      for (const resourceFromBlueprint of nextResult.values()) {
+        mergeResource(result, resourceFromBlueprint)
+      }
+    }
+  }
+
+  return result
+}
+
+function mergeResource(prev: Bill, newResource: BomItem): void {
   const id = newResource.item.id
   const existing = prev.get(id)
   prev.set(id, {
     item: newResource.item,
     quantity: (existing?.quantity || 0) + newResource.quantity
   })
-}
-
-export function getBomForInput(
-  prev: Bill,
-  id: ResourceId,
-  qty: number,
-  deconstructed: Bill,
-  isOrderItem = false
-): Bill {
-  const result = new Map(prev)
-  const resource = getResource(id)
-
-  if (resource == undefined) return result
-
-  if (
-    !isConstructible(resource) ||
-    (!deconstructed.has(resource.id) && !isOrderItem)
-  ) {
-    mergeResource(result, {
-      item: resource,
-      quantity: qty
-    })
-    return result
-  }
-
-  for (const [blueprintId, blueprintQty] of Object.entries(
-    resource.blueprint
-  )) {
-    const partial = getBomForInput(
-      new Map(),
-      blueprintId,
-      blueprintQty * qty,
-      deconstructed
-    )
-    for (const resourceFromBlueprint of partial.values()) {
-      mergeResource(result, resourceFromBlueprint)
-    }
-  }
-
-  return result
 }

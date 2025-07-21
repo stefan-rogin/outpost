@@ -7,6 +7,7 @@ import {
   transferContainer
 } from "../testObjects"
 
+// TODO: Move to navigation own tests
 describe("CatalogPage tests", () => {
   test("getNavOption scrolls through options", () => {
     const sidedLeft: CatalogGroup = {

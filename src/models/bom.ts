@@ -6,5 +6,6 @@ export interface BomItem {
 }
 
 export type Bill = Map<ResourceId, BomItem>
+
 export type Scarcity = "Common" | "Uncommon" | "Rare" | "Exotic" | "Unique"
 export type Tier = "Tier01" | "Tier02" | "Tier03"

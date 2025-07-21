@@ -3,20 +3,23 @@ import { ResourceId } from "@/models/resource"
 import { OrderItemView } from "./OrderItemView"
 import { BoM } from "./BoM"
 import { Power } from "./Power"
-import { Order, QtyChange } from "@/models/order"
+import { QtyChange } from "@/models/order"
 import Image from "next/image"
+import { Project } from "@/models/project"
 
 export const ProjectView = ({
-  order,
+  project,
   onQtyChange,
-  onClear
+  onClear,
+  onDeconstructedChange
 }: {
-  order: Order
+  project: Project
   onQtyChange: (id: ResourceId, action: QtyChange) => () => void
   onClear: () => () => void
+  onDeconstructedChange: (deconstructed: ResourceId[]) => () => void
 }) => (
   <>
-    {[...order].length < 1 ? (
+    {[...project.order].length < 1 ? (
       <div className={styles.intro}>
         <h3 className={styles.title}>Starfield Outpost Planner</h3>
         <p>
@@ -85,11 +88,15 @@ export const ProjectView = ({
           />
         </div>
 
-        <Power order={order} />
-        {[...order].map(([id, item]) => (
+        <Power order={project.order} />
+        {[...project.order].map(([id, item]) => (
           <OrderItemView key={id} orderItem={item} onQtyChange={onQtyChange} />
         ))}
-        <BoM order={order} />
+        <BoM
+          onDeconstructedChange={onDeconstructedChange}
+          order={project.order}
+          deconstructed={project.deconstructed}
+        />
       </div>
     )}
   </>
