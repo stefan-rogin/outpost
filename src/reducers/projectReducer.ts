@@ -32,9 +32,6 @@ export const projectReducer = (
   switch (action.type) {
     case ProjectActionType.INIT:
       return action.payload
-    case ProjectActionType.RENAME:
-      // TODO: Implement rename
-      return state
     case ProjectActionType.CLEAR:
       return {
         ...state,
