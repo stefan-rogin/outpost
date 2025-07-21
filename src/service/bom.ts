@@ -113,6 +113,8 @@ function getBomForInput(
   if (opts.resultType === "deconstructed") {
     if (opts.deconstructed.includes(id)) {
       mergeResource(result, { item: resource, quantity: qty })
+    } else if (!opts.isOrderItem) {
+      return result
     }
   } else {
     // opts.resultType === "items"

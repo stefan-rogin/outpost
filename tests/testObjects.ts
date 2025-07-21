@@ -207,6 +207,11 @@ export const testBillWithDeconstructDeconstructedSet: Bill = new Map<ResourceId,
   ["Mfg_Tier02_SterileNanotubes", { item: testResources["Mfg_Tier02_SterileNanotubes"], quantity: 4 }]
 ])
 
+export const testBillWithDeconstructCase2DeconstructedSet: Bill = new Map<ResourceId, BomItem>([
+  ["Mfg_Tier03_SubstrateMolecularSieve", { item: testResources["Mfg_Tier03_SubstrateMolecularSieve"], quantity: 2 }],
+  ["Mfg_Tier02_MolecularSieve", { item: testResources["Mfg_Tier02_MolecularSieve"], quantity: 2 }]
+])
+
 export const serializedTestProject: string =
   '{"id":"1f8a4b0c-07e1-4dac-8114-b37b2e65f44b","name":"Project",' +
   '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2},' +

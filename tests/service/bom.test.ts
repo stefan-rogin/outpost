@@ -12,6 +12,7 @@ import {
   testOrder,
   testBillWithDeconstructItemSet,
   testBillWithDeconstructDeconstructedSet,
+  testBillWithDeconstructCase2DeconstructedSet,
   testCsv,
   testProject
 } from "../testObjects"
@@ -35,6 +36,17 @@ describe("service/bom", () => {
     expect(
       getAggregatedDeconstructed(testOrder, testProject.deconstructed)
     ).toStrictEqual(testBillWithDeconstructDeconstructedSet)
+  })
+
+  test("aggregates deconstructed materials without counting as deconstructed inputs of intact components", () => {
+    const newDeconstructedTest = testProject.deconstructed.toSpliced(
+      testProject.deconstructed.indexOf("Mfg_Tier02_SterileNanotubes"),
+      1
+    )
+
+    expect(
+      getAggregatedDeconstructed(testOrder, newDeconstructedTest)
+    ).toStrictEqual(testBillWithDeconstructCase2DeconstructedSet)
   })
 
   test("gets scarcity for resources", () => {
