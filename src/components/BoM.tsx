@@ -1,59 +1,25 @@
 import { ResourceId, Resource, isConstructible } from "@/models/resource"
 import styles from "@/components/BoM.module.css"
-import { useState, useMemo, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import { Bill, BomItem } from "@/models/bom"
-import {
-  getTier,
-  getScarcity,
-  getAggregatedItems,
-  getAggregatedDeconstructed,
-  getCsvFromProject
-} from "../service/bom"
+import { getTier, getScarcity, getCsvFromProject } from "../service/bom"
 import { Order } from "@/models/order"
 
 export const BoM = ({
   order,
-  deconstructed,
-  onDeconstructedChange
+  itemBill,
+  deconstructedBill,
+  onToggleDeconstruct
 }: {
   order: Order
-  deconstructed: ResourceId[]
-  onDeconstructedChange: (deconstructed: ResourceId[]) => () => void
+  itemBill: Bill
+  deconstructedBill: Bill
+  onToggleDeconstruct: (id: ResourceId) => () => void
 }) => {
-  const itemBill: Bill = useMemo(
-    () => getAggregatedItems(order, deconstructed),
-    [order, deconstructed]
-  )
-  const deconstructedBill: Bill = useMemo(
-    () => getAggregatedDeconstructed(order, deconstructed),
-    [order, deconstructed]
-  )
-
-  useEffect(() => {
-    const newDeconstructed: ResourceId[] = Array.from(
-      deconstructedBill.values()
-    ).map((bomItem): ResourceId => bomItem.item.id)
-
-    if (
-      deconstructed.length !== newDeconstructed.length ||
-      [...deconstructed].sort().toString() !==
-        [...newDeconstructed].sort().toString()
-    ) {
-      onDeconstructedChange(newDeconstructed)()
-    }
-  }, [deconstructedBill, deconstructed, onDeconstructedChange])
-
   const [copied, setCopied] = useState<boolean>(false)
 
-  const isDeconstructed = (id: ResourceId) => deconstructed.includes(id)
-
-  const toggleDeconstructed = (id: ResourceId) => (): void => {
-    const index = deconstructed.indexOf(id)
-    const newDeconstructed =
-      index < 0 ? [...deconstructed, id] : deconstructed.toSpliced(index, 1)
-    onDeconstructedChange(newDeconstructed)()
-  }
+  const isDeconstructed = (id: ResourceId) => deconstructedBill.has(id)
 
   const handleCopyClipboard = () => {
     const ANIMATION_TIMEOUT = 2000
@@ -95,7 +61,7 @@ export const BoM = ({
               <div
                 className={itemClassName}
                 key={bomItem.item.id}
-                onClick={toggleDeconstructed(bomItem.item.id)}
+                onClick={onToggleDeconstruct(bomItem.item.id)}
               >
                 <span className={styles.quantity}>{bomItem.quantity}</span>
                 <div className={styles.icon_container}>

@@ -3,6 +3,7 @@ import * as Resources from "@/service/resource"
 import { BoM } from "@/components/BoM"
 import { render, screen } from "@testing-library/react"
 import { testResources, testOrder, testProject } from "../testObjects"
+import { getAggregatedItems, getAggregatedDeconstructed } from "@/service/bom"
 
 jest.mock("@/service/resource", () => ({
   getResource: jest.fn()
@@ -17,8 +18,12 @@ describe("BoM render tests", () => {
     render(
       <BoM
         order={testOrder}
-        deconstructed={testProject.deconstructed}
-        onDeconstructedChange={_ => () => {}}
+        itemBill={getAggregatedItems(testOrder, testProject.deconstructed)}
+        deconstructedBill={getAggregatedDeconstructed(
+          testOrder,
+          testProject.deconstructed
+        )}
+        onToggleDeconstruct={_ => () => {}}
       />
     )
     expect(screen.getByText("Substrate Molecular Sieve")).toBeInTheDocument()

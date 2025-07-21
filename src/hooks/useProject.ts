@@ -1,6 +1,6 @@
 "use client"
 
-import { Project } from "@/models/project"
+import { ProjectState } from "@/models/project"
 import {
   ProjectAction,
   ProjectActionType,
@@ -12,18 +12,37 @@ import {
   getStoredProject,
   storeProject
 } from "@/service/project"
+import { Bill } from "@/models/bom"
+import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
+
+const initialState: ProjectState = {
+  project: getEmptyProject(),
+  itemBill: new Map(),
+  deconstructedBill: new Map()
+}
 
 export const useProject = (): {
-  project: Project
+  state: ProjectState
   dispatch: (action: ProjectAction) => void
 } => {
   const isMounted = useRef(false)
-  const [project, dispatch] = useReducer(projectReducer, getEmptyProject())
+  const [state, dispatch] = useReducer(projectReducer, initialState)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedProject = getStoredProject()
-      dispatch({ type: ProjectActionType.INIT, payload: storedProject })
+      const project = getStoredProject()
+      const itemBill: Bill = getAggregatedItems(
+        project.order,
+        project.deconstructed
+      )
+      const deconstructedBill: Bill = getAggregatedDeconstructed(
+        project.order,
+        project.deconstructed
+      )
+      dispatch({
+        type: ProjectActionType.INIT,
+        payload: { project, itemBill, deconstructedBill }
+      })
     }
   }, [])
 
@@ -32,10 +51,10 @@ export const useProject = (): {
       isMounted.current = true
       return
     }
-    if (typeof window !== "undefined" && project.id) {
-      storeProject(project)
+    if (typeof window !== "undefined" && state.project.id) {
+      storeProject(state.project)
     }
-  }, [project])
+  }, [state])
 
-  return { project: project, dispatch }
+  return { state, dispatch }
 }

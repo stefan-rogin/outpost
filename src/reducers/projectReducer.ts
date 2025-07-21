@@ -1,53 +1,83 @@
 import { QtyChange } from "@/models/order"
-import { Project } from "@/models/project"
+import { ProjectState } from "@/models/project"
 import { ResourceId } from "@/models/resource"
+import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
 import { changeOrderQty } from "@/service/order"
 
 export enum ProjectActionType {
   INIT = "INIT",
   CHANGE_ITEM_QTY = "CHANGE_ITEM_QTY",
   RENAME = "RENAME",
-  CHANGE_DECONSTRUCT = "CHANGE_DECONSTRUCT"
+  TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT"
 }
 
 export type ProjectAction =
-  | { type: ProjectActionType.INIT; payload: Project }
+  | { type: ProjectActionType.INIT; payload: ProjectState }
   | { type: ProjectActionType.RENAME; payload: string }
   | {
       type: ProjectActionType.CHANGE_ITEM_QTY
       payload: { id: ResourceId; qtyChange: QtyChange }
     }
   | {
-      type: ProjectActionType.CHANGE_DECONSTRUCT
-      payload: { deconstructed: ResourceId[] }
+      type: ProjectActionType.TOGGLE_DECONSTRUCT
+      payload: { id: ResourceId }
     }
 
 export const projectReducer = (
-  project: Project,
+  state: ProjectState,
   action: ProjectAction
-): Project => {
+): ProjectState => {
   switch (action.type) {
     case ProjectActionType.INIT:
       return action.payload
     case ProjectActionType.RENAME:
       // TODO: Implement rename
-      return project
+      return state
     case ProjectActionType.CHANGE_ITEM_QTY:
-      const [id, qtyChange, order] = [
+      const icOrder = changeOrderQty(
         action.payload.id,
         action.payload.qtyChange,
-        project.order
-      ]
+        state.project.order
+      )
+      const itemBill = getAggregatedItems(icOrder, state.project.deconstructed)
+      const deconstructedBill = getAggregatedDeconstructed(
+        icOrder,
+        state.project.deconstructed
+      )
+      const newDeconstructed: ResourceId[] = state.project.deconstructed.filter(
+        id => deconstructedBill.has(id)
+      )
       return {
-        ...project,
-        order: changeOrderQty(id, qtyChange, order),
-        lastChanged: new Date()
+        ...state,
+        project: {
+          ...state.project,
+          order: icOrder,
+          deconstructed: newDeconstructed,
+          lastChanged: new Date()
+        },
+        itemBill,
+        deconstructedBill
       }
-    case ProjectActionType.CHANGE_DECONSTRUCT:
+
+    case ProjectActionType.TOGGLE_DECONSTRUCT:
+      const index = state.project.deconstructed.indexOf(action.payload.id)
+      const deconstructed =
+        index < 0
+          ? [...state.project.deconstructed, action.payload.id]
+          : state.project.deconstructed.toSpliced(index, 1)
+
       return {
-        ...project,
-        deconstructed: action.payload.deconstructed,
-        lastChanged: new Date()
+        ...state,
+        project: {
+          ...state.project,
+          deconstructed,
+          lastChanged: new Date()
+        },
+        itemBill: getAggregatedItems(state.project.order, deconstructed),
+        deconstructedBill: getAggregatedDeconstructed(
+          state.project.order,
+          deconstructed
+        )
       }
     default:
       throw new Error("State change not implemented.")

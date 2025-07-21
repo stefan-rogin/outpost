@@ -20,7 +20,7 @@ declare global {
 }
 
 export const Outpost = () => {
-  const { project, dispatch } = useProject()
+  const { state, dispatch } = useProject()
 
   // Paypal button
   useEffect(() => {
@@ -61,10 +61,10 @@ export const Outpost = () => {
     // setOrder(new Map())
   }
 
-  const handleDeconstructedChange = (deconstructed: ResourceId[]) => (): void =>
+  const handleOnToggleDeconstruct = (id: ResourceId) => (): void =>
     dispatch({
-      type: ProjectActionType.CHANGE_DECONSTRUCT,
-      payload: { deconstructed }
+      type: ProjectActionType.TOGGLE_DECONSTRUCT,
+      payload: { id }
     })
 
   return (
@@ -79,9 +79,9 @@ export const Outpost = () => {
       <div className={styles.bom_column}>
         <ProjectView
           onClear={handleOnClear}
-          project={project}
+          state={state}
           onQtyChange={handleQtyChange}
-          onDeconstructedChange={handleDeconstructedChange}
+          onToggleDeconstruct={handleOnToggleDeconstruct}
         />
       </div>
     </>
