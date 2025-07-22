@@ -46,11 +46,14 @@ export const projectReducer = (
         deconstructedBill: new Map()
       }
     case ProjectActionType.RENAME:
+      const newName = action.payload.trim()
+      if (!newName) return state
+
       return {
         ...state,
         project: {
           ...state.project,
-          name: action.payload
+          name: newName
         }
       }
     case ProjectActionType.CHANGE_ITEM_QTY:

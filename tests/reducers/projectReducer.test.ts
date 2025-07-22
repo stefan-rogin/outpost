@@ -38,6 +38,14 @@ describe("projectReducer tests", () => {
     expect(result.project.name).toBe("New name test")
   })
 
+  test("ignores RENAME action if empty or whitespace", () => {
+    const result = projectReducer(testInititialState, {
+      type: ProjectActionType.RENAME,
+      payload: " "
+    })
+    expect(result.project.name).toBe("Project")
+  })
+
   test("handles CLEAR action", () => {
     const result = projectReducer(testProjectState1, {
       type: ProjectActionType.CLEAR

@@ -31,7 +31,10 @@ export const ProjectView = ({
   }
   const handleRenameSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    onRename(newName)
+    const trimmed = newName.trim()
+    if (!trimmed) return
+
+    onRename(trimmed)
     setRename(false)
   }
 
