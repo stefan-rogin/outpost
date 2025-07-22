@@ -1,5 +1,18 @@
-import { CatalogConfigCategory } from "@/models/catalog"
+import {
+  Catalog,
+  CatalogCategory,
+  CatalogConfigCategory,
+  CatalogGroup
+} from "@/models/catalog"
+import {
+  ResourceId,
+  Constructible,
+  Resource,
+  isConstructible
+} from "@/models/resource"
+import { getResource } from "./resource"
 
+// TODO: Extract config to json, kepp just its import here
 export const catalogConfig: CatalogConfigCategory[] = [
   {
     title: "Extractors",
@@ -125,3 +138,30 @@ export const catalogConfig: CatalogConfigCategory[] = [
     ]
   }
 ]
+
+export function mapCatalogFromConfig(
+  catalogConfig: CatalogConfigCategory[]
+): Catalog {
+  return catalogConfig.map(mapCategoryFromConfig)
+}
+
+export function mapCategoryFromConfig(
+  categoryConfig: CatalogConfigCategory
+): CatalogCategory {
+  return {
+    ...categoryConfig,
+    items: categoryConfig.items.map(mapGroupFromConfig)
+  }
+}
+
+export function mapGroupFromConfig(groupConfig: ResourceId[]): CatalogGroup {
+  const options: Constructible[] = groupConfig
+    .map((id: ResourceId): Resource | undefined => getResource(id))
+    .filter(
+      (res: Resource | undefined) => res !== undefined && isConstructible(res)
+    )
+  return {
+    inView: options[0], // TODO: Handle possible empty options
+    options
+  }
+}

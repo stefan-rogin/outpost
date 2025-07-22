@@ -2,7 +2,7 @@ import { Arrow } from "@/components/Arrow"
 import styles from "@/components/CatalogPage.module.css"
 import { ResourceId } from "@/models/resource"
 import Image from "next/image"
-import { getNavIndex, NavDirection } from "@/lib/navigation"
+import { getNavIndex, NavDirection } from "@/service/navigation"
 import { CatalogCategory, CatalogGroup } from "@/models/catalog"
 
 export const CatalogPage = ({

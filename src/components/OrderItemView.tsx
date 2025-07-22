@@ -1,8 +1,9 @@
 import styles from "@/components/OrderItemView.module.css"
-import { ResourceId, QtyChange } from "@/models/resource"
+import { ResourceId } from "@/models/resource"
+import { QtyChange } from "@/models/order"
 import { Arrow } from "@/components/Arrow"
 import Image from "next/image"
-import { getResource } from "@/lib/resources"
+import { getResource } from "@/service/resource"
 import { OrderItem } from "@/models/order"
 
 export const OrderItemView = ({

@@ -13,3 +13,8 @@
   font-size: 12px;
   width: 100%;
 }
+
+.loading {
+  font-size: 18px;
+  font-family: inherit;
+}
