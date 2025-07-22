@@ -78,7 +78,7 @@ describe("projectReducer tests", () => {
   test("handles TOGGLE_DECONSTRUCT action (add)", () => {
     const action: ProjectAction = {
       type: ProjectActionType.TOGGLE_DECONSTRUCT,
-      payload: { id: "Mfg_Tier02_SterileNanotubes" }
+      payload: "Mfg_Tier02_SterileNanotubes"
     }
     expect(testProjectState2.project.deconstructed.length).toBe(2)
     const result = projectReducer(testProjectState2, action)
@@ -89,10 +89,21 @@ describe("projectReducer tests", () => {
     ).toBe(6)
   })
 
+  test("allows TOGGLE_DECONSTRUCT action only for constructibles", () => {
+    const action: ProjectAction = {
+      type: ProjectActionType.TOGGLE_DECONSTRUCT,
+      payload: "InorgRareVanadium"
+    }
+    expect(testProjectState2.project.deconstructed.length).toBe(2)
+    const result = projectReducer(testProjectState2, action)
+    expect(result.project.deconstructed.length).toBe(2)
+    expect(result.project.deconstructed).not.toContain("InorgRareVanadium")
+  })
+
   test("handles TOGGLE_DECONSTRUCT action (remove)", () => {
     const action: ProjectAction = {
       type: ProjectActionType.TOGGLE_DECONSTRUCT,
-      payload: { id: "Mfg_Tier02_SterileNanotubes" }
+      payload: "Mfg_Tier02_SterileNanotubes"
     }
     expect(testProjectState3.project.deconstructed.length).toBe(3)
     const result = projectReducer(testProjectState3, action)

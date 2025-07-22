@@ -72,7 +72,7 @@ export const Outpost = () => {
   const handleOnToggleDeconstruct = (id: ResourceId) => (): void =>
     dispatch({
       type: ProjectActionType.TOGGLE_DECONSTRUCT,
-      payload: { id }
+      payload: id
     })
 
   return (

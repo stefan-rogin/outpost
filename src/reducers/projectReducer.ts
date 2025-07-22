@@ -1,8 +1,9 @@
 import { QtyChange } from "@/models/order"
 import { ProjectState } from "@/models/project"
-import { ResourceId } from "@/models/resource"
+import { isConstructible, Resource, ResourceId } from "@/models/resource"
 import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
 import { changeOrderQty } from "@/service/order"
+import { getResource } from "@/service/resource"
 
 export enum ProjectActionType {
   INIT = "INIT",
@@ -21,7 +22,7 @@ export type ProjectAction =
     }
   | {
       type: ProjectActionType.TOGGLE_DECONSTRUCT
-      payload: { id: ResourceId }
+      payload: ResourceId
     }
   | { type: ProjectActionType.CLEAR }
 
@@ -79,10 +80,13 @@ export const projectReducer = (
       }
 
     case ProjectActionType.TOGGLE_DECONSTRUCT:
-      const index = state.project.deconstructed.indexOf(action.payload.id)
+      const resource: Resource | undefined = getResource(action.payload)
+      if (!resource || !isConstructible(resource)) return state
+
+      const index = state.project.deconstructed.indexOf(action.payload)
       const deconstructed =
         index < 0
-          ? [...state.project.deconstructed, action.payload.id]
+          ? [...state.project.deconstructed, action.payload]
           : state.project.deconstructed.toSpliced(index, 1)
 
       return {

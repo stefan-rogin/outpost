@@ -61,7 +61,11 @@ export const BoM = ({
               <div
                 className={itemClassName}
                 key={bomItem.item.id}
-                onClick={onToggleDeconstruct(bomItem.item.id)}
+                onClick={
+                  isConstructible(bomItem.item)
+                    ? onToggleDeconstruct(bomItem.item.id)
+                    : undefined
+                }
               >
                 <span className={styles.quantity}>{bomItem.quantity}</span>
                 <div className={styles.icon_container}>
