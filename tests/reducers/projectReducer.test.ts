@@ -30,6 +30,14 @@ describe("projectReducer tests", () => {
     expect(result).toStrictEqual(testInititialState)
   })
 
+  test("handles RENAME action", () => {
+    const result = projectReducer(testInititialState, {
+      type: ProjectActionType.RENAME,
+      payload: "New name test"
+    })
+    expect(result.project.name).toBe("New name test")
+  })
+
   test("handles CLEAR action", () => {
     const result = projectReducer(testProjectState1, {
       type: ProjectActionType.CLEAR

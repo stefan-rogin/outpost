@@ -44,6 +44,14 @@ export const projectReducer = (
         itemBill: new Map(),
         deconstructedBill: new Map()
       }
+    case ProjectActionType.RENAME:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          name: action.payload
+        }
+      }
     case ProjectActionType.CHANGE_ITEM_QTY:
       const icOrder = changeOrderQty(
         action.payload.id,

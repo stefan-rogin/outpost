@@ -6,7 +6,7 @@ import {
   ProjectActionType,
   projectReducer
 } from "@/reducers/projectReducer"
-import { useEffect, useReducer, useRef } from "react"
+import { useEffect, useReducer, useState } from "react"
 import {
   getEmptyProject,
   getStoredProject,
@@ -24,9 +24,10 @@ const initialState: ProjectState = {
 export const useProject = (): {
   state: ProjectState
   dispatch: (action: ProjectAction) => void
+  loaded: boolean
 } => {
-  const isMounted = useRef(false)
   const [state, dispatch] = useReducer(projectReducer, initialState)
+  const [loaded, setLoaded] = useState<boolean>(false)
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -43,18 +44,15 @@ export const useProject = (): {
         type: ProjectActionType.INIT,
         payload: { project, itemBill, deconstructedBill }
       })
+      setLoaded(true)
     }
   }, [])
 
   useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true
-      return
-    }
-    if (typeof window !== "undefined" && state.project.id) {
+    if (loaded && typeof window !== "undefined" && state.project.id) {
       storeProject(state.project)
     }
-  }, [state])
+  }, [loaded, state.project])
 
-  return { state, dispatch }
+  return { state, dispatch, loaded }
 }

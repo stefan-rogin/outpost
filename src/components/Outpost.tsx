@@ -5,7 +5,7 @@ import { CatalogView } from "@/components/CatalogView"
 import { ProjectView } from "@/components/ProjectView"
 import { ResourceId } from "@/models/resource"
 import { QtyChange } from "@/models/order"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { useProject } from "@/hooks/useProject"
 import { ProjectActionType } from "@/reducers/projectReducer"
 
@@ -20,7 +20,7 @@ declare global {
 }
 
 export const Outpost = () => {
-  const { state, dispatch } = useProject()
+  const { state, dispatch, loaded } = useProject()
 
   // Paypal button
   useEffect(() => {
@@ -43,19 +43,29 @@ export const Outpost = () => {
     document.body.appendChild(script)
   }, [])
 
-  const handleCatalogSelect = (id: ResourceId) => (): void =>
-    dispatch({
-      type: ProjectActionType.CHANGE_ITEM_QTY,
-      payload: { id, qtyChange: "add" }
-    })
+  const handleCatalogSelect = useCallback(
+    (id: ResourceId) => (): void =>
+      dispatch({
+        type: ProjectActionType.CHANGE_ITEM_QTY,
+        payload: { id, qtyChange: "add" }
+      }),
+    [dispatch]
+  )
 
-  const handleQtyChange = (id: ResourceId, qtyChange: QtyChange) => (): void =>
-    dispatch({
-      type: ProjectActionType.CHANGE_ITEM_QTY,
-      payload: { id, qtyChange }
-    })
+  const handleQtyChange = useCallback(
+    (id: ResourceId, qtyChange: QtyChange) => (): void =>
+      dispatch({
+        type: ProjectActionType.CHANGE_ITEM_QTY,
+        payload: { id, qtyChange }
+      }),
+    [dispatch]
+  )
 
-  const handleOnClear = () => () => {
+  const handleOnRename = (name: string) => {
+    dispatch({ type: ProjectActionType.RENAME, payload: name })
+  }
+
+  const handleOnClear = () => {
     dispatch({ type: ProjectActionType.CLEAR })
   }
 
@@ -75,12 +85,17 @@ export const Outpost = () => {
         <CatalogView onSelect={handleCatalogSelect} />
       </div>
       <div className={styles.bom_column}>
-        <ProjectView
-          onClear={handleOnClear}
-          state={state}
-          onQtyChange={handleQtyChange}
-          onToggleDeconstruct={handleOnToggleDeconstruct}
-        />
+        {loaded ? (
+          <ProjectView
+            onClear={handleOnClear}
+            state={state}
+            onQtyChange={handleQtyChange}
+            onToggleDeconstruct={handleOnToggleDeconstruct}
+            onRename={handleOnRename}
+          />
+        ) : (
+          <div className={styles.loading}>Loading…</div>
+        )}
       </div>
     </>
   )

@@ -1,0 +1,55 @@
+.container {
+  margin-right: 12px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+
+.title {
+  font-size: 18px;
+  margin: 12px 0;
+  cursor: pointer;
+}
+
+.intro,
+.intro p,
+.intro h5 {
+  font-size: 14px;
+}
+
+.intro h4,
+.intro h5 {
+  margin: 12px 0;
+}
+
+.intro ul {
+  padding: 12px 36px;
+}
+
+.delete_icon {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.rename_icon {
+  position: absolute;
+  cursor: pointer;
+  right: 36px;
+}
+
+.rename_input {
+  font-family: inherit;
+  margin: 4px 0;
+  padding: 0 8px;
+  width: 320px;
+  height: 38px;
+  font-size: 16px;
+  border: 1px solid var(--accent);
+  background-color: #222;
+  color: #ccc;
+}
