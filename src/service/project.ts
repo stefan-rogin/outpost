@@ -3,6 +3,7 @@ import { isConstructible, Resource, ResourceId } from "@/models/resource"
 import { OrderItem } from "@/models/order"
 import { v4 as uuid } from "uuid"
 import { getResource } from "./resource"
+import { Optional, isDefined } from "@/types/common"
 
 export interface DehydratedProject {
   id: UUID
@@ -10,43 +11,27 @@ export interface DehydratedProject {
   order: Record<ResourceId, number>
   deconstructed: ResourceId[]
   lastChanged: string
+  version: string
 }
 
-const PROJECT_STORAGE_KEY = "project"
+const VERSION = "1.0"
+const PROJECT_STORAGE_PATTERN =
+  /^o_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/
 
-export function getStoredProject(): Project {
-  const raw = localStorage.getItem(PROJECT_STORAGE_KEY)
-  let project: Project | undefined = undefined
-  if (raw) {
-    try {
-      project = hydrateProject(deserializeProject(raw))
-    } catch {
-      // TODO: Enable back after defining test/dev/prod envs
-      // console.log("Invalid project in storage.")
-    }
+export function getStoredProject(id: string): Optional<Project> {
+  try {
+    const raw = localStorage.getItem(id)
+    if (raw) return hydrateProject(deserializeProject(raw))
+  } catch {
+    return undefined
   }
-  return project ?? getNewProject()
 }
+
 export function storeProject(project: Project): void {
-  localStorage.setItem(PROJECT_STORAGE_KEY, serializeProject(project))
-}
-
-export function getEmptyProject(): Project {
-  return {
-    id: "",
-    name: "",
-    order: new Map(),
-    deconstructed: [],
-    lastChanged: new Date(0)
-  }
-}
-
-function getNewProject(): Project {
-  return {
-    ...getEmptyProject(),
-    id: uuid(),
-    name: "Project"
-  }
+  localStorage.setItem(
+    getStorageKeyForId(project.id),
+    serializeProject(project)
+  )
 }
 
 function hydrateProject(dehydrated: DehydratedProject): Project {
@@ -57,7 +42,7 @@ function hydrateProject(dehydrated: DehydratedProject): Project {
       acc: Map<ResourceId, OrderItem>,
       [id, quantity]: [id: ResourceId, quantity: number]
     ) => {
-      const constructible: Resource | undefined = getResource(id)
+      const constructible: Optional<Resource> = getResource(id)
       if (constructible !== undefined && isConstructible(constructible)) {
         const item: OrderItem = {
           item: constructible,
@@ -70,10 +55,58 @@ function hydrateProject(dehydrated: DehydratedProject): Project {
     new Map()
   )
   return {
-    ...dehydrated,
+    id: dehydrated.id,
+    name: dehydrated.name,
     order,
+    deconstructed: dehydrated.deconstructed,
     lastChanged: new Date(dehydrated.lastChanged)
   }
+}
+
+export function getLatestProject(): Optional<Project> {
+  try {
+    const storedProjects = getRecentProjects()
+    return storedProjects.length > 0
+      ? hydrateProject(storedProjects[0])
+      : undefined
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * @throws {Error}
+ */
+function getRecentProjects(): DehydratedProject[] {
+  const storageKeys: string[] = listStorage()
+    .filter(isDefined)
+    .filter(key => PROJECT_STORAGE_PATTERN.test(key))
+
+  const storedProjects: DehydratedProject[] = storageKeys
+    .map((key: string): Optional<DehydratedProject> => {
+      try {
+        return deserializeProject(localStorage.getItem(key)!)
+      } catch {
+        return undefined
+      }
+    })
+    .filter(isDefined)
+
+  return storedProjects
+    .sort(
+      (a, b) =>
+        new Date(a.lastChanged).getTime() - new Date(b.lastChanged).getTime()
+    )
+    .reverse()
+}
+
+function listStorage(): Optional<string>[] {
+  const length = localStorage.length
+  const keys: Optional<string>[] = []
+  for (let i = 0; i < length; i++) {
+    keys.push(localStorage.key(i) ?? undefined)
+  }
+  return keys
 }
 
 function serializeProject(project: Project): string {
@@ -84,12 +117,15 @@ function serializeProject(project: Project): string {
   const dehydrated: DehydratedProject = {
     ...project,
     order: dehydratedOrder,
-    lastChanged: project.lastChanged.toISOString()
+    lastChanged: project.lastChanged.toISOString(),
+    version: VERSION
   }
   return JSON.stringify(dehydrated)
 }
 
-// This function throws parse exceptions to be caught elsewhere
+/**
+ * @throws {Error}
+ */
 function deserializeProject(raw: string): DehydratedProject {
   const parsed = JSON.parse(raw)
   if (
@@ -115,6 +151,30 @@ function deserializeProject(raw: string): DehydratedProject {
     name: parsed.name,
     order: parsedOrder,
     deconstructed: parsedDeconstructed,
-    lastChanged: parsed.lastChanged
+    lastChanged: parsed.lastChanged,
+    version: parsed.version
   }
+}
+
+export function getEmptyProject(): Project {
+  return {
+    id: "",
+    name: "",
+    order: new Map(),
+    deconstructed: [],
+    lastChanged: new Date(0)
+  }
+}
+
+export function getNewProject(): Project {
+  return {
+    ...getEmptyProject(),
+    id: uuid(),
+    name: "Project",
+    lastChanged: new Date()
+  }
+}
+
+function getStorageKeyForId(id: UUID): string {
+  return `o_${id}`
 }

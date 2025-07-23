@@ -1,0 +1,27 @@
+.title {
+  max-width: 420px;
+  font-size: 18px;
+  margin: 12px 0;
+  cursor: pointer;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+}
+
+.intro,
+.intro p,
+.intro h5 {
+  font-size: 14px;
+}
+
+.intro h4,
+.intro h5 {
+  margin: 12px 0;
+}
+
+.intro ul {
+  padding: 12px 36px;
+}
