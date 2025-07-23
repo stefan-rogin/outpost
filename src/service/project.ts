@@ -18,9 +18,9 @@ const VERSION = "1.0"
 const PROJECT_STORAGE_PATTERN =
   /^o_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/
 
-export function getStoredProject(id: string): Optional<Project> {
+export function getStoredProject(id: UUID): Optional<Project> {
   try {
-    const raw = localStorage.getItem(id)
+    const raw = localStorage.getItem(getStorageKeyForId(id))
     if (raw) return hydrateProject(deserializeProject(raw))
   } catch {
     return undefined
@@ -65,7 +65,7 @@ function hydrateProject(dehydrated: DehydratedProject): Project {
 
 export function getLatestProject(): Optional<Project> {
   try {
-    const storedProjects = getRecentProjects()
+    const storedProjects = getSortedDryProjects()
     return storedProjects.length > 0
       ? hydrateProject(storedProjects[0])
       : undefined
@@ -74,10 +74,24 @@ export function getLatestProject(): Optional<Project> {
   }
 }
 
+export function getRecentProjects(): {
+  id: UUID
+  name: string
+  lastChanged: Date
+}[] {
+  return getSortedDryProjects().map(project => {
+    return {
+      id: project.id,
+      name: project.name,
+      lastChanged: new Date(project.lastChanged)
+    }
+  })
+}
+
 /**
  * @throws {Error}
  */
-function getRecentProjects(): DehydratedProject[] {
+function getSortedDryProjects(): DehydratedProject[] {
   const storageKeys: string[] = listStorage()
     .filter(isDefined)
     .filter(key => PROJECT_STORAGE_PATTERN.test(key))

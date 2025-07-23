@@ -86,7 +86,11 @@ export const Outpost = () => {
           <div id="donate-button"></div>
         </div>
 
-        <CatalogView onSelect={handleCatalogSelect} />
+        <CatalogView
+          onSelect={handleCatalogSelect}
+          isLoaded={!state.isLoading}
+          id={state.project.id}
+        />
       </div>
       <div className={styles.bom_column}>
         {state.isLoading ? (

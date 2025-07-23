@@ -1,4 +1,4 @@
-.category_nav_container {
+.container {
   width: 180px;
   height: 44px;
   padding: 4px;
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.category_title {
+.title {
   font-size: 14px;
   margin: 4px;
   width: 100%;

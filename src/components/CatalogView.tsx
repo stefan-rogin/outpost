@@ -6,11 +6,17 @@ import { CatalogPage } from "@/components/CatalogPage"
 import { Constructible, ResourceId } from "@/models/resource"
 import { Arrow } from "@/components/Arrow"
 import { Catalog, CatalogGroup } from "@/models/catalog"
+import { RecentProjects } from "./RecentProjects"
+import { UUID } from "@/models/project"
 
 export const CatalogView = ({
-  onSelect
+  onSelect,
+  isLoaded,
+  id
 }: {
   onSelect: (id: ResourceId) => () => void
+  isLoaded: boolean
+  id: UUID
 }) => {
   const [categoryIndex, setCategoryIndex] = useState<number>(0)
   const handlePageChange = (direction: NavDirection) => (): void =>
@@ -32,10 +38,8 @@ export const CatalogView = ({
 
   return (
     <div>
-      <div className={styles.category_nav_container}>
-        <div className={styles.category_title}>
-          {catalog[categoryIndex].title}
-        </div>
+      <div className={styles.container}>
+        <div className={styles.title}>{catalog[categoryIndex].title}</div>
         <Arrow
           className={styles.arrow_prev}
           onClick={handlePageChange("prev")}
@@ -52,6 +56,7 @@ export const CatalogView = ({
         onGroupNav={handleGroupNavFn}
         onSelect={onSelect}
       />
+      {isLoaded && <RecentProjects id={id} />}
     </div>
   )
 }

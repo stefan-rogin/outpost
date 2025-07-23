@@ -11,7 +11,8 @@ import { useEffect, useReducer } from "react"
 import {
   getEmptyProject,
   storeProject,
-  getLatestProject
+  getLatestProject,
+  getStoredProject
 } from "@/service/project"
 
 const initialState: ProjectState = {
@@ -32,12 +33,21 @@ export const useProject = (): {
     // Load latest or new
     if (typeof window !== "undefined") {
       dispatch({ type: ProjectActionType.INIT })
+      // URL Id?
+      const url = new window.URL(window.location.href)
+      const id: Optional<string> = url.searchParams.get("id") ?? undefined
       try {
-        const project: Optional<Project> = getLatestProject()
+        const project: Optional<Project> = id
+          ? getStoredProject(id)
+          : getLatestProject()
         if (isDefined(project)) {
           dispatch({ type: ProjectActionType.LOAD_OK, payload: project })
         } else {
-          dispatch({ type: ProjectActionType.CREATE })
+          if (id) {
+            dispatch({ type: ProjectActionType.LOAD_ERR })
+          } else {
+            dispatch({ type: ProjectActionType.CREATE })
+          }
         }
       } catch {
         dispatch({ type: ProjectActionType.LOAD_ERR })
