@@ -10,13 +10,17 @@ export const testInititialState: ProjectState = {
     lastChanged: new Date(0)
   },
   itemBill: new Map(),
-  deconstructedBill: new Map()
+  deconstructedBill: new Map(),
+  isLoading: false,
+  isError: false
 }
 
 export const testProjectState1: ProjectState = {
   project: to.testProject,
   itemBill: to.testBillWithDeconstructItemSet,
-  deconstructedBill: to.testBillWithDeconstructDeconstructedSet
+  deconstructedBill: to.testBillWithDeconstructDeconstructedSet,
+  isLoading: false,
+  isError: false
 }
 
 export const testProjectState2: ProjectState = {
@@ -28,11 +32,15 @@ export const testProjectState2: ProjectState = {
     )
   },
   itemBill: to.testBillWithDeconstructItemSet,
-  deconstructedBill: to.testBillWithDeconstructCase2DeconstructedSet
+  deconstructedBill: to.testBillWithDeconstructCase2DeconstructedSet,
+  isLoading: false,
+  isError: false
 }
 
 export const testProjectState3: ProjectState = {
   project: to.testProject,
   itemBill: to.testBillNoDeconstructItemSet,
-  deconstructedBill: new Map()
+  deconstructedBill: new Map(),
+  isLoading: false,
+  isError: false
 }
