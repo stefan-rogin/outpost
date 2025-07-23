@@ -15,6 +15,8 @@ export interface ProjectState {
   project: Project
   itemBill: Bill
   deconstructedBill: Bill
+  isLoading: boolean
+  isError: boolean
 }
 
 export type UUID = string

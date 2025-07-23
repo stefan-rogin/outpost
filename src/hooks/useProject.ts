@@ -1,58 +1,55 @@
 "use client"
 
-import { ProjectState } from "@/models/project"
+import { Optional, isDefined } from "@/types/common"
+import { ProjectState, Project } from "@/models/project"
 import {
   ProjectAction,
   ProjectActionType,
   projectReducer
 } from "@/reducers/projectReducer"
-import { useEffect, useReducer, useState } from "react"
+import { useEffect, useReducer } from "react"
 import {
   getEmptyProject,
-  getStoredProject,
-  storeProject
+  storeProject,
+  getLatestProject
 } from "@/service/project"
-import { Bill } from "@/models/bom"
-import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
 
 const initialState: ProjectState = {
   project: getEmptyProject(),
   itemBill: new Map(),
-  deconstructedBill: new Map()
+  deconstructedBill: new Map(),
+  isLoading: true,
+  isError: false
 }
 
 export const useProject = (): {
   state: ProjectState
   dispatch: (action: ProjectAction) => void
-  loaded: boolean
 } => {
   const [state, dispatch] = useReducer(projectReducer, initialState)
-  const [loaded, setLoaded] = useState<boolean>(false)
 
   useEffect(() => {
+    // Load latest or new
     if (typeof window !== "undefined") {
-      const project = getStoredProject()
-      const itemBill: Bill = getAggregatedItems(
-        project.order,
-        project.deconstructed
-      )
-      const deconstructedBill: Bill = getAggregatedDeconstructed(
-        project.order,
-        project.deconstructed
-      )
-      dispatch({
-        type: ProjectActionType.INIT,
-        payload: { project, itemBill, deconstructedBill }
-      })
-      setLoaded(true)
+      dispatch({ type: ProjectActionType.INIT })
+      try {
+        const project: Optional<Project> = getLatestProject()
+        if (isDefined(project)) {
+          dispatch({ type: ProjectActionType.LOAD_OK, payload: project })
+        } else {
+          dispatch({ type: ProjectActionType.CREATE })
+        }
+      } catch {
+        dispatch({ type: ProjectActionType.LOAD_ERR })
+      }
     }
   }, [])
 
   useEffect(() => {
-    if (loaded && typeof window !== "undefined" && state.project.id) {
+    if (!state.isLoading && typeof window !== "undefined" && state.project.id) {
       storeProject(state.project)
     }
-  }, [loaded, state.project])
+  }, [state.isLoading, state.project])
 
-  return { state, dispatch, loaded }
+  return { state, dispatch }
 }

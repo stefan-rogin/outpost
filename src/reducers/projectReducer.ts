@@ -1,20 +1,26 @@
 import { QtyChange } from "@/models/order"
-import { ProjectState } from "@/models/project"
+import { Project, ProjectState } from "@/models/project"
 import { isConstructible, Resource, ResourceId } from "@/models/resource"
 import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
 import { changeOrderQty } from "@/service/order"
+import { getNewProject } from "@/service/project"
 import { getResource } from "@/service/resource"
 
 export enum ProjectActionType {
   INIT = "INIT",
+  LOAD_OK = "LOAD_OK",
+  LOAD_ERR = "LOAD_ERR",
   CHANGE_ITEM_QTY = "CHANGE_ITEM_QTY",
   RENAME = "RENAME",
   TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT",
-  CLEAR = "CLEAR"
+  CLEAR = "CLEAR",
+  CREATE = "CREATE"
 }
 
 export type ProjectAction =
-  | { type: ProjectActionType.INIT; payload: ProjectState }
+  | { type: ProjectActionType.INIT }
+  | { type: ProjectActionType.LOAD_OK; payload: Project }
+  | { type: ProjectActionType.LOAD_ERR }
   | { type: ProjectActionType.RENAME; payload: string }
   | {
       type: ProjectActionType.CHANGE_ITEM_QTY
@@ -25,14 +31,48 @@ export type ProjectAction =
       payload: ResourceId
     }
   | { type: ProjectActionType.CLEAR }
+  | { type: ProjectActionType.CREATE }
 
+// TODO: Extract actions
 export const projectReducer = (
   state: ProjectState,
   action: ProjectAction
 ): ProjectState => {
   switch (action.type) {
     case ProjectActionType.INIT:
-      return action.payload
+      return {
+        ...state,
+        isLoading: true,
+        isError: false
+      }
+    case ProjectActionType.LOAD_OK:
+      return {
+        project: action.payload,
+        itemBill: getAggregatedItems(
+          action.payload.order,
+          action.payload.deconstructed
+        ),
+        deconstructedBill: getAggregatedDeconstructed(
+          action.payload.order,
+          action.payload.deconstructed
+        ),
+        isLoading: false,
+        isError: false
+      }
+    case ProjectActionType.LOAD_ERR:
+      return {
+        ...state,
+        isLoading: false,
+        isError: true
+      }
+    case ProjectActionType.CREATE:
+      return {
+        project: getNewProject(),
+        itemBill: new Map(),
+        deconstructedBill: new Map(),
+        isLoading: false,
+        isError: false
+      }
     case ProjectActionType.CLEAR:
       return {
         ...state,

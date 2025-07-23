@@ -22,12 +22,15 @@ const getResource = Resources.getResource as jest.MockedFunction<
 getResource.mockImplementation(id => testResources[id])
 
 describe("projectReducer tests", () => {
-  test("handles INIT action", () => {
+  test("handles INIT action by changing to loading", () => {
     const result = projectReducer(testInititialState, {
-      type: ProjectActionType.INIT,
-      payload: testInititialState
+      type: ProjectActionType.INIT
     })
-    expect(result).toStrictEqual(testInititialState)
+    expect(result).toStrictEqual({
+      ...testInititialState,
+      isLoading: true,
+      isError: false
+    })
   })
 
   test("handles RENAME action", () => {

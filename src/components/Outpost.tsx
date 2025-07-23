@@ -20,7 +20,7 @@ declare global {
 }
 
 export const Outpost = () => {
-  const { state, dispatch, loaded } = useProject()
+  const { state, dispatch } = useProject()
 
   // Paypal button
   useEffect(() => {
@@ -61,12 +61,16 @@ export const Outpost = () => {
     [dispatch]
   )
 
-  const handleOnRename = (name: string) => {
+  const handleOnRename = (name: string): void => {
     dispatch({ type: ProjectActionType.RENAME, payload: name })
   }
 
-  const handleOnClear = () => {
+  const handleOnClear = (): void => {
     dispatch({ type: ProjectActionType.CLEAR })
+  }
+
+  const handleOnCreate = (): void => {
+    dispatch({ type: ProjectActionType.CREATE })
   }
 
   const handleOnToggleDeconstruct = (id: ResourceId) => (): void =>
@@ -85,16 +89,17 @@ export const Outpost = () => {
         <CatalogView onSelect={handleCatalogSelect} />
       </div>
       <div className={styles.bom_column}>
-        {loaded ? (
+        {state.isLoading ? (
+          <div className={styles.loading}>Loading…</div>
+        ) : (
           <ProjectView
+            onCreate={handleOnCreate}
             onClear={handleOnClear}
             state={state}
             onQtyChange={handleQtyChange}
             onToggleDeconstruct={handleOnToggleDeconstruct}
             onRename={handleOnRename}
           />
-        ) : (
-          <div className={styles.loading}>Loading…</div>
         )}
       </div>
     </>

@@ -6,6 +6,8 @@ import {
   serializedTestProject
 } from "../testObjects"
 import { getStoredProject, storeProject } from "@/service/project"
+import { Optional } from "@/types/common"
+import { Project } from "@/models/project"
 
 jest.mock("@/service/resource", () => ({
   getResource: jest.fn()
@@ -32,36 +34,35 @@ Object.defineProperty(global, "localStorage", {
 // WARN: Potential for flakiness
 describe("service/project", () => {
   test("loads a stored project", () => {
-    expect(getStoredProject()).toStrictEqual(testProject)
+    expect(getStoredProject(testProject.id)).toStrictEqual(testProject)
   })
 
   test("stores a project", () => {
     storeProject(testProject)
-    expect(setItem).toHaveBeenCalledWith("project", serializedTestProject)
+    expect(setItem).toHaveBeenCalledWith(
+      `o_${testProject.id}`,
+      serializedTestProject
+    )
   })
 
-  test("falls back to a new project if serialization is invalid", () => {
+  test("returns undefined if serialization is invalid", () => {
     const notJSON = serializedTestProject.replace(
       '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2}',
       '"order":'
     )
     getItemMock.mockImplementationOnce(() => notJSON)
-    expect(typeof getStoredProject().id).toBe("string")
-    expect(typeof getStoredProject().name).toBe("string")
-    expect(typeof getStoredProject().order).toBe("object")
-    expect(getStoredProject().order.keys.length).toBe(0)
+    const result: Optional<Project> = getStoredProject(testProject.id)
+    expect(typeof result).toBe("undefined")
   })
 
-  test("falls back to a new project if stored is invalid", () => {
+  test("returns undefined if stored is invalid", () => {
     const orderNotObject = serializedTestProject.replace(
       '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2}',
       '"order": ""'
     )
     getItemMock.mockImplementationOnce(() => orderNotObject)
-    expect(typeof getStoredProject().id).toBe("string")
-    expect(typeof getStoredProject().name).toBe("string")
-    expect(typeof getStoredProject().order).toBe("object")
-    expect(getStoredProject().order.keys.length).toBe(0)
+    const result: Optional<Project> = getStoredProject(testProject.id)
+    expect(typeof result).toBe("undefined")
   })
 
   test("only allows constructible items in order", () => {
@@ -70,6 +71,6 @@ describe("service/project", () => {
       '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2, "InorgCommonNickel": 1}'
     )
     getItemMock.mockImplementationOnce(() => notConstructible)
-    expect(getStoredProject()).toStrictEqual(testProject)
+    expect(getStoredProject(testProject.id)).toStrictEqual(testProject)
   })
 })
