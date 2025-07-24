@@ -47,6 +47,7 @@ export const projectReducer = (
       }
     case ProjectActionType.LOAD_OK:
       const updatedState: ProjectState = {
+        ...state,
         project: { ...action.payload, lastOpened: new Date() },
         itemBill: getAggregatedItems(
           action.payload.order,
@@ -70,6 +71,7 @@ export const projectReducer = (
       }
     case ProjectActionType.CREATE:
       return {
+        ...state,
         project: getNewProject(),
         itemBill: new Map(),
         deconstructedBill: new Map(),
@@ -77,6 +79,7 @@ export const projectReducer = (
         isError: false
       }
     case ProjectActionType.DELETE:
+      // TODO: Change from clear to delete
       return {
         ...state,
         project: {
@@ -123,7 +126,8 @@ export const projectReducer = (
           lastChanged: new Date()
         },
         itemBill,
-        deconstructedBill
+        deconstructedBill,
+        isEmptyWorkspace: false
       }
 
     case ProjectActionType.TOGGLE_DECONSTRUCT:

@@ -7,7 +7,7 @@ import {
   ProjectActionType,
   projectReducer
 } from "@/reducers/projectReducer"
-import { useEffect, useReducer } from "react"
+import { useEffect, useReducer, useMemo } from "react"
 import {
   getEmptyProject,
   storeProject,
@@ -15,18 +15,20 @@ import {
   getStoredProject
 } from "@/service/project"
 
-const initialState: ProjectState = {
-  project: getEmptyProject(),
-  itemBill: new Map(),
-  deconstructedBill: new Map(),
-  isLoading: true,
-  isError: false
-}
-
 export const useProject = (): {
   state: ProjectState
   dispatch: (action: ProjectAction) => void
 } => {
+  const latestProject: Optional<Project> = useMemo(() => getLatestProject(), [])
+
+  const initialState: ProjectState = {
+    project: getEmptyProject(),
+    itemBill: new Map(),
+    deconstructedBill: new Map(),
+    isLoading: true,
+    isError: false,
+    isEmptyWorkspace: !isDefined(latestProject)
+  }
   const [state, dispatch] = useReducer(projectReducer, initialState)
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export const useProject = (): {
       try {
         const project: Optional<Project> = id
           ? getStoredProject(id)
-          : getLatestProject()
+          : latestProject
         if (isDefined(project)) {
           dispatch({ type: ProjectActionType.LOAD_OK, payload: project })
         } else {
@@ -53,7 +55,7 @@ export const useProject = (): {
         dispatch({ type: ProjectActionType.LOAD_ERR })
       }
     }
-  }, [])
+  }, [latestProject])
 
   useEffect(() => {
     if (!state.isLoading && typeof window !== "undefined" && state.project.id) {

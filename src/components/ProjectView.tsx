@@ -7,7 +7,6 @@ import { QtyChange } from "@/models/order"
 import Image from "next/image"
 import { ProjectState } from "@/models/project"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { Intro } from "./Intro"
 
 export const ProjectView = ({
   state,
@@ -45,68 +44,84 @@ export const ProjectView = ({
     event: ChangeEvent<HTMLInputElement>
   ): void => setNewName(event.target.value)
 
-  if (state.project.order.size > 0)
-    return (
-      <div className={styles.container}>
-        <div className={styles.header}>
-          {rename ? (
-            <form onSubmit={handleRenameSubmit}>
-              <input
-                type="text"
-                value={newName}
-                className={styles.rename_input}
-                onChange={handleRenameInputChange}
-                onBlur={toggleRename}
-                autoFocus
-              />
-            </form>
-          ) : (
-            <h3 className={styles.title} onClick={toggleRename}>
-              {state.project.name}
-            </h3>
-          )}
-        </div>
-        <div className={styles.actions_container}>
-          <Power order={state.project.order} />
+  const isProjectEmpty: boolean = !(state.project.order.size > 0)
 
-          <Image
-            priority={true}
-            src="/create.svg"
-            alt="Create project"
-            width={24}
-            height={24}
-            className={styles.create_icon}
-            onClick={onCreate}
-          />
-          <Image
-            priority={true}
-            src="/rename.svg"
-            alt="Rename project"
-            width={24}
-            height={24}
-            className={styles.rename_icon}
-            onClick={toggleRename}
-          />
-          <Image
-            priority={true}
-            src="/delete.svg"
-            alt="Delete project"
-            width={24}
-            height={24}
-            onClick={onClear}
-            className={styles.delete_icon}
-          />
-        </div>
-        {[...state.project.order].map(([id, item]) => (
-          <OrderItemView key={id} orderItem={item} onQtyChange={onQtyChange} />
-        ))}
-        <BoM
-          onToggleDeconstruct={onToggleDeconstruct}
-          order={state.project.order}
-          itemBill={state.itemBill}
-          deconstructedBill={state.deconstructedBill}
-        />
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        {rename ? (
+          <form onSubmit={handleRenameSubmit}>
+            <input
+              type="text"
+              value={newName}
+              className={styles.rename_input}
+              onChange={handleRenameInputChange}
+              onBlur={toggleRename}
+              autoFocus
+            />
+          </form>
+        ) : (
+          <h3 className={styles.title} onClick={toggleRename}>
+            {state.project.name}
+          </h3>
+        )}
       </div>
-    )
-  else return <Intro />
+      {isProjectEmpty ? (
+        <>
+          <h3>Add modules</h3>
+          <p>
+            Start building your outpost by selecting modules from the panel on
+            the left.
+          </p>
+        </>
+      ) : (
+        <>
+          <div className={styles.actions_container}>
+            <Power order={state.project.order} />
+
+            <Image
+              priority={true}
+              src="/create.svg"
+              alt="Create project"
+              width={24}
+              height={24}
+              className={styles.create_icon}
+              onClick={onCreate}
+            />
+            <Image
+              priority={true}
+              src="/rename.svg"
+              alt="Rename project"
+              width={24}
+              height={24}
+              className={styles.rename_icon}
+              onClick={toggleRename}
+            />
+            <Image
+              priority={true}
+              src="/delete.svg"
+              alt="Delete project"
+              width={24}
+              height={24}
+              onClick={onClear}
+              className={styles.delete_icon}
+            />
+          </div>
+          {[...state.project.order].map(([id, item]) => (
+            <OrderItemView
+              key={id}
+              orderItem={item}
+              onQtyChange={onQtyChange}
+            />
+          ))}
+          <BoM
+            onToggleDeconstruct={onToggleDeconstruct}
+            order={state.project.order}
+            itemBill={state.itemBill}
+            deconstructedBill={state.deconstructedBill}
+          />
+        </>
+      )}
+    </div>
+  )
 }
