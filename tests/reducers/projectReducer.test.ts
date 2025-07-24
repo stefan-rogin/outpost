@@ -51,7 +51,7 @@ describe("projectReducer tests", () => {
 
   test("handles CLEAR action", () => {
     const result = projectReducer(testProjectState1, {
-      type: ProjectActionType.CLEAR
+      type: ProjectActionType.DELETE
     })
     expect(result.project.name).toBe("Project")
     expect(result.project.id).toBe("1f8a4b0c-07e1-4dac-8114-b37b2e65f44b")

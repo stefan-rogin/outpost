@@ -5,43 +5,14 @@ import { CatalogView } from "@/components/CatalogView"
 import { ProjectView } from "@/components/ProjectView"
 import { ResourceId } from "@/models/resource"
 import { QtyChange } from "@/models/order"
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 import { useProject } from "@/hooks/useProject"
 import { ProjectActionType } from "@/reducers/projectReducer"
-
-declare global {
-  interface Window {
-    PayPal?: {
-      Donation?: {
-        Button?: (options: unknown) => { render: (selector: string) => void }
-      }
-    }
-  }
-}
+import { Link } from "@/components/Link"
+import { RecentProjects } from "./RecentProjects"
 
 export const Outpost = () => {
   const { state, dispatch } = useProject()
-
-  // Paypal button
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.src = "https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
-    script.charset = "UTF-8"
-    script.onload = () => {
-      if (window.PayPal?.Donation?.Button) {
-        window.PayPal.Donation.Button({
-          env: "production",
-          hosted_button_id: "CXMVLBQ2WCZDC",
-          image: {
-            src: "https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif",
-            alt: "Donate with PayPal button",
-            title: "PayPal - The safer, easier way to pay online!"
-          }
-        }).render("#donate-button")
-      }
-    }
-    document.body.appendChild(script)
-  }, [])
 
   const handleCatalogSelect = useCallback(
     (id: ResourceId) => (): void =>
@@ -66,7 +37,7 @@ export const Outpost = () => {
   }
 
   const handleOnClear = (): void => {
-    dispatch({ type: ProjectActionType.CLEAR })
+    dispatch({ type: ProjectActionType.DELETE })
   }
 
   const handleOnCreate = (): void => {
@@ -80,13 +51,12 @@ export const Outpost = () => {
     })
 
   return (
-    <>
+    <div className={styles.body}>
       <div className={styles.catalog_column}>
-        <div id="donate-button-container">
-          <div id="donate-button"></div>
-        </div>
+        <Link href="project-list" content="All projects" />
 
         <CatalogView onSelect={handleCatalogSelect} />
+        {!state.isLoading && state.project.lastOpened && <RecentProjects />}
       </div>
       <div className={styles.bom_column}>
         {state.isLoading ? (
@@ -102,6 +72,6 @@ export const Outpost = () => {
           />
         )}
       </div>
-    </>
+    </div>
   )
 }

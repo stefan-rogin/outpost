@@ -1,4 +1,4 @@
-import { Project, UUID } from "@/models/project"
+import { Project, UUID, ProjectInfo } from "@/models/project"
 import { isConstructible, Resource, ResourceId } from "@/models/resource"
 import { OrderItem } from "@/models/order"
 import { v4 as uuid } from "uuid"
@@ -10,6 +10,8 @@ export interface DehydratedProject {
   name: string
   order: Record<ResourceId, number>
   deconstructed: ResourceId[]
+  created: string
+  lastOpened: string
   lastChanged: string
   version: string
 }
@@ -18,9 +20,9 @@ const VERSION = "1.0"
 const PROJECT_STORAGE_PATTERN =
   /^o_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/
 
-export function getStoredProject(id: string): Optional<Project> {
+export function getStoredProject(id: UUID): Optional<Project> {
   try {
-    const raw = localStorage.getItem(id)
+    const raw = localStorage.getItem(getStorageKeyForId(id))
     if (raw) return hydrateProject(deserializeProject(raw))
   } catch {
     return undefined
@@ -59,13 +61,15 @@ function hydrateProject(dehydrated: DehydratedProject): Project {
     name: dehydrated.name,
     order,
     deconstructed: dehydrated.deconstructed,
+    created: new Date(dehydrated.created),
+    lastOpened: new Date(dehydrated.lastOpened),
     lastChanged: new Date(dehydrated.lastChanged)
   }
 }
 
 export function getLatestProject(): Optional<Project> {
   try {
-    const storedProjects = getRecentProjects()
+    const storedProjects = getSortedDryProjects()
     return storedProjects.length > 0
       ? hydrateProject(storedProjects[0])
       : undefined
@@ -74,10 +78,22 @@ export function getLatestProject(): Optional<Project> {
   }
 }
 
+export function getRecentProjects(): ProjectInfo[] {
+  return getSortedDryProjects().map(project => {
+    return {
+      id: project.id,
+      name: project.name,
+      created: new Date(project.created),
+      lastOpened: new Date(project.lastOpened),
+      lastChanged: new Date(project.lastChanged)
+    }
+  })
+}
+
 /**
  * @throws {Error}
  */
-function getRecentProjects(): DehydratedProject[] {
+function getSortedDryProjects(): DehydratedProject[] {
   const storageKeys: string[] = listStorage()
     .filter(isDefined)
     .filter(key => PROJECT_STORAGE_PATTERN.test(key))
@@ -95,7 +111,7 @@ function getRecentProjects(): DehydratedProject[] {
   return storedProjects
     .sort(
       (a, b) =>
-        new Date(a.lastChanged).getTime() - new Date(b.lastChanged).getTime()
+        new Date(a.lastOpened).getTime() - new Date(b.lastOpened).getTime()
     )
     .reverse()
 }
@@ -117,6 +133,8 @@ function serializeProject(project: Project): string {
   const dehydrated: DehydratedProject = {
     ...project,
     order: dehydratedOrder,
+    created: project.created.toISOString(),
+    lastOpened: project.lastOpened.toISOString(),
     lastChanged: project.lastChanged.toISOString(),
     version: VERSION
   }
@@ -135,6 +153,8 @@ function deserializeProject(raw: string): DehydratedProject {
     typeof parsed.order !== "object" ||
     parsed.order === null ||
     !Array.isArray(parsed.deconstructed) ||
+    typeof parsed.created !== "string" ||
+    typeof parsed.lastOpened !== "string" ||
     typeof parsed.lastChanged !== "string"
   ) {
     throw new Error("Invalid serialization.")
@@ -151,6 +171,8 @@ function deserializeProject(raw: string): DehydratedProject {
     name: parsed.name,
     order: parsedOrder,
     deconstructed: parsedDeconstructed,
+    created: parsed.created,
+    lastOpened: parsed.lastOpened,
     lastChanged: parsed.lastChanged,
     version: parsed.version
   }
@@ -162,6 +184,8 @@ export function getEmptyProject(): Project {
     name: "",
     order: new Map(),
     deconstructed: [],
+    created: new Date(0),
+    lastOpened: new Date(0),
     lastChanged: new Date(0)
   }
 }
@@ -171,6 +195,8 @@ export function getNewProject(): Project {
     ...getEmptyProject(),
     id: uuid(),
     name: "Project",
+    created: new Date(),
+    lastOpened: new Date(),
     lastChanged: new Date()
   }
 }

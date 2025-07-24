@@ -32,10 +32,9 @@ export const CatalogView = ({
 
   return (
     <div>
-      <div className={styles.category_nav_container}>
-        <div className={styles.category_title}>
-          {catalog[categoryIndex].title}
-        </div>
+      <div className={styles.spacer}></div>
+      <div className={styles.container}>
+        <div className={styles.title}>{catalog[categoryIndex].title}</div>
         <Arrow
           className={styles.arrow_prev}
           onClick={handlePageChange("prev")}

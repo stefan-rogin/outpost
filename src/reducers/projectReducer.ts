@@ -3,7 +3,7 @@ import { Project, ProjectState } from "@/models/project"
 import { isConstructible, Resource, ResourceId } from "@/models/resource"
 import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
 import { changeOrderQty } from "@/service/order"
-import { getNewProject } from "@/service/project"
+import { getNewProject, storeProject } from "@/service/project"
 import { getResource } from "@/service/resource"
 
 export enum ProjectActionType {
@@ -13,7 +13,7 @@ export enum ProjectActionType {
   CHANGE_ITEM_QTY = "CHANGE_ITEM_QTY",
   RENAME = "RENAME",
   TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT",
-  CLEAR = "CLEAR",
+  DELETE = "DELETE",
   CREATE = "CREATE"
 }
 
@@ -30,7 +30,7 @@ export type ProjectAction =
       type: ProjectActionType.TOGGLE_DECONSTRUCT
       payload: ResourceId
     }
-  | { type: ProjectActionType.CLEAR }
+  | { type: ProjectActionType.DELETE }
   | { type: ProjectActionType.CREATE }
 
 // TODO: Extract actions
@@ -46,8 +46,8 @@ export const projectReducer = (
         isError: false
       }
     case ProjectActionType.LOAD_OK:
-      return {
-        project: action.payload,
+      const updatedState: ProjectState = {
+        project: { ...action.payload, lastOpened: new Date() },
         itemBill: getAggregatedItems(
           action.payload.order,
           action.payload.deconstructed
@@ -59,6 +59,9 @@ export const projectReducer = (
         isLoading: false,
         isError: false
       }
+      // Immediately store lastOpened change
+      storeProject(updatedState.project)
+      return updatedState
     case ProjectActionType.LOAD_ERR:
       return {
         ...state,
@@ -73,7 +76,7 @@ export const projectReducer = (
         isLoading: false,
         isError: false
       }
-    case ProjectActionType.CLEAR:
+    case ProjectActionType.DELETE:
       return {
         ...state,
         project: {
@@ -93,7 +96,8 @@ export const projectReducer = (
         ...state,
         project: {
           ...state.project,
-          name: newName
+          name: newName,
+          lastChanged: new Date()
         }
       }
     case ProjectActionType.CHANGE_ITEM_QTY:
