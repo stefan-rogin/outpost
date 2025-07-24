@@ -7,6 +7,8 @@ export const testInititialState: ProjectState = {
     name: "Project",
     order: new Map(),
     deconstructed: [],
+    created: new Date(0),
+    lastOpened: new Date(0),
     lastChanged: new Date(0)
   },
   itemBill: new Map(),

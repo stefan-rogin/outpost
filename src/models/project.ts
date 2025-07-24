@@ -7,6 +7,8 @@ export interface Project {
   name: string
   order: Order
   deconstructed: ResourceId[]
+  created: Date
+  lastOpened: Date
   lastChanged: Date
 }
 
@@ -20,3 +22,11 @@ export interface ProjectState {
 }
 
 export type UUID = string
+
+export interface ProjectInfo {
+  id: UUID
+  name: string
+  created: Date
+  lastOpened: Date
+  lastChanged: Date
+}

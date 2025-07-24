@@ -1,13 +1,12 @@
 "use client"
 
 import styles from "@/components/RecentProjects.module.css"
-import { UUID } from "@/models/project"
 import { getRecentProjects } from "@/service/project"
-import { useMemo } from "react"
 
-export const RecentProjects = ({ id }: { id: UUID }) => {
-  const recentProjects = useMemo(() => getRecentProjects().toSpliced(10), [id])
+export const RecentProjects = () => {
+  const RECENT_LIST_SIZE = 10
 
+  const recentProjects = getRecentProjects().toSpliced(RECENT_LIST_SIZE)
   return (
     <div>
       <div className={styles.title_container}>

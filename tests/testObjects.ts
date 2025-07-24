@@ -175,6 +175,8 @@ export const testProject: Project = {
   name: "Project",
   order: testOrder,
   deconstructed: ["Mfg_Tier03_SubstrateMolecularSieve", "Mfg_Tier02_MolecularSieve", "Mfg_Tier02_SterileNanotubes"],
+  created: new Date("2025-03-02T22:00:02.000Z"),
+  lastOpened: new Date("2025-03-02T22:02:45.000Z"),
   lastChanged: new Date("2025-03-02T22:05:32.000Z")
 }
 
@@ -216,13 +218,15 @@ export const serializedTestProject: string =
   '{"id":"1f8a4b0c-07e1-4dac-8114-b37b2e65f44b","name":"Project",' +
   '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2},' +
   '"deconstructed":["Mfg_Tier03_SubstrateMolecularSieve","Mfg_Tier02_MolecularSieve","Mfg_Tier02_SterileNanotubes"],' +
-  '"lastChanged":"2025-03-02T22:05:32.000Z","version":"1.0"}'
+  '"created":"2025-03-02T22:00:02.000Z","lastOpened":"2025-03-02T22:02:45.000Z","lastChanged":"2025-03-02T22:05:32.000Z","version":"1.0"}'
 
 export const dehydratedTestProject: DehydratedProject = {
   id: "1f8a4b0c-07e1-4dac-8114-b37b2e65f44b",
   name: "Project",
   order: { OutpostStorageLiquid01Large: 2, OutpostStorageSolid01Large: 3 },
   deconstructed: ["Mfg_Tier01_AdaptiveFrame"],
+  created: "2025-03-02T22:00:02.000Z",
+  lastOpened: "2025-03-02T22:02:45.000Z",
   lastChanged: "2025-03-02T22:05:32.000Z",
   version: "1.0"
 }

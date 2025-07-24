@@ -65,6 +65,9 @@ export const ProjectView = ({
               {state.project.name}
             </h3>
           )}
+        </div>
+        <div className={styles.actions_container}>
+          <Power order={state.project.order} />
 
           <Image
             priority={true}
@@ -94,8 +97,6 @@ export const ProjectView = ({
             className={styles.delete_icon}
           />
         </div>
-
-        <Power order={state.project.order} />
         {[...state.project.order].map(([id, item]) => (
           <OrderItemView key={id} orderItem={item} onQtyChange={onQtyChange} />
         ))}

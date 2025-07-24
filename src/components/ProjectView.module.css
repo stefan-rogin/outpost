@@ -10,7 +10,7 @@
 }
 
 .title {
-  max-width: 420px;
+  max-width: 560px;
   font-size: 18px;
   margin: 12px 0;
   cursor: pointer;
@@ -45,10 +45,17 @@
   font-family: inherit;
   margin: 4px 0;
   padding: 0 8px;
-  width: 320px;
+  width: 420px;
   height: 38px;
   font-size: 16px;
   border: 1px solid var(--accent);
   background-color: #222;
   color: #ccc;
+}
+
+.actions_container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-top: 2px solid #333;
 }
