@@ -44,10 +44,6 @@ export const Outpost = () => {
     dispatch({ type: ProjectActionType.CREATE })
   }
 
-  const handleOnCreate = (): void => {
-    dispatch({ type: ProjectActionType.CREATE })
-  }
-
   const handleOnToggleDeconstruct = (id: ResourceId) => (): void =>
     dispatch({
       type: ProjectActionType.TOGGLE_DECONSTRUCT,
