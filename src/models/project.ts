@@ -19,6 +19,7 @@ export interface ProjectState {
   deconstructedBill: Bill
   isLoading: boolean
   isError: boolean
+  isEmptyWorkspace: boolean
 }
 
 export type UUID = string

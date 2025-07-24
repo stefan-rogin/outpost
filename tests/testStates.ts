@@ -14,7 +14,8 @@ export const testInititialState: ProjectState = {
   itemBill: new Map(),
   deconstructedBill: new Map(),
   isLoading: false,
-  isError: false
+  isError: false,
+  isEmptyWorkspace: false
 }
 
 export const testProjectState1: ProjectState = {
@@ -22,7 +23,8 @@ export const testProjectState1: ProjectState = {
   itemBill: to.testBillWithDeconstructItemSet,
   deconstructedBill: to.testBillWithDeconstructDeconstructedSet,
   isLoading: false,
-  isError: false
+  isError: false,
+  isEmptyWorkspace: false
 }
 
 export const testProjectState2: ProjectState = {
@@ -36,7 +38,8 @@ export const testProjectState2: ProjectState = {
   itemBill: to.testBillWithDeconstructItemSet,
   deconstructedBill: to.testBillWithDeconstructCase2DeconstructedSet,
   isLoading: false,
-  isError: false
+  isError: false,
+  isEmptyWorkspace: false
 }
 
 export const testProjectState3: ProjectState = {
@@ -44,5 +47,6 @@ export const testProjectState3: ProjectState = {
   itemBill: to.testBillNoDeconstructItemSet,
   deconstructedBill: new Map(),
   isLoading: false,
-  isError: false
+  isError: false,
+  isEmptyWorkspace: false
 }

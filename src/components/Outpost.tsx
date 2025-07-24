@@ -10,6 +10,7 @@ import { useProject } from "@/hooks/useProject"
 import { ProjectActionType } from "@/reducers/projectReducer"
 import { Link } from "@/components/Link"
 import { RecentProjects } from "./RecentProjects"
+import { Intro } from "./Intro"
 
 export const Outpost = () => {
   const { state, dispatch } = useProject()
@@ -59,8 +60,12 @@ export const Outpost = () => {
         {!state.isLoading && state.project.lastOpened && <RecentProjects />}
       </div>
       <div className={styles.bom_column}>
-        {state.isLoading ? (
-          <div className={styles.loading}>Loading…</div>
+        {state.isLoading || state.isError || state.isEmptyWorkspace ? (
+          <Intro
+            isLoading={state.isLoading}
+            isError={state.isError}
+            isEmptyWorkspace={state.isEmptyWorkspace}
+          />
         ) : (
           <ProjectView
             onCreate={handleOnCreate}
