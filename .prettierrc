@@ -11,6 +11,7 @@
   "plugins": [],
   "overrides": [
     { "files": "*.json", "options": { "printWidth": 120 } },
-    { "files": "**/testObjects.ts", "options": { "printWidth": 240 } }
+    { "files": "**/testObjects.ts", "options": { "printWidth": 240 } },
+    { "files": "**/*.test.ts", "options": { "printWidth": 120 } }
   ]
 }

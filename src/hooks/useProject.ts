@@ -12,12 +12,14 @@ import {
   getEmptyProject,
   storeProject,
   getLatestProject,
-  getStoredProject
+  getStoredProject,
+  deleteProject as deleteProjectFromStorage
 } from "@/service/project"
 
 export const useProject = (): {
   state: ProjectState
   dispatch: (action: ProjectAction) => void
+  deleteProject: () => void
 } => {
   const latestProject: Optional<Project> = useMemo(() => getLatestProject(), [])
 
@@ -63,5 +65,15 @@ export const useProject = (): {
     }
   }, [state.isLoading, state.project])
 
-  return { state, dispatch }
+  const deleteProject = (): void => {
+    deleteProjectFromStorage(state.project.id)
+    const nextProject: Optional<Project> = getLatestProject()
+    if (nextProject) {
+      dispatch({ type: ProjectActionType.LOAD_OK, payload: nextProject })
+    } else {
+      dispatch({ type: ProjectActionType.CREATE })
+    }
+  }
+
+  return { state, dispatch, deleteProject }
 }

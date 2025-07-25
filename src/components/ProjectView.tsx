@@ -11,14 +11,14 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 export const ProjectView = ({
   state,
   onQtyChange,
-  onClear,
+  onDelete,
   onCreate,
   onToggleDeconstruct,
   onRename
 }: {
   state: ProjectState
   onQtyChange: (id: ResourceId, action: QtyChange) => () => void
-  onClear: () => void
+  onDelete: () => void
   onCreate: () => void
   onToggleDeconstruct: (id: ResourceId) => () => void
   onRename: (name: string) => void
@@ -103,7 +103,7 @@ export const ProjectView = ({
               alt="Delete project"
               width={24}
               height={24}
-              onClick={onClear}
+              onClick={onDelete}
               className={styles.delete_icon}
             />
           </div>
