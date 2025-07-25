@@ -13,7 +13,9 @@ import {
   storeProject,
   getLatestProject,
   getStoredProject,
-  deleteProject as deleteProjectFromStorage
+  deleteProject as deleteProjectFromStorage,
+  getLegacyOrder,
+  convertLegacyOrderToV1_0
 } from "@/service/project"
 
 export const useProject = (): {
@@ -37,6 +39,22 @@ export const useProject = (): {
     // Load latest or new
     if (typeof window !== "undefined") {
       dispatch({ type: ProjectActionType.INIT })
+      // Legacy
+      try {
+        const legacyOrder: Optional<string> = getLegacyOrder()
+        if (isDefined(legacyOrder)) {
+          const legacyProject: Optional<Project> =
+            convertLegacyOrderToV1_0(legacyOrder)
+          if (isDefined(legacyProject)) {
+            dispatch({
+              type: ProjectActionType.LOAD_OK,
+              payload: legacyProject
+            })
+          }
+        }
+      } finally {
+        localStorage.removeItem("order")
+      }
       // URL Id?
       const url = new window.URL(window.location.href)
       const id: Optional<string> = url.searchParams.get("id") ?? undefined

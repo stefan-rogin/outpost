@@ -1,7 +1,15 @@
 import { ResourceId, Resource } from "@/models/resource"
 import * as Resources from "@/service/resource"
-import { testResources, testProject1, serializedTestProject1 } from "../testObjects"
-import { deleteProject, getLatestProject, getRecentProjects, getStoredProject, storeProject } from "@/service/project"
+import { testResources, testProject1, serializedTestProject1, serializedLegacyOrder } from "../testObjects"
+import {
+  convertLegacyOrderToV1_0,
+  deleteProject,
+  getLatestProject,
+  getLegacyOrder,
+  getRecentProjects,
+  getStoredProject,
+  storeProject
+} from "@/service/project"
 import { Optional } from "@/types/common"
 import { Project } from "@/models/project"
 import { storageMock } from "../mocks/localStorageMock"
@@ -93,5 +101,21 @@ describe("service/project", () => {
     expect(result[0].created.toISOString()).toBe("2025-03-03T23:00:02.000Z")
     expect(result[0].lastOpened.toISOString()).toBe("2025-03-03T23:02:45.000Z")
     expect(result[0].lastChanged.toISOString()).toBe("2025-03-03T23:05:32.000Z")
+  })
+
+  test("getLegacyOrder retrieves a legacy order if there is one present", () => {
+    const result = getLegacyOrder()
+
+    expect(result).toBe(serializedLegacyOrder)
+  })
+
+  test("converts legacy order to project v1.0", () => {
+    const result = convertLegacyOrderToV1_0(getLegacyOrder()!)
+
+    expect(result?.name).toBe("Project")
+    expect(result?.order.size).toBe(2)
+    expect(result?.created).toBeInstanceOf(Date)
+    expect(result?.lastOpened).toBeInstanceOf(Date)
+    expect(result?.lastChanged).toBeInstanceOf(Date)
   })
 })

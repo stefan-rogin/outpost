@@ -1,11 +1,21 @@
 "use client"
 
+declare global {
+  interface Window {
+    PayPal?: {
+      Donation?: {
+        Button?: (options: unknown) => { render: (selector: string) => void }
+      }
+    }
+  }
+}
+
 import styles from "./Outpost.module.css"
 import { CatalogView } from "@/components/CatalogView"
 import { ProjectView } from "@/components/ProjectView"
 import { ResourceId } from "@/models/resource"
 import { QtyChange } from "@/models/order"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { useProject } from "@/hooks/useProject"
 import { ProjectActionType } from "@/reducers/projectReducer"
 import { Link } from "@/components/Link"
@@ -57,6 +67,26 @@ export const Outpost = () => {
       payload: id
     })
 
+  useEffect(() => {
+    const script = document.createElement("script")
+    script.src = "https://www.paypalobjects.com/donate/sdk/donate-sdk.js"
+    script.charset = "UTF-8"
+    script.onload = () => {
+      if (window.PayPal?.Donation?.Button) {
+        window.PayPal.Donation.Button({
+          env: "production",
+          hosted_button_id: "CXMVLBQ2WCZDC",
+          image: {
+            src: "https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif",
+            alt: "Donate with PayPal button",
+            title: "PayPal - The safer, easier way to pay online!"
+          }
+        }).render("#donate-button")
+      }
+    }
+    document.body.appendChild(script)
+  }, [])
+
   return (
     <div className={styles.body}>
       <div className={styles.catalog_column}>
@@ -64,6 +94,9 @@ export const Outpost = () => {
 
         <CatalogView onSelect={handleCatalogSelect} />
         {!state.isLoading && state.project.lastOpened && <RecentProjects />}
+        <div id="donate-button-container">
+          <div id="donate-button"></div>
+        </div>
       </div>
       <div className={styles.bom_column}>
         {state.isLoading || state.isError || state.isEmptyWorkspace ? (
