@@ -1,6 +1,6 @@
 import { Project, UUID, ProjectInfo } from "@/models/project"
 import { isConstructible, Resource, ResourceId } from "@/models/resource"
-import { OrderItem } from "@/models/order"
+import { Order, OrderItem } from "@/models/order"
 import { v4 as uuid } from "uuid"
 import { getResource } from "./resource"
 import { Optional, isDefined } from "@/types/common"
@@ -94,19 +94,41 @@ export function getRecentProjects(): ProjectInfo[] {
   })
 }
 
-/**
- * @throws {Error}
- */
+export function convertLegacyOrderToV1_0(
+  serializedOrder: string
+): Optional<Project> {
+  const newProject: Project = getNewProject()
+  try {
+    const order: Order = new Map<ResourceId, OrderItem>(
+      JSON.parse(serializedOrder)
+    )
+    return {
+      ...newProject,
+      order
+    }
+  } catch {
+    console.log(`Unable to deserialize legacy order: ${serializedOrder}`)
+    return undefined
+  }
+}
+
+export function getLegacyOrder(): Optional<string> {
+  return localStorage.getItem("order") ?? undefined
+}
+
 function getSortedDryProjects(): DehydratedProject[] {
   const storageKeys: string[] = listStorage()
     .filter(isDefined)
     .filter(key => PROJECT_STORAGE_PATTERN.test(key))
 
   const storedProjects: DehydratedProject[] = storageKeys
-    .map(
-      (key: string): Optional<DehydratedProject> =>
-        deserializeProject(localStorage.getItem(key)!)
-    )
+    .map((key: string): Optional<DehydratedProject> => {
+      try {
+        return deserializeProject(localStorage.getItem(key)!)
+      } catch {
+        return undefined
+      }
+    })
     .filter(isDefined)
 
   return storedProjects
