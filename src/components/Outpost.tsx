@@ -13,7 +13,7 @@ import { RecentProjects } from "./RecentProjects"
 import { Intro } from "./Intro"
 
 export const Outpost = () => {
-  const { state, dispatch } = useProject()
+  const { state, dispatch, deleteProject } = useProject()
 
   const handleCatalogSelect = useCallback(
     (id: ResourceId) => (): void =>
@@ -37,8 +37,14 @@ export const Outpost = () => {
     dispatch({ type: ProjectActionType.RENAME, payload: name })
   }
 
-  const handleOnClear = (): void => {
-    dispatch({ type: ProjectActionType.DELETE })
+  const handleOnDelete = (): void => {
+    const confirmed: boolean = window.confirm(
+      "Are you sure you want to delete this project?"
+    )
+    if (!confirmed) return
+    if (!state.project.id) return
+
+    deleteProject()
   }
 
   const handleOnCreate = (): void => {
@@ -69,7 +75,7 @@ export const Outpost = () => {
         ) : (
           <ProjectView
             onCreate={handleOnCreate}
-            onClear={handleOnClear}
+            onDelete={handleOnDelete}
             state={state}
             onQtyChange={handleQtyChange}
             onToggleDeconstruct={handleOnToggleDeconstruct}

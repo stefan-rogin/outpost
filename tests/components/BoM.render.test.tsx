@@ -2,7 +2,7 @@ import { ResourceId, Resource } from "@/models/resource"
 import * as Resources from "@/service/resource"
 import { BoM } from "@/components/BoM"
 import { render, screen } from "@testing-library/react"
-import { testResources, testOrder, testProject } from "../testObjects"
+import { testResources, testOrder, testProject1 } from "../testObjects"
 import { getAggregatedItems, getAggregatedDeconstructed } from "@/service/bom"
 
 jest.mock("@/service/resource", () => ({
@@ -18,10 +18,10 @@ describe("BoM render tests", () => {
     render(
       <BoM
         order={testOrder}
-        itemBill={getAggregatedItems(testOrder, testProject.deconstructed)}
+        itemBill={getAggregatedItems(testOrder, testProject1.deconstructed)}
         deconstructedBill={getAggregatedDeconstructed(
           testOrder,
-          testProject.deconstructed
+          testProject1.deconstructed
         )}
         onToggleDeconstruct={_ => () => {}}
       />

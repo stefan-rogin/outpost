@@ -36,6 +36,10 @@ export function storeProject(project: Project): void {
   )
 }
 
+export function deleteProject(id: UUID): void {
+  localStorage.removeItem(getStorageKeyForId(id))
+}
+
 function hydrateProject(dehydrated: DehydratedProject): Project {
   const order: Map<ResourceId, OrderItem> = Object.entries(
     dehydrated.order
@@ -99,13 +103,10 @@ function getSortedDryProjects(): DehydratedProject[] {
     .filter(key => PROJECT_STORAGE_PATTERN.test(key))
 
   const storedProjects: DehydratedProject[] = storageKeys
-    .map((key: string): Optional<DehydratedProject> => {
-      try {
-        return deserializeProject(localStorage.getItem(key)!)
-      } catch {
-        return undefined
-      }
-    })
+    .map(
+      (key: string): Optional<DehydratedProject> =>
+        deserializeProject(localStorage.getItem(key)!)
+    )
     .filter(isDefined)
 
   return storedProjects

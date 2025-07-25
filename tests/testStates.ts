@@ -19,7 +19,7 @@ export const testInititialState: ProjectState = {
 }
 
 export const testProjectState1: ProjectState = {
-  project: to.testProject,
+  project: to.testProject1,
   itemBill: to.testBillWithDeconstructItemSet,
   deconstructedBill: to.testBillWithDeconstructDeconstructedSet,
   isLoading: false,
@@ -29,9 +29,9 @@ export const testProjectState1: ProjectState = {
 
 export const testProjectState2: ProjectState = {
   project: {
-    ...to.testProject,
-    deconstructed: to.testProject.deconstructed.toSpliced(
-      to.testProject.deconstructed.indexOf("Mfg_Tier02_SterileNanotubes"),
+    ...to.testProject1,
+    deconstructed: to.testProject1.deconstructed.toSpliced(
+      to.testProject1.deconstructed.indexOf("Mfg_Tier02_SterileNanotubes"),
       1
     )
   },
@@ -43,7 +43,7 @@ export const testProjectState2: ProjectState = {
 }
 
 export const testProjectState3: ProjectState = {
-  project: to.testProject,
+  project: to.testProject1,
   itemBill: to.testBillNoDeconstructItemSet,
   deconstructedBill: new Map(),
   isLoading: false,

@@ -30,7 +30,6 @@ export type ProjectAction =
       type: ProjectActionType.TOGGLE_DECONSTRUCT
       payload: ResourceId
     }
-  | { type: ProjectActionType.DELETE }
   | { type: ProjectActionType.CREATE }
 
 // TODO: Extract actions
@@ -77,19 +76,6 @@ export const projectReducer = (
         deconstructedBill: new Map(),
         isLoading: false,
         isError: false
-      }
-    case ProjectActionType.DELETE:
-      // TODO: Change from clear to delete
-      return {
-        ...state,
-        project: {
-          ...state.project,
-          order: new Map(),
-          deconstructed: [],
-          lastChanged: new Date()
-        },
-        itemBill: new Map(),
-        deconstructedBill: new Map()
       }
     case ProjectActionType.RENAME:
       const newName = action.payload.trim()

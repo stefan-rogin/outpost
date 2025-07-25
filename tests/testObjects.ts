@@ -160,7 +160,10 @@ export const testResources: Record<ResourceId, Resource> = {
       OrgExoticBiosuppressant: 2
     }
   },
+  OutpostTransferContainer01: transferContainer,
   OutpostStorageGas01Large: storageGasLarge,
+  OutpostStorageSolid01Sm: storageSolidSmall,
+  OutpostStorageSolid01Med: storageSolidMedium,
   OutpostStorageSolid01Large: storageSolidLarge,
   OutpostHarvesterGas_03_Large: harvesterGasLarge
 }
@@ -170,7 +173,7 @@ export const testOrder: Order = new Map<ResourceId, OrderItem>([
   ["OutpostStorageGas01Large", { item: storageGasLarge, quantity: 2 }]
 ])
 
-export const testProject: Project = {
+export const testProject1: Project = {
   id: "1f8a4b0c-07e1-4dac-8114-b37b2e65f44b",
   name: "Project",
   order: testOrder,
@@ -178,6 +181,15 @@ export const testProject: Project = {
   created: new Date("2025-03-02T22:00:02.000Z"),
   lastOpened: new Date("2025-03-02T22:02:45.000Z"),
   lastChanged: new Date("2025-03-02T22:05:32.000Z")
+}
+
+export const testProject2: Project = {
+  ...testProject1,
+  id: "c66cc168-6ee1-46fc-b6de-7a9e50529d98",
+  name: "Project2",
+  created: new Date("2025-03-03T23:00:02.000Z"),
+  lastOpened: new Date("2025-03-03T23:02:45.000Z"),
+  lastChanged: new Date("2025-03-03T23:05:32.000Z")
 }
 
 export const testBillNoDeconstructItemSet: Bill = new Map<ResourceId, BomItem>([
@@ -214,13 +226,25 @@ export const testBillWithDeconstructCase2DeconstructedSet: Bill = new Map<Resour
   ["Mfg_Tier02_MolecularSieve", { item: testResources["Mfg_Tier02_MolecularSieve"], quantity: 2 }]
 ])
 
-export const serializedTestProject: string =
+export const serializedTestProject1: string =
   '{"id":"1f8a4b0c-07e1-4dac-8114-b37b2e65f44b","name":"Project",' +
   '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2},' +
   '"deconstructed":["Mfg_Tier03_SubstrateMolecularSieve","Mfg_Tier02_MolecularSieve","Mfg_Tier02_SterileNanotubes"],' +
   '"created":"2025-03-02T22:00:02.000Z","lastOpened":"2025-03-02T22:02:45.000Z","lastChanged":"2025-03-02T22:05:32.000Z","version":"1.0"}'
 
-export const dehydratedTestProject: DehydratedProject = {
+export const serializedTestProject2: string =
+  '{"id":"c66cc168-6ee1-46fc-b6de-7a9e50529d98","name":"Project2",' +
+  '"order":{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2},' +
+  '"deconstructed":["Mfg_Tier03_SubstrateMolecularSieve","Mfg_Tier02_MolecularSieve","Mfg_Tier02_SterileNanotubes"],' +
+  '"created":"2025-03-03T23:00:02.000Z","lastOpened":"2025-03-03T23:02:45.000Z","lastChanged":"2025-03-03T23:05:32.000Z","version":"1.0"}'
+
+export const serializedLegacyOrder: string =
+  '[["OutpostHarvesterGas_03_Large",{"item":{"id":"OutpostHarvesterGas_03_Large","name":"Extractor - Gas - Industrial",' +
+  '"blueprint":{"Mfg_Tier03_SubstrateMolecularSieve":2,"Mfg_Tier01_AdaptiveFrame":5,"Mfg_Tier01_ReactiveGauge":3,"InorgRareVanadium":6}},"quantity":1}],' +
+  '["OutpostStorageGas01Large",{"item":{"id":"OutpostStorageGas01Large","name":"Storage - Gas - Large",' +
+  '"blueprint":{"Mfg_Tier01_AdaptiveFrame":10,"InorgCommonCopper":20,"InorgUncommonTungsten":16}},"quantity":2}]]'
+
+export const dehydratedTestProject1: DehydratedProject = {
   id: "1f8a4b0c-07e1-4dac-8114-b37b2e65f44b",
   name: "Project",
   order: { OutpostStorageLiquid01Large: 2, OutpostStorageSolid01Large: 3 },
@@ -228,6 +252,17 @@ export const dehydratedTestProject: DehydratedProject = {
   created: "2025-03-02T22:00:02.000Z",
   lastOpened: "2025-03-02T22:02:45.000Z",
   lastChanged: "2025-03-02T22:05:32.000Z",
+  version: "1.0"
+}
+
+export const dehydratedTestProject2: DehydratedProject = {
+  id: "c66cc168-6ee1-46fc-b6de-7a9e50529d98",
+  name: "Project2",
+  order: { OutpostStorageLiquid01Large: 2, OutpostStorageSolid01Large: 3 },
+  deconstructed: ["Mfg_Tier01_AdaptiveFrame"],
+  created: "2025-03-03T23:00:02.000Z",
+  lastOpened: "2025-03-03T23:02:45.000Z",
+  lastChanged: "2025-03-03T23:05:32.000Z",
   version: "1.0"
 }
 
