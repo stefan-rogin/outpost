@@ -43,7 +43,7 @@ export const BoM = ({
           alt={copied ? "Copied." : "Copy to clipboard"}
           width={24}
           height={24}
-          className={styles.power_icon}
+          className={styles.power_icon} // FIXME: Review class
           onClick={handleCopyClipboard}
         />
       </div>

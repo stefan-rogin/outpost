@@ -22,23 +22,8 @@
   line-clamp: 1;
 }
 
-.delete_icon,
-.rename_icon,
-.create_icon {
-  position: absolute;
+.action_icon {
   cursor: pointer;
-}
-
-.delete_icon {
-  right: 0;
-}
-
-.rename_icon {
-  right: 36px;
-}
-
-.create_icon {
-  right: 72px;
 }
 
 .rename_input {
@@ -58,4 +43,17 @@
   display: flex;
   align-items: center;
   border-top: 2px solid #333;
+}
+
+.icons_container {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 50%;
+  transform: translateY(-12px);
+}
+
+.icons_row {
+  display: flex;
+  gap: 12px;
 }

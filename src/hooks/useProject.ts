@@ -14,8 +14,9 @@ import {
   getLatestProject,
   getStoredProject,
   deleteProject as deleteProjectFromStorage,
-  getLegacyOrder,
-  convertLegacyOrderToV1_0
+  getLegacyProject,
+  getHydratedProject,
+  getNewProject
 } from "@/service/project"
 
 export const useProject = (): {
@@ -24,7 +25,11 @@ export const useProject = (): {
   deleteProject: () => void
 } => {
   const latestProject: Optional<Project> = useMemo(() => getLatestProject(), [])
-  const hasLegacyOrder: boolean = useMemo(() => !!getLegacyOrder(), [])
+  const legacyProject: Optional<Project> = getLegacyProject()
+  const hasLegacyOrder: boolean = useMemo(
+    () => !!legacyProject,
+    [legacyProject]
+  )
 
   const initialState: ProjectState = {
     project: getEmptyProject(),
@@ -38,45 +43,46 @@ export const useProject = (): {
 
   useEffect(() => {
     // Load latest or new
-    if (typeof window !== "undefined") {
-      dispatch({ type: ProjectActionType.INIT })
-      // Legacy
-      try {
-        const legacyOrder: Optional<string> = getLegacyOrder()
-        if (isDefined(legacyOrder)) {
-          const legacyProject: Optional<Project> =
-            convertLegacyOrderToV1_0(legacyOrder)
-          if (isDefined(legacyProject)) {
-            dispatch({
-              type: ProjectActionType.LOAD_OK,
-              payload: legacyProject
-            })
-            localStorage.removeItem("order")
-            return
-          }
-        }
-      } catch {}
-      // URL Id?
-      const url = new window.URL(window.location.href)
-      const id: Optional<string> = url.searchParams.get("id") ?? undefined
-      try {
-        const project: Optional<Project> = id
-          ? getStoredProject(id)
-          : latestProject
-        if (isDefined(project)) {
-          dispatch({ type: ProjectActionType.LOAD_OK, payload: project })
-        } else {
-          if (id) {
-            dispatch({ type: ProjectActionType.LOAD_ERR })
-          } else {
-            dispatch({ type: ProjectActionType.CREATE })
-          }
-        }
-      } catch {
-        dispatch({ type: ProjectActionType.LOAD_ERR })
-      }
+    if (typeof window === "undefined") return
+
+    dispatch({ type: ProjectActionType.INIT })
+    // Legacy
+    if (isDefined(legacyProject)) {
+      dispatch({
+        type: ProjectActionType.LOAD_OK,
+        payload: legacyProject
+      })
+      localStorage.removeItem("order")
+      return
     }
-  }, [latestProject])
+    // URL Id?
+    const url = new window.URL(window.location.href)
+    const id: Optional<string> = url.searchParams.get("id") ?? undefined
+    const serialization: Optional<string> =
+      url.searchParams.get("serialized") ?? undefined
+
+    try {
+      const fromSerialization: Optional<Project> = serialization
+        ? getHydratedProject(atob(serialization))
+        : undefined
+      const fromId: Optional<Project> = id ? getStoredProject(id) : undefined
+      if (
+        (serialization && !isDefined(fromSerialization)) ||
+        (id && !isDefined(fromId))
+      ) {
+        dispatch({ type: ProjectActionType.LOAD_ERR })
+        return
+      }
+      const project: Project =
+        fromSerialization ?? fromId ?? latestProject ?? getNewProject()
+      dispatch({ type: ProjectActionType.LOAD_OK, payload: project })
+      if (url.search) {
+        history.pushState({}, "", "/")
+      }
+    } catch {
+      dispatch({ type: ProjectActionType.LOAD_ERR })
+    }
+  }, [latestProject, legacyProject])
 
   useEffect(() => {
     if (!state.isLoading && typeof window !== "undefined" && state.project.id) {

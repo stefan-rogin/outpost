@@ -2,10 +2,9 @@ import { ResourceId, Resource } from "@/models/resource"
 import * as Resources from "@/service/resource"
 import { testResources, testProject1, serializedTestProject1, serializedLegacyOrder } from "../testObjects"
 import {
-  convertLegacyOrderToV1_0,
   deleteProject,
   getLatestProject,
-  getLegacyOrder,
+  getLegacyProject,
   getRecentProjects,
   getStoredProject,
   storeProject
@@ -103,14 +102,8 @@ describe("service/project", () => {
     expect(result[0].lastChanged.toISOString()).toBe("2025-03-03T23:05:32.000Z")
   })
 
-  test("getLegacyOrder retrieves a legacy order if there is one present", () => {
-    const result = getLegacyOrder()
-
-    expect(result).toBe(serializedLegacyOrder)
-  })
-
-  test("converts legacy order to project v1.0", () => {
-    const result = convertLegacyOrderToV1_0(getLegacyOrder()!)
+  test("getLegacyProject retrieves a legacy order if there is one present", () => {
+    const result = getLegacyProject()
 
     expect(result?.name).toBe("Project")
     expect(result?.order.size).toBe(2)

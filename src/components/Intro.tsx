@@ -1,6 +1,7 @@
 "use client"
 
 import styles from "@/components/Intro.module.css"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 export const Intro = ({
@@ -88,6 +89,11 @@ export const Intro = ({
               copy/paste errors.
             </li>
             <li>
+              <strong>Invalid URL import:</strong> If you used an URL containing
+              an exported project, the project could not be extracted. Please
+              double-check for copy/paste errors.
+            </li>
+            <li>
               <strong>Corrupted Save:</strong> The saved project&apos;s
               structure is unreadable and unfortunately cannot be recovered.
             </li>
@@ -96,6 +102,9 @@ export const Intro = ({
               bug.
             </li>
           </ul>
+          <Link href="/" className={styles.link}>
+            Home
+          </Link>
         </>
       )}
       {isLoading && <h3 className={styles.title}>Loading...</h3>}
