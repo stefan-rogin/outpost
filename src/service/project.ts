@@ -113,7 +113,11 @@ export function convertLegacyOrderToV1_0(
 }
 
 export function getLegacyOrder(): Optional<string> {
-  return localStorage.getItem("order") ?? undefined
+  try {
+    return localStorage.getItem("order") ?? undefined
+  } catch {
+    return undefined
+  }
 }
 
 function getSortedDryProjects(): DehydratedProject[] {

@@ -24,6 +24,7 @@ export const useProject = (): {
   deleteProject: () => void
 } => {
   const latestProject: Optional<Project> = useMemo(() => getLatestProject(), [])
+  const hasLegacyOrder: boolean = useMemo(() => !!getLegacyOrder(), [])
 
   const initialState: ProjectState = {
     project: getEmptyProject(),
@@ -31,7 +32,7 @@ export const useProject = (): {
     deconstructedBill: new Map(),
     isLoading: true,
     isError: false,
-    isEmptyWorkspace: !isDefined(latestProject)
+    isEmptyWorkspace: !isDefined(latestProject) && !hasLegacyOrder
   }
   const [state, dispatch] = useReducer(projectReducer, initialState)
 
@@ -50,11 +51,11 @@ export const useProject = (): {
               type: ProjectActionType.LOAD_OK,
               payload: legacyProject
             })
+            localStorage.removeItem("order")
+            return
           }
         }
-      } finally {
-        localStorage.removeItem("order")
-      }
+      } catch {}
       // URL Id?
       const url = new window.URL(window.location.href)
       const id: Optional<string> = url.searchParams.get("id") ?? undefined
