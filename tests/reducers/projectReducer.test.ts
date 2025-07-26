@@ -77,6 +77,31 @@ describe("projectReducer tests", () => {
     expect(result.isEmptyWorkspace).toBe(false)
   })
 
+  test("handles DUPLICATE action by creating a new project with same order", () => {
+    const uuidV4Regex = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+    const source = testProjectState1.project
+    const now = new Date()
+    const ish = 2000
+    const result = projectReducer(testProjectState1, { type: ProjectActionType.DUPLICATE, payload: source.id })
+
+    expect(result.project).toMatchObject({
+      ...source,
+      id: expect.stringMatching(uuidV4Regex),
+      name: "Project copy",
+      created: expect.any(Date),
+      lastOpened: expect.any(Date),
+      lastChanged: expect.any(Date)
+    })
+    expect(Math.abs(result.project.created.getTime() - now.getTime())).toBeLessThanOrEqual(ish)
+    expect(Math.abs(result.project.lastOpened.getTime() - now.getTime())).toBeLessThanOrEqual(ish)
+    expect(Math.abs(result.project.lastChanged.getTime() - now.getTime())).toBeLessThanOrEqual(ish)
+    expect(result.itemBill.size).toBe(11)
+    expect(result.deconstructedBill.size).toBe(3)
+    expect(result.isError).toBe(false)
+    expect(result.isLoading).toBe(false)
+    expect(result.isEmptyWorkspace).toBe(false)
+  })
+
   test("handles RENAME action", () => {
     const result = projectReducer(testInititialState, {
       type: ProjectActionType.RENAME,

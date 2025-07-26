@@ -7,11 +7,13 @@ import { useEffect, useState } from "react"
 export const Intro = ({
   isLoading,
   isError,
-  isEmptyWorkspace
+  isEmptyWorkspace,
+  onAck
 }: {
   isLoading: boolean
   isError: boolean
   isEmptyWorkspace: boolean
+  onAck: () => void
 }) => {
   const [hasMounted, setHasMounted] = useState<boolean>(false)
 
@@ -102,8 +104,8 @@ export const Intro = ({
               bug.
             </li>
           </ul>
-          <Link href="/" className={styles.link}>
-            Home
+          <Link href="/" className={styles.link} onClick={onAck}>
+            Create new
           </Link>
         </>
       )}

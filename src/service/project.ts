@@ -72,10 +72,18 @@ function hydrateProject(dehydrated: DehydratedProject): Project {
 }
 
 export function duplicateProject(project: Project): Project {
-  return { ...project, id: uuid() }
+  return {
+    ...project,
+    id: uuid(),
+    created: new Date(),
+    lastOpened: new Date(),
+    lastChanged: new Date()
+  }
 }
 
-export function getHydratedProject(serialization: string): Optional<Project> {
+export function getProjectForSerialization(
+  serialization: string
+): Optional<Project> {
   try {
     return hydrateProject(deserializeProject(serialization))
   } catch {

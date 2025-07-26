@@ -21,4 +21,5 @@
 
 .link {
   color: var(--accent);
+  font-weight: 800;
 }

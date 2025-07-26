@@ -7,7 +7,7 @@ import {
   ProjectActionType,
   projectReducer
 } from "@/reducers/projectReducer"
-import { useEffect, useReducer, useMemo } from "react"
+import { useEffect, useReducer, useMemo, useState } from "react"
 import {
   getEmptyProject,
   storeProject,
@@ -15,7 +15,7 @@ import {
   getStoredProject,
   deleteProject as deleteProjectFromStorage,
   getLegacyProject,
-  getHydratedProject,
+  getProjectForSerialization,
   getNewProject
 } from "@/service/project"
 
@@ -23,6 +23,7 @@ export const useProject = (): {
   state: ProjectState
   dispatch: (action: ProjectAction) => void
   deleteProject: () => void
+  recentVersion: number
 } => {
   const latestProject: Optional<Project> = useMemo(() => getLatestProject(), [])
   const legacyProject: Optional<Project> = getLegacyProject()
@@ -40,8 +41,9 @@ export const useProject = (): {
     isEmptyWorkspace: !isDefined(latestProject) && !hasLegacyOrder
   }
   const [state, dispatch] = useReducer(projectReducer, initialState)
+  const [recentVersion, setRecentVersion] = useState<number>(0)
 
-  useEffect(() => {
+  const init = () => {
     // Load latest or new
     if (typeof window === "undefined") return
 
@@ -63,7 +65,7 @@ export const useProject = (): {
 
     try {
       const fromSerialization: Optional<Project> = serialization
-        ? getHydratedProject(atob(serialization))
+        ? getProjectForSerialization(atob(serialization))
         : undefined
       const fromId: Optional<Project> = id ? getStoredProject(id) : undefined
       if (
@@ -82,11 +84,13 @@ export const useProject = (): {
     } catch {
       dispatch({ type: ProjectActionType.LOAD_ERR })
     }
-  }, [latestProject, legacyProject])
+  }
+  useEffect(() => init(), [latestProject, legacyProject])
 
   useEffect(() => {
     if (!state.isLoading && typeof window !== "undefined" && state.project.id) {
       storeProject(state.project)
+      setRecentVersion(v => v + 1)
     }
   }, [state.isLoading, state.project])
 
@@ -100,5 +104,5 @@ export const useProject = (): {
     }
   }
 
-  return { state, dispatch, deleteProject }
+  return { state, dispatch, deleteProject, recentVersion }
 }
