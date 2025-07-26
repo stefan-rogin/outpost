@@ -21,9 +21,10 @@ import { ProjectActionType } from "@/reducers/projectReducer"
 import { Link } from "@/components/Link"
 import { RecentProjects } from "./RecentProjects"
 import { Intro } from "./Intro"
+import { UUID } from "@/models/project"
 
 export const Outpost = () => {
-  const { state, dispatch, deleteProject } = useProject()
+  const { state, dispatch, deleteProject, recentVersion } = useProject()
 
   const handleCatalogSelect = useCallback(
     (id: ResourceId) => (): void =>
@@ -61,11 +62,17 @@ export const Outpost = () => {
     dispatch({ type: ProjectActionType.CREATE })
   }
 
+  const handleOnDuplicate = (id: UUID) => (): void => {
+    dispatch({ type: ProjectActionType.DUPLICATE, payload: id })
+  }
+
   const handleOnToggleDeconstruct = (id: ResourceId) => (): void =>
     dispatch({
       type: ProjectActionType.TOGGLE_DECONSTRUCT,
       payload: id
     })
+
+  const handleOnAck = () => dispatch({ type: ProjectActionType.CREATE })
 
   useEffect(() => {
     const script = document.createElement("script")
@@ -93,7 +100,9 @@ export const Outpost = () => {
         <Link href="project-list" content="All projects" />
 
         <CatalogView onSelect={handleCatalogSelect} />
-        {!state.isLoading && state.project.lastOpened && <RecentProjects />}
+        {!state.isLoading && state.project.lastOpened && (
+          <RecentProjects key={recentVersion} />
+        )}
         <div id="donate-button-container">
           <div id="donate-button"></div>
         </div>
@@ -104,10 +113,12 @@ export const Outpost = () => {
             isLoading={state.isLoading}
             isError={state.isError}
             isEmptyWorkspace={state.isEmptyWorkspace}
+            onAck={handleOnAck}
           />
         ) : (
           <ProjectView
             onCreate={handleOnCreate}
+            onDuplicate={handleOnDuplicate}
             onDelete={handleOnDelete}
             state={state}
             onQtyChange={handleQtyChange}

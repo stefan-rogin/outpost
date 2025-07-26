@@ -1,9 +1,13 @@
 import { QtyChange } from "@/models/order"
-import { Project, ProjectState } from "@/models/project"
+import { Project, ProjectState, UUID } from "@/models/project"
 import { isConstructible, Resource, ResourceId } from "@/models/resource"
 import { getAggregatedDeconstructed, getAggregatedItems } from "@/service/bom"
 import { changeOrderQty } from "@/service/order"
-import { getNewProject, storeProject } from "@/service/project"
+import {
+  duplicateProject,
+  getNewProject,
+  storeProject
+} from "@/service/project"
 import { getResource } from "@/service/resource"
 
 export enum ProjectActionType {
@@ -14,7 +18,8 @@ export enum ProjectActionType {
   RENAME = "RENAME",
   TOGGLE_DECONSTRUCT = "TOGGLE_DECONSTRUCT",
   DELETE = "DELETE",
-  CREATE = "CREATE"
+  CREATE = "CREATE",
+  DUPLICATE = "DUPLICATE"
 }
 
 export type ProjectAction =
@@ -31,6 +36,7 @@ export type ProjectAction =
       payload: ResourceId
     }
   | { type: ProjectActionType.CREATE }
+  | { type: ProjectActionType.DUPLICATE; payload: UUID }
 
 // TODO: Extract actions
 export const projectReducer = (
@@ -74,6 +80,24 @@ export const projectReducer = (
         project: getNewProject(),
         itemBill: new Map(),
         deconstructedBill: new Map(),
+        isLoading: false,
+        isError: false
+      }
+    case ProjectActionType.DUPLICATE:
+      return {
+        ...state,
+        project: {
+          ...duplicateProject(state.project),
+          name: state.project.name + " copy"
+        },
+        itemBill: getAggregatedItems(
+          state.project.order,
+          state.project.deconstructed
+        ),
+        deconstructedBill: getAggregatedDeconstructed(
+          state.project.order,
+          state.project.deconstructed
+        ),
         isLoading: false,
         isError: false
       }

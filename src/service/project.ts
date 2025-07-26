@@ -71,6 +71,26 @@ function hydrateProject(dehydrated: DehydratedProject): Project {
   }
 }
 
+export function duplicateProject(project: Project): Project {
+  return {
+    ...project,
+    id: uuid(),
+    created: new Date(),
+    lastOpened: new Date(),
+    lastChanged: new Date()
+  }
+}
+
+export function getProjectForSerialization(
+  serialization: string
+): Optional<Project> {
+  try {
+    return hydrateProject(deserializeProject(serialization))
+  } catch {
+    return undefined
+  }
+}
+
 export function getLatestProject(): Optional<Project> {
   try {
     const storedProjects = getSortedDryProjects()
@@ -94,10 +114,16 @@ export function getRecentProjects(): ProjectInfo[] {
   })
 }
 
-export function convertLegacyOrderToV1_0(
-  serializedOrder: string
-): Optional<Project> {
+export function getLegacyProject(): Optional<Project> {
+  const legacyOrder = getLegacyOrder()
+  if (!isDefined(legacyOrder)) return undefined
+
+  return convertLegacyOrderToV1_0(legacyOrder)
+}
+
+function convertLegacyOrderToV1_0(serializedOrder: string): Optional<Project> {
   const newProject: Project = getNewProject()
+
   try {
     const order: Order = new Map<ResourceId, OrderItem>(
       JSON.parse(serializedOrder)
@@ -107,17 +133,13 @@ export function convertLegacyOrderToV1_0(
       order
     }
   } catch {
-    console.log(`Unable to deserialize legacy order: ${serializedOrder}`)
     return undefined
   }
 }
 
-export function getLegacyOrder(): Optional<string> {
-  try {
-    return localStorage.getItem("order") ?? undefined
-  } catch {
-    return undefined
-  }
+function getLegacyOrder(): Optional<string> {
+  if (typeof localStorage == "undefined") return undefined
+  return localStorage.getItem("order") ?? undefined
 }
 
 function getSortedDryProjects(): DehydratedProject[] {
@@ -152,7 +174,7 @@ function listStorage(): Optional<string>[] {
   return keys
 }
 
-function serializeProject(project: Project): string {
+export function serializeProject(project: Project): string {
   const dehydratedOrder: Record<ResourceId, number> = Object.fromEntries(
     [...project.order.entries()].map(([id, { quantity }]) => [id, quantity])
   )

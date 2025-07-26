@@ -2,10 +2,11 @@ import { ResourceId, Resource } from "@/models/resource"
 import * as Resources from "@/service/resource"
 import { testResources, testProject1, serializedTestProject1, serializedLegacyOrder } from "../testObjects"
 import {
-  convertLegacyOrderToV1_0,
   deleteProject,
+  duplicateProject,
+  getProjectForSerialization,
   getLatestProject,
-  getLegacyOrder,
+  getLegacyProject,
   getRecentProjects,
   getStoredProject,
   storeProject
@@ -103,19 +104,42 @@ describe("service/project", () => {
     expect(result[0].lastChanged.toISOString()).toBe("2025-03-03T23:05:32.000Z")
   })
 
-  test("getLegacyOrder retrieves a legacy order if there is one present", () => {
-    const result = getLegacyOrder()
-
-    expect(result).toBe(serializedLegacyOrder)
-  })
-
-  test("converts legacy order to project v1.0", () => {
-    const result = convertLegacyOrderToV1_0(getLegacyOrder()!)
+  test("getLegacyProject retrieves a legacy order if there is one present", () => {
+    const result = getLegacyProject()
 
     expect(result?.name).toBe("Project")
     expect(result?.order.size).toBe(2)
     expect(result?.created).toBeInstanceOf(Date)
     expect(result?.lastOpened).toBeInstanceOf(Date)
     expect(result?.lastChanged).toBeInstanceOf(Date)
+  })
+
+  test("duplicateProjects creates a copy with new id and dates", () => {
+    const result = duplicateProject(testProject1)
+
+    expect(result.order).toStrictEqual(testProject1.order)
+    expect(result.deconstructed).toStrictEqual(testProject1.deconstructed)
+    expect(result.name).toBe(testProject1.name)
+    expect(result.id).not.toBe(testProject1.id)
+    expect(result.created).not.toBe(testProject1.id)
+    expect(result.lastOpened).not.toBe(testProject1.lastOpened)
+    expect(result.lastChanged).not.toBe(testProject1.lastChanged)
+  })
+
+  test("hydarateProject constructs a hydrated project from a serialization", () => {
+    const result = getProjectForSerialization(serializedTestProject1)
+
+    expect(result?.name).toBe("Project")
+    expect(result?.order.size).toBe(2)
+  })
+
+  test("hydarateProject returns undefined for a bad serialization", () => {
+    const badSerialization = serializedTestProject1.replace(
+      '{"OutpostHarvesterGas_03_Large":1,"OutpostStorageGas01Large":2},',
+      ""
+    )
+    const result = getProjectForSerialization(badSerialization)
+
+    expect(result).toBe(undefined)
   })
 })

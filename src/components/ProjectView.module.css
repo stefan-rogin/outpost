@@ -22,23 +22,8 @@
   line-clamp: 1;
 }
 
-.delete_icon,
-.rename_icon,
-.create_icon {
-  position: absolute;
+.action_icon {
   cursor: pointer;
-}
-
-.delete_icon {
-  right: 0;
-}
-
-.rename_icon {
-  right: 36px;
-}
-
-.create_icon {
-  right: 72px;
 }
 
 .rename_input {
@@ -58,4 +43,52 @@
   display: flex;
   align-items: center;
   border-top: 2px solid #333;
+}
+
+.icons_container {
+  position: absolute;
+  height: 100%;
+  right: 0;
+  top: 50%;
+  transform: translateY(-12px);
+}
+
+.icons_row {
+  display: flex;
+  gap: 12px;
+}
+
+.short_intro {
+  border-top: 2px solid #333;
+  padding-top: 16px;
+}
+
+.image_with_tooltip {
+  /* position: relative; */
+  display: inline-block;
+}
+
+.tooltip {
+  visibility: visible;
+  position: absolute;
+  top: 0;
+  /* left: 50%; */
+  transform: translateX(-50%);
+  transform: translateY(50%);
+  background-color: #222;
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transition-delay: 0.2s;
+  pointer-events: none;
+  z-index: 4;
+  border: 1px solid #555;
+}
+
+.image_with_tooltip:hover .tooltip {
+  /* cursor: crosshair; */
+  visibility: visible;
+  opacity: 1;
 }

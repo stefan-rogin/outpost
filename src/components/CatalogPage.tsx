@@ -24,7 +24,7 @@ export const CatalogPage = ({
               alt={group.inView.name}
               width={100}
               height={100}
-              loading={"eager"}
+              loading="eager"
               onClick={onSelect(group.inView.id)}
             />
 

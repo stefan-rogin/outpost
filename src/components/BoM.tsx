@@ -43,7 +43,6 @@ export const BoM = ({
           alt={copied ? "Copied." : "Copy to clipboard"}
           width={24}
           height={24}
-          className={styles.power_icon}
           onClick={handleCopyClipboard}
         />
       </div>

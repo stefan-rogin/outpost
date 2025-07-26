@@ -18,3 +18,8 @@
 .intro ul {
   padding: 12px 36px;
 }
+
+.link {
+  color: var(--accent);
+  font-weight: 800;
+}
