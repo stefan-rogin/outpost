@@ -1,5 +1,5 @@
 import powerData from "@/lib/resources/power_map.json"
-import styles from "@/components/Power.module.css"
+import styles from "./Power.module.css"
 import { Order, OrderItem } from "@/models/order"
 import { ResourceId } from "@/models/resource"
 import Image from "next/image"

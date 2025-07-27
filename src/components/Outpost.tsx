@@ -11,15 +11,15 @@ declare global {
 }
 
 import styles from "./Outpost.module.css"
-import { CatalogView } from "@/components/CatalogView"
-import { ProjectView } from "@/components/ProjectView"
+import { CatalogView } from "@/components/catalog/CatalogView"
+import { ProjectView } from "@/components/project/ProjectView"
 import { ResourceId } from "@/models/resource"
 import { QtyChange } from "@/models/order"
 import { useCallback, useEffect } from "react"
 import { useProject } from "@/hooks/useProject"
 import { ProjectActionType } from "@/reducers/projectReducer"
-import { Link } from "@/components/Link"
-import { RecentProjects } from "./RecentProjects"
+import { Link } from "@/components/common/Link"
+import { RecentProjects } from "./project-list/RecentProjects"
 import { Intro } from "./Intro"
 import { UUID } from "@/models/project"
 
@@ -120,7 +120,9 @@ export const Outpost = () => {
             onCreate={handleOnCreate}
             onDuplicate={handleOnDuplicate}
             onDelete={handleOnDelete}
-            state={state}
+            project={state.project}
+            itemBill={state.itemBill}
+            deconstructedBill={state.deconstructedBill}
             onQtyChange={handleQtyChange}
             onToggleDeconstruct={handleOnToggleDeconstruct}
             onRename={handleOnRename}

@@ -1,5 +1,5 @@
 import { CatalogGroup } from "@/models/catalog"
-import { getNavOption } from "@/components/CatalogPage"
+import { getNavOption } from "@/components/catalog/CatalogPage"
 import {
   testGroups,
   storageSolidSmall,

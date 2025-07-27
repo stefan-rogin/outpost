@@ -1,6 +1,6 @@
 import { ResourceId, Resource } from "@/models/resource"
 import * as Resources from "@/service/resource"
-import { BoM } from "@/components/BoM"
+import { BoM } from "@/components/project/BoM"
 import { render, screen } from "@testing-library/react"
 import { testResources, testOrder, testProject1 } from "../testObjects"
 import { getAggregatedItems, getAggregatedDeconstructed } from "@/service/bom"

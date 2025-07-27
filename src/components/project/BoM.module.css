@@ -1,5 +1,5 @@
 .container {
-  border-top: 2px solid #333;
+  border-top: 2px solid var(--accent-sec);
 }
 
 .title {
@@ -10,7 +10,7 @@
 .bom_item {
   position: relative;
   width: 100%;
-  background-color: #222;
+  background-color: var(--background-sec);
   margin: 4px 0;
   line-height: 2.2em;
   font-size: 12px;
@@ -42,8 +42,8 @@
     -45deg,
     var(--accent) 0,
     var(--accent) 1px,
-    #333 0,
-    #333 50%
+    var(--accent-sec) 0,
+    var(--accent-sec) 50%
   );
 }
 

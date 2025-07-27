@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/components/Intro.module.css"
+import styles from "./Intro.module.css"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 

@@ -60,7 +60,7 @@ const nameMap: Map<string, string> = new Map(name_map as [string, string][])
 
 // Get base resources
 const resLines: string[] = filterLines(await getAllLines(RESOURCES_FILE), "res")
-console.debug(`Base resources lines: ${resLines.length}`)
+console.log(`Base resources lines: ${resLines.length}`)
 
 const baseResources: BaseResource[] = resLines.map(line => {
   const cols: string[] = line.split("\t").map(col => col.trim())
@@ -74,7 +74,7 @@ const coLines: string[] = filterLines(
   await getAllLines(CONSTRUCTIBLES_FILE),
   "co"
 )
-console.debug(`Constructible resources lines: ${coLines.length}`)
+console.log(`Constructible resources lines: ${coLines.length}`)
 
 const constructibles: Constructible[] = coLines.map(line => {
   const cols: string[] = line.split("\t")
@@ -153,7 +153,7 @@ async function getAllLines(file: string): Promise<string[]> {
     },
     new Map<number, number>()
   )
-  console.debug(`All lines for ${file}: ${allLines.length}`)
+  console.log(`All lines for ${file}: ${allLines.length}`)
   if ([...columnsCheck.keys()].length > 1) {
     throw new Error("Malformed export file.")
   }

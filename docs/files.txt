@@ -1,31 +1,39 @@
 outpost/
 ├── src/
 │   ├── app/             
+│   │   ├── project-list/             
+│   │   │   └── page.tsx    // Projects list page
 │   │   ├── layout.tsx
-│   │   └── page.tsx
+│   │   └── page.tsx        // Main (SPA) page
 │   │
 │   ├── components/               
-│   │   ├── BoM.tsx
-│   │   ├── CatalogPage.tsx
-│   │   ├── CatalogView.tsx
-│   │   ├── OrderItemView.tsx
-│   │   ├── Outpost.tsx
-│   │   ├── Power.tsx
-│   │   └── ProjectView.tsx
+│   │   ├── catalog/             
+│   │   │   ├── CatalogPage.tsx          // Catalog category
+│   │   │   └── CatalogView.tsx          // Catalog section
+│   │   ├── common/             
+│   │   │   ├── Arrow.tsx                // Navigation arrows
+│   │   │   └── Link.tsx                 // Navigation link
+│   │   ├── project/             
+│   │   │   ├── BoM.tsx                  // Bill of materials
+│   │   │   ├── OrderItemView.tsx        // Construction module
+│   │   │   ├── Power.tsx                // Power required/generated
+│   │   │   └── ProjectView.tsx          // Project section
+│   │   ├── project-list/             
+│   │   │   ├── ProjectList.tsx          // List of stored projects
+│   │   │   └── RecentProjects.tsx       // List of recently opened projects
+│   │   ├── Intro.tsx                    // Intro content (help|error)
+│   │   ├── Outpost.tsx                  // Main app component
+│   │   └── PageFrame.tsx                // Page frame (shared)
 │   │
 │   ├── hooks/                   
-│   │   └── useProject.ts
+│   │   └── useProject.ts                // Custom hook for project loading
 │   │
-│   ├── lib/                      
-│   │   ├── resources/             
-│   │   │   ├── parse_export.ts
-│   │   │   └── resources.json
-│   │   ├── catalog.ts             
-│   │   ├── navigation.ts            
-│   │   ├── resources.ts            
-│   │   └── resources.ts       
+│   ├── lib/                       
+│   │   └── resources/                   // Creators kit exports and parser
+│   │       ├── parse_export.ts
+│   │       └── resources.json
 │   │
-│   ├── models/                 
+│   ├── models/                          // App models
 │   │   ├── bom.ts
 │   │   ├── catalog.ts
 │   │   ├── order.ts
@@ -33,24 +41,27 @@ outpost/
 │   │   └── resource.ts
 │   │
 │   ├── reducers/               
-│   │   └── projectReducer.ts
+│   │   └── projectReducer.ts            // App state reducer
 │   │
-│   └── service/               
-│       ├── bom.ts
-│       ├── catalog.ts
-│       ├── navigation.ts
-│       ├── order.ts
-│       ├── project.ts
-│       └── resource.ts
+│   ├── service/                         // Service layer
+│   │   ├── bom.ts
+│   │   ├── catalog.ts
+│   │   ├── navigation.ts
+│   │   ├── order.ts
+│   │   ├── project.ts
+│   │   └── resource.ts
+│   └── types/
+│        └── common.ts
 │
-├── tests/                   
+├── tests/                               // Render | unit | integration tests
 │   ├── components/               
 │   │   └── ....render.test.tsx
+│   ├── mocks/               
+│   │   └── localStorageMock.ts
+│   ├── reducers/               
+│   │   └── projectReducer.test.tsx
 │   └── service/
 │       └── ....test.tsx
-│
-├── context/                 
-│   └── AuthContext.tsx
 │
 ├── ...          
 ├── tsconfig.json           

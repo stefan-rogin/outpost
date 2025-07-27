@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "@/components/RecentProjects.module.css"
+import styles from "./RecentProjects.module.css"
 import { getRecentProjects } from "@/service/project"
 
 export const RecentProjects = () => {

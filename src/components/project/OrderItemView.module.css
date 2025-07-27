@@ -8,17 +8,12 @@
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  background-color: #000;
+  background-color: var(--background-third);
   font-size: 14px;
 }
 
-/* .icon {
-  border: 1px solid #333;
-} */
-
 .counter {
   font-size: 20px;
-  /* background-color: #333; */
   width: 40px;
   line-height: 40px;
   text-align: center;
@@ -34,8 +29,8 @@
   white-space: nowrap;
   padding: 4px 8px;
   margin: 4px;
-  background-color: #222;
-  color: #999;
+  background-color: var(--background-sec);
+  color: var(--foreground-sec);
   line-height: 1.2em;
   font-size: 12px;
 }

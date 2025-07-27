@@ -1,7 +1,7 @@
-import styles from "@/components/OrderItemView.module.css"
+import styles from "./OrderItemView.module.css"
 import { ResourceId } from "@/models/resource"
 import { QtyChange } from "@/models/order"
-import { Arrow } from "@/components/Arrow"
+import { Arrow } from "@/components/common/Arrow"
 import Image from "next/image"
 import { getResource } from "@/service/resource"
 import { OrderItem } from "@/models/order"
@@ -17,9 +17,15 @@ export const OrderItemView = ({
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <Arrow onClick={onQtyChange(item.id, "remove")} />
+        <Arrow
+          onClick={onQtyChange(item.id, "remove")}
+          aria-label="Decrease quantity"
+        />
         <div className={styles.counter}>{orderItem.quantity}</div>
-        <Arrow onClick={onQtyChange(item.id, "add")} />
+        <Arrow
+          onClick={onQtyChange(item.id, "add")}
+          aria-label="Increase quantity"
+        />
         <Image
           src={`/icons/${item.id}.jpg`}
           alt={item.name}

@@ -1,9 +1,9 @@
 import { ResourceId, Resource, isConstructible } from "@/models/resource"
-import styles from "@/components/BoM.module.css"
+import styles from "./BoM.module.css"
 import { useState } from "react"
 import Image from "next/image"
 import { Bill, BomItem } from "@/models/bom"
-import { getTier, getScarcity, getCsvFromProject } from "../service/bom"
+import { getTier, getScarcity, getCsvFromProject } from "../../service/bom"
 import { Order } from "@/models/order"
 
 export const BoM = ({
@@ -64,6 +64,9 @@ export const BoM = ({
                   isConstructible(bomItem.item)
                     ? onToggleDeconstruct(bomItem.item.id)
                     : undefined
+                }
+                aria-label={
+                  isConstructible(bomItem.item) ? "Toggle deconstruct" : ""
                 }
               >
                 <span className={styles.quantity}>{bomItem.quantity}</span>

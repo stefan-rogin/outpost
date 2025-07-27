@@ -50,7 +50,7 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #222;
+  background-color: var(--background-sec);
   width: 320px;
   padding: 6px 12px;
   border-radius: 4px;

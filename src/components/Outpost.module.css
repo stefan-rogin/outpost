@@ -9,7 +9,7 @@
   user-select: none;
   display: flex;
   flex-direction: column;
-  background-color: #111;
+  background-color: var(--background);
   margin-left: 12px;
 }
 

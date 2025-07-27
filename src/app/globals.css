@@ -1,6 +1,10 @@
 :root {
   --background: #111;
+  --background-sec: #222;
+  --background-third: #000;
+  --background-fourth: #080808;
   --foreground: #ccc;
+  --foreground-sec: #999;
   --accent: #a19272;
   --accent-sec: #333;
 }
@@ -8,9 +12,7 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
   font-family: Verdana, sans-serif;
-  overflow-y: auto;
   scrollbar-gutter: stable;
 }
 
@@ -32,27 +34,8 @@ a {
   text-decoration: none;
 }
 
-button {
-  background-color: #111;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  text-transform: uppercase;
-  font-size: 13px;
-  padding: 7px 16px;
-  min-width: 110px;
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
 #donate-button-container {
+  border-top: 2px solid var(--accent-sec);
   padding: 12px;
   text-align: center;
-}
-
-@media (max-width: 768px) {
-  html,
-  body {
-    overflow-x: auto;
-  }
 }
