@@ -34,15 +34,15 @@
   height: 38px;
   font-size: 16px;
   border: 1px solid var(--accent);
-  background-color: #222;
-  color: #ccc;
+  background-color: var(--background-sec);
+  color: var(--foreground);
 }
 
 .actions_container {
   position: relative;
   display: flex;
   align-items: center;
-  border-top: 2px solid #333;
+  border-top: 2px solid var(--accent-sec);
 }
 
 .icons_container {
@@ -59,12 +59,11 @@
 }
 
 .short_intro {
-  border-top: 2px solid #333;
+  border-top: 2px solid var(--accent-sec);
   padding-top: 16px;
 }
 
 .image_with_tooltip {
-  /* position: relative; */
   display: inline-block;
 }
 
@@ -72,10 +71,9 @@
   visibility: visible;
   position: absolute;
   top: 0;
-  /* left: 50%; */
   transform: translateX(-50%);
   transform: translateY(50%);
-  background-color: #222;
+  background-color: var(--background-sec);
   white-space: nowrap;
   padding: 6px 12px;
   border-radius: 4px;
@@ -88,7 +86,6 @@
 }
 
 .image_with_tooltip:hover .tooltip {
-  /* cursor: crosshair; */
   visibility: visible;
   opacity: 1;
 }

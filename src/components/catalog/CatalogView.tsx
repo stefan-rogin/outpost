@@ -1,10 +1,10 @@
 import { catalogConfig, mapCatalogFromConfig } from "@/service/catalog"
 import { useState, useMemo } from "react"
-import styles from "@/components/CatalogView.module.css"
+import styles from "./CatalogView.module.css"
 import { getNavIndex, NavDirection } from "@/service/navigation"
-import { CatalogPage } from "@/components/CatalogPage"
+import { CatalogPage } from "@/components/catalog/CatalogPage"
 import { Constructible, ResourceId } from "@/models/resource"
-import { Arrow } from "@/components/Arrow"
+import { Arrow } from "@/components/common/Arrow"
 import { Catalog, CatalogGroup } from "@/models/catalog"
 
 export const CatalogView = ({

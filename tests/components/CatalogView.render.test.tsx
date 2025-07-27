@@ -1,4 +1,4 @@
-import { CatalogView } from "@/components/CatalogView"
+import { CatalogView } from "@/components/catalog/CatalogView"
 import { render, screen } from "@testing-library/react"
 
 describe("CatalogView render tests", () => {

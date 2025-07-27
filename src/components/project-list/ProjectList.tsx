@@ -1,7 +1,7 @@
 "use client"
 
-import styles from "@/components/ProjectList.module.css"
-import { Link } from "@/components/Link"
+import styles from "./ProjectList.module.css"
+import { Link } from "@/components/common/Link"
 import { getRecentProjects } from "@/service/project"
 import { useEffect, useState } from "react"
 import { ProjectInfo } from "@/models/project"

@@ -25,5 +25,17 @@ describe("page render tests", () => {
       expect(screen.queryByText("Starfield Outpost Planner")).toBeNull()
       expect(screen.queryByText("Materials")).toBeInTheDocument()
     })
+
+    const firstDeconstruct = screen.getAllByLabelText("Toggle deconstruct")[0]
+    fireEvent.click(firstDeconstruct)
+    await waitFor(() => {
+      expect(screen.queryByText("Silver")).toBeInTheDocument()
+    })
+
+    const decreaseQuantityButton = screen.getByLabelText("Decrease quantity")
+    fireEvent.click(decreaseQuantityButton)
+    await waitFor(() => {
+      expect(screen.queryByText("Add modules")).toBeInTheDocument()
+    })
   })
 })

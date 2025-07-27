@@ -43,7 +43,7 @@ export const useProject = (): {
   const [state, dispatch] = useReducer(projectReducer, initialState)
   const [recentVersion, setRecentVersion] = useState<number>(0)
 
-  const init = () => {
+  useEffect(() => {
     // Load latest or new
     if (typeof window === "undefined") return
 
@@ -84,8 +84,7 @@ export const useProject = (): {
     } catch {
       dispatch({ type: ProjectActionType.LOAD_ERR })
     }
-  }
-  useEffect(() => init(), [latestProject, legacyProject])
+  }, [latestProject, legacyProject])
 
   useEffect(() => {
     if (!state.isLoading && typeof window !== "undefined" && state.project.id) {

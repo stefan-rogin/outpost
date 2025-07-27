@@ -1,6 +1,6 @@
 import NextLink from "next/link"
 import Image from "next/image"
-import styles from "@/components/Link.module.css"
+import styles from "./Link.module.css"
 
 export const Link = ({ href, content }: { href: string; content: string }) => (
   <div className={styles.container}>

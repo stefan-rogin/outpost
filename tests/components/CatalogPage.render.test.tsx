@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { CatalogPage } from "@/components/CatalogPage"
+import { CatalogPage } from "@/components/catalog/CatalogPage"
 import { testCategory } from "../testObjects"
 
 describe("CatalogPage render tests", () => {

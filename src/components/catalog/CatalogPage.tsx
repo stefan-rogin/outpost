@@ -1,5 +1,5 @@
-import { Arrow } from "@/components/Arrow"
-import styles from "@/components/CatalogPage.module.css"
+import { Arrow } from "@/components/common/Arrow"
+import styles from "./CatalogPage.module.css"
 import { ResourceId } from "@/models/resource"
 import Image from "next/image"
 import { getNavIndex, NavDirection } from "@/service/navigation"

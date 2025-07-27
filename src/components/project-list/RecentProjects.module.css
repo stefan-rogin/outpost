@@ -3,7 +3,7 @@
   height: 44px;
   padding: 4px;
   position: relative;
-  background-color: #242424;
+  background-color: var(--background-sec);
   display: flex;
   align-items: center;
   flex-direction: column;

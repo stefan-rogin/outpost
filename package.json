@@ -9,9 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "test": "jest --testPathIgnorePatterns='.*\\.render\\.test\\.tsx'",
-    "test:all": "jest",
-    "test:render": "jest '.*\\.render\\.test\\.tsx$'",
+    "test": "jest --testPathIgnorePatterns='.*\\.render\\.test\\.tsx' --no-cache",
+    "test:all": "jest --no-cache",
+    "test:render": "jest '.*\\.render\\.test\\.tsx$' --no-cache",
     "test:watch": "jest --watch"
   },
   "dependencies": {

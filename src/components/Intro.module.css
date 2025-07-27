@@ -19,6 +19,10 @@
   padding: 12px 36px;
 }
 
+.intro li {
+  margin: 8px 0;
+}
+
 .link {
   color: var(--accent);
   font-weight: 800;

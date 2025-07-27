@@ -1,16 +1,19 @@
-import styles from "@/components/ProjectView.module.css"
+import styles from "./ProjectView.module.css"
 import { ResourceId } from "@/models/resource"
 import { OrderItemView } from "./OrderItemView"
 import { BoM } from "./BoM"
 import { Power } from "./Power"
 import { QtyChange } from "@/models/order"
 import Image from "next/image"
-import { ProjectState, UUID } from "@/models/project"
+import { Project, UUID } from "@/models/project"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { duplicateProject, serializeProject } from "@/service/project"
+import { Bill } from "@/models/bom"
 
 export const ProjectView = ({
-  state,
+  project,
+  itemBill,
+  deconstructedBill,
   onQtyChange,
   onDelete,
   onCreate,
@@ -18,7 +21,9 @@ export const ProjectView = ({
   onToggleDeconstruct,
   onRename
 }: {
-  state: ProjectState
+  project: Project
+  itemBill: Bill
+  deconstructedBill: Bill
   onQtyChange: (id: ResourceId, action: QtyChange) => () => void
   onDelete: () => void
   onCreate: () => void
@@ -27,12 +32,12 @@ export const ProjectView = ({
   onRename: (name: string) => void
 }) => {
   const [rename, setRename] = useState<boolean>(false)
-  const [newName, setNewName] = useState<string>(state.project.name)
+  const [newName, setNewName] = useState<string>(project.name)
   const [shared, setShared] = useState<boolean>(false)
-  useEffect(() => setNewName(state.project.name), [state.project.name])
+  useEffect(() => setNewName(project.name), [project.name])
 
   const toggleRename = () => {
-    setNewName(state.project.name)
+    setNewName(project.name)
     setRename(!rename)
   }
   const handleRenameSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -50,9 +55,7 @@ export const ProjectView = ({
 
   const handleOnShare = () => {
     const ANIMATION_TIMEOUT = 2000
-    const serialized: string = btoa(
-      serializeProject(duplicateProject(state.project))
-    )
+    const serialized: string = btoa(serializeProject(duplicateProject(project)))
     const url = new window.URL(window.location.href)
     setShared(true)
     setTimeout(() => setShared(false), ANIMATION_TIMEOUT)
@@ -64,7 +67,7 @@ export const ProjectView = ({
         })
     }
   }
-  const isProjectEmpty: boolean = !(state.project.order.size > 0)
+  const isProjectEmpty: boolean = !(project.order.size > 0)
 
   return (
     <div className={styles.container}>
@@ -82,7 +85,7 @@ export const ProjectView = ({
           </form>
         ) : (
           <h3 className={styles.title} onClick={toggleRename}>
-            {state.project.name}
+            {project.name}
           </h3>
         )}
       </div>
@@ -97,7 +100,7 @@ export const ProjectView = ({
       ) : (
         <>
           <div className={styles.actions_container}>
-            <Power order={state.project.order} />
+            <Power order={project.order} />
             <div className={styles.icons_container}>
               <div className={styles.icons_row}>
                 <div className={styles.image_with_tooltip}>
@@ -132,7 +135,7 @@ export const ProjectView = ({
                     width={24}
                     height={24}
                     className={styles.action_icon}
-                    onClick={onDuplicate(state.project.id)}
+                    onClick={onDuplicate(project.id)}
                   />
                   <span className={styles.tooltip}>Duplicate</span>
                 </div>
@@ -163,7 +166,7 @@ export const ProjectView = ({
               </div>
             </div>
           </div>
-          {[...state.project.order].map(([id, item]) => (
+          {[...project.order].map(([id, item]) => (
             <OrderItemView
               key={id}
               orderItem={item}
@@ -172,9 +175,9 @@ export const ProjectView = ({
           ))}
           <BoM
             onToggleDeconstruct={onToggleDeconstruct}
-            order={state.project.order}
-            itemBill={state.itemBill}
-            deconstructedBill={state.deconstructedBill}
+            order={project.order}
+            itemBill={itemBill}
+            deconstructedBill={deconstructedBill}
           />
         </>
       )}

@@ -1,4 +1,4 @@
-import styles from "@/components/PageFrame.module.css"
+import styles from "./PageFrame.module.css"
 import { ReactNode } from "react"
 import Image from "next/image"
 
@@ -31,7 +31,7 @@ export const PageFrame = ({ children }: { children: ReactNode }) => (
         its in-game items are the property of Bethesda Softworks and its
         respective owners. This tool is a fan-created resource and is not
         affiliated with, endorsed by, or associated with Bethesda. Data and
-        renderings of modules were obtained using Starfield Creators Kit.
+        renderings of modules were obtained using Starfield: Creation Kit.
       </small>
     </footer>
   </div>

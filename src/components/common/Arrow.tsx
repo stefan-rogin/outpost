@@ -1,4 +1,4 @@
-import styles from "@/components/Arrow.module.css"
+import styles from "./Arrow.module.css"
 import { SyntheticEvent } from "react"
 
 export const Arrow = ({

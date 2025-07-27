@@ -32,7 +32,7 @@
 
 .header_title h3 {
   position: absolute;
-  left: 392px;
+  left: 388px;
   top: 50%;
   transform: translateY(-50%);
   letter-spacing: 0.34em;
@@ -42,13 +42,13 @@
 
 .body {
   padding: 12px 0;
-  background-color: #080808;
+  background-color: var(--background-fourth);
   min-height: 960px;
 }
 
 .footer {
   padding: 8px 0;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--accent-sec);
   text-align: center;
   font-size: 11px;
   opacity: 0.6;
