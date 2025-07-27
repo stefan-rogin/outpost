@@ -133,4 +133,5 @@ The project runs without any external dependecies. Its configuration data (resou
 
 ## Remarks
 
+- With the runtime requiring broswer dependedncies only, CSR is virtually not used and most components are rendered client-side.
 - All images, names, and intellectual property related to Starfield and its in-game items are the property of Bethesda Softworks and its respective owners. This tool is a fan-created resource and is not affiliated with, endorsed by, or associated with Bethesda. Data and renderings of modules were obtained using Starfield: Creation Kit.
