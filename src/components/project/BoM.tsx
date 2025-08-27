@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Bill, BomItem } from "@/models/bom"
 import { getTier, getScarcity, getCsvFromProject } from "../../service/bom"
 import { Order } from "@/models/order"
+import { getResource } from "@/service/resource"
 
 export const BoM = ({
   order,
@@ -57,31 +58,45 @@ export const BoM = ({
             }`
             const iconPath: string | undefined = getIconPath(bomItem.item)
             return (
-              <div
-                className={itemClassName}
-                key={bomItem.item.id}
-                onClick={
-                  isConstructible(bomItem.item)
-                    ? onToggleDeconstruct(bomItem.item.id)
-                    : undefined
-                }
-                aria-label={
-                  isConstructible(bomItem.item) ? "Toggle deconstruct" : ""
-                }
-              >
-                <span className={styles.quantity}>{bomItem.quantity}</span>
-                <div className={styles.icon_container}>
-                  {iconPath && (
-                    <Image
-                      src={iconPath}
-                      alt="Scarcity"
-                      width={16}
-                      height={16}
-                    />
-                  )}
-                </div>
+              <div key={bomItem.item.id}>
+                <div
+                  className={itemClassName}
+                  onClick={
+                    isConstructible(bomItem.item)
+                      ? onToggleDeconstruct(bomItem.item.id)
+                      : undefined
+                  }
+                  aria-label={
+                    isConstructible(bomItem.item) ? "Toggle deconstruct" : ""
+                  }
+                >
+                  <span className={styles.quantity}>{bomItem.quantity}</span>
+                  <div className={styles.icon_container}>
+                    {iconPath && (
+                      <Image
+                        src={iconPath}
+                        alt="Scarcity"
+                        width={16}
+                        height={16}
+                      />
+                    )}
+                  </div>
 
-                {bomItem.item.name ?? bomItem.item.id}
+                  {bomItem.item.name ?? bomItem.item.id}
+                </div>
+                {isDeconstructed(bomItem.item.id) && (
+                  <div className={styles.item_bom}>
+                    {isConstructible(bomItem.item) &&
+                      Object.entries(bomItem.item.blueprint).map(
+                        ([id, qty]: [id: ResourceId, qty: number]) => (
+                          <div className={styles.res_chip} key={id}>
+                            {qty * bomItem.quantity} x{" "}
+                            {getResource(id)?.name || id}
+                          </div>
+                        )
+                      )}
+                  </div>
+                )}
               </div>
             )
           })}

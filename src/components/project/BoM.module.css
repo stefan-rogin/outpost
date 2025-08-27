@@ -72,3 +72,18 @@
   margin: 0 12px;
   z-index: 4;
 }
+
+.item_bom {
+  padding: 4px;
+}
+
+.res_chip {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 4px 8px;
+  margin: 4px;
+  background-color: var(--background-sec);
+  color: var(--foreground-sec);
+  line-height: 1.2em;
+  font-size: 12px;
+}
