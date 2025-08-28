@@ -435,7 +435,7 @@
   },
   "Mfg_Tier02_ParamagnonSuperconductor": {
     "id": "Mfg_Tier02_ParamagnonSuperconductor",
-    "name": "Paramagnon Superconductor",
+    "name": "Paramagnon Conductor",
     "blueprint": {
       "Mfg_Tier01_ZeroWire": 3,
       "InorgRareGold": 1,
@@ -559,7 +559,7 @@
   },
   "Mfg_Tier03_VerylManifold": {
     "id": "Mfg_Tier03_VerylManifold",
-    "name": "Veryl Manifold",
+    "name": "Veryl-Treated Manifold",
     "blueprint": {
       "Mfg_Tier01_AusteniticManifold": 1,
       "InorgUniqueVeryl_G": 4,
